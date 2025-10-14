@@ -3,8 +3,7 @@
           integrate dynamic rendering
           fix button functionality
 -->
-<!DOCTYPE html>
-<!-- sets up the navbar for webpage w/ bootstrap -->
+<!-- Header for website -->
 <header>
   <div class="navbar navbar-dark bg-dark box-shadow">
     <!-- container class to hold search bar + profile picture -->
@@ -30,59 +29,12 @@
   </div>
 </header>
 
-
-<!-- Middle Section of webpage with buttons & functionality -->
-<section class="py-5 text-center container">
-  <div class="row py-lg-5">
-    <div class="col-lg-6 col-md-8 mx-auto">
-      <!-- website header + body -->
-      <h1 class="fw-light">Sync.EQ</h1>
-      <p class="lead text-body-secondary">
-        Equalize your connections.
-      </p>
-      <!-- buttons for functionality -->
-      <p>
-        <a href="#" class="btn btn-primary my-2">Go To Your Profile</a>
-        <a href="#" class="btn btn-secondary my-2">Find Collaborators</a>
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- Recommended profiles for logged in user -->
-<div class="album py-5 bg-body-tertiary">
-  <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <!-- takes in input from app.component.ts and renders onto page based on input -->
-      @for (card of cards; track card) {
-      <div class="col">
-        <div class="card shadow-sm">
-          <img [src]="card.image" class="card-img-top" alt="Thumbnail" />
-          <div class="card-body">
-            <!-- equivalent to props -->
-            <p class="card-text">
-              {{card.username}}
-            </p>
-            <div class="d-flex justify-content-between align-items-center">
-              <!-- buttons for functionality to message or go to profile -->
-              <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary">
-                  Profile
-                </button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">
-                  Message
-                </button>
-              </div>
-              <small class="text-body-secondary">{{card.genre}}</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    }
-    </div>
-  </div>
-</div>
-
-
-
+<!-- Router outlet to render different pages -->
 <router-outlet />
+
+<!-- Footer for website -->
+<footer>
+  <div class="d-flex justify-content-center align-items-center bg-dark text-white">
+    Example Footer
+  </div>
+</footer>
