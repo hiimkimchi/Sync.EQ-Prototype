@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-profile',
   imports: [CommonModule],
-  templateUrl: './dashboard.component.html',
+  templateUrl: './profile.component.html',
 })
-export class DashboardPage {
-    title = 'profile-dashboard';
+export class ProfilePage {
+    title = 'profile-page';
 }
