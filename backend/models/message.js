@@ -1,8 +1,7 @@
 // message.js
-const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+import mongoose from "mongoose"
+const ObjectId = mongoose.Types.ObjectId;
 
-// if this is a media 
 const MessageSchema = new Schema({
     _id: {type: ObjectId, required: true},
     chatID: {type: String, required: true},
@@ -17,4 +16,4 @@ const MessageSchema = new Schema({
 // idea for messaging aspect
 // - if both users online: set up a socket
 // - else: run backend services and deliver to a chathistory object
-mongoose.model("Message", MessageSchema);
+export default mongoose.model("Message", MessageSchema);

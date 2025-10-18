@@ -15,7 +15,5 @@ node server.js
 ```
 cd frontend
 npm install
-npm run dev
+npm run start
 ```
-
-gabe
