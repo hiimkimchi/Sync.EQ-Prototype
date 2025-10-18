@@ -1,11 +1,12 @@
 // imports + dotenv loading
-require('dotenv').config();
+import dotenv from "dotenv"
+import mongoose from "mongoose";
 
-const mongoose = require("mongoose");
+dotenv.config();
 const mongoDB = process.env.MONGO_URL;
 
 // connects to mongoDB
-async function connectMongoose() {
+export default async function connectMongoose() {
     try {
         await mongoose.connect(mongoDB);
         console.log(`Mongoose fully connected`);
@@ -14,6 +15,3 @@ async function connectMongoose() {
         process.exit(1);
     }
 }
-
-// exports connectMongoose() for importing to other files
-module.exports = connectMongoose;

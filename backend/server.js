@@ -1,16 +1,20 @@
 // import files
-const express = require("express");
-const db_connection = require("./db");
+import express from "express";
+import connectMongoose from "./db.js";
+import userRoutes from "./routes/userRoutes.js"
 const port = 3000;
 const app = express();
 
 // sets up connection to mongoDB
-db_connection();
+await connectMongoose();
+app.use(express.json())
 
 // default route
 app.get('/', (req, res) => {
     res.send("Hello, SyncEQ!");
-})
+});
+
+app.use("/users", userRoutes);
 
 // captures a port to listen for HTTP requests
 app.listen(port, () => {

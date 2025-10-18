@@ -1,6 +1,6 @@
 // chat.js 
-const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+import mongoose from "mongoose";
+const ObjectId = mongoose.Types.ObjectId; 
 
 const ChatSchema = new Schema({
     _id: {type: ObjectId, required: true},
