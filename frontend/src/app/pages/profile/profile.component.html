@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh; padding: 2vh 0; background-color: #817f7f;">
   <div class="position-relative d-flex justify-content-center align-items-center w-100" style="max-width: 1100px; height: 96vh;">
-    
+
     <!-- Light grey square -->
     <div
       class="rounded-3 shadow text-dark overflow-auto p-4 d-flex flex-column justify-content-center"
@@ -15,24 +15,31 @@
         scrollbar-color: #555 #d9d9d9;
       "
     >
-      <!-- Profile section -->
-      <div class="d-flex align-items-center mb-4">
-        <!-- Profile picture -->
-        <div
-          class="rounded-circle bg-light border border-dark d-flex align-items-center justify-content-center me-4 flex-shrink-0"
-          style="width: 120px; height: 120px;"
-        >
-          <small class="fw-bold text-dark">{{ profile.profile_pic }}</small>
+        <div class="d-flex mb-4">
+            <!-- Left column: Profile picture with name & handle underneath -->
+            <div class="d-flex flex-column align-items-center me-4 flex-shrink-0">
+                <!-- Profile picture -->
+                <div
+                    class="rounded-circle bg-light border border-dark d-flex align-items-center justify-content-center"
+                    style="width: 120px; height: 120px;"
+                >
+                    <small class="fw-bold text-dark">{{ user?.profile_pic }}</small>
+                </div>
+
+                <!-- Name & handle under the picture -->
+                <div class="text-center mt-2">
+                    <h5 class="fw-bold mb-0">{{ user?.artist_name }}</h5>
+                    <h5 class="fw-bold mb-0">{{ user?.username }}</h5>
+                </div>
+            </div>
+
+            <!-- Right column: Profession & bio -->
+            <div class="flex-grow-1 d-flex flex-column justify-content-center">
+                <!-- <h5 class="fw-bold mb-2">{{ user?.profession }}</h5> -->
+                <p class="mb-0 pt-4 rounded" style="background-color: #bbbbbb;">{{ user?.biography }}</p>
+            </div>
         </div>
 
-        <!-- Profile text -->
-        <div class="flex-grow-1">
-          <h3 class="fw-bold mb-1">{{ profile.artistName }}</h3>
-          <h4 class="fw-bold mb-1">{{ profile.handle }}</h4>
-          <h5 class="fw-bold mb-2">{{ profile.profession }}</h5>
-          <p class="mb-0">{{ profile.bio }}</p>
-        </div>
-      </div>
     </div>
 
     <!-- Vinyl record poking out (static, closer to square) -->

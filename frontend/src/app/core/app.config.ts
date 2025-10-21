@@ -6,6 +6,7 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { ENV } from './environment';
 
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,5 +24,8 @@ export const appConfig: ApplicationConfig = {
       // Enable refresh tokens for persistent sessions
       useRefreshTokens: true
     })
+  ]
+};
+    provideHttpClient()
   ]
 };
