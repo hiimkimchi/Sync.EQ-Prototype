@@ -15,6 +15,7 @@ node server.js
 ```
 MONGO_URL
 ```
+### NOTE: your .env file should be in /backend
 
 ## To run the Angular Frontend
 ### Generate config.json
@@ -34,3 +35,4 @@ npm run start
 ```
 API_URL
 ```
+### NOTE: your .env file should be in the /frontend
