@@ -4,6 +4,8 @@ import { provideAuth0 } from '@auth0/auth0-angular';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { ENV } from './environment';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,8 +13,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     provideClientHydration(withEventReplay()),
     provideAuth0({
-      domain: 'poop',
-      clientId: 'pee',
+      domain: ENV.auth0Domain,
+      clientId: ENV.auth0ClientId,
       authorizationParams: {
         redirect_uri: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:4200'
       },
