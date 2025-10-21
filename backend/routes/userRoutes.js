@@ -25,4 +25,17 @@ app.get("/:username", async (req, res) => {
     }
 });
 
+// get all users in db
+app.get("/", async (req, res) => {
+    try {
+        const users = await User.find();
+        if(!users) {
+            return res.status(404).json({ error: "No users in db" });
+        }
+        res.status(200).json(users);
+    } catch(err) {
+        res.status(400).json({error: err.message});
+    }
+});
+
 export default app;
