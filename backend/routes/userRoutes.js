@@ -1,9 +1,10 @@
 import express from "express";
 import User from "../models/user.js";
+import { jwtCheck } from "../middleware/auth.js";
 const app = express.Router();
 
 // create a user
-app.post("/", async (req, res) => {
+app.post("/", jwtCheck, async (req, res) => {
     try {
         const user = await User.create(req.body);
         res.status(201).json(user);
