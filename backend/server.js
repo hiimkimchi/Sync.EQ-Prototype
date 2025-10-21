@@ -2,8 +2,11 @@
 import express from "express";
 import connectMongoose from "./db.js";
 import userRoutes from "./routes/userRoutes.js"
-const port = 3000;
+import dotenv from "dotenv"
 const app = express();
+
+dotenv.config();
+const port = process.env.PORT;
 
 // sets up connection to mongoDB
 await connectMongoose();
