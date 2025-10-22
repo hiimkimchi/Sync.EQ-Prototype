@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     res.send("Hello, SyncEQ!");
 });
 
-app.use("/users", userRoutes);
+app.use("/api/users", userRoutes);
 
 // captures a port to listen for HTTP requests
 app.listen(port, () => {
