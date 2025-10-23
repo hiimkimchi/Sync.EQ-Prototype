@@ -17,6 +17,7 @@ export const appConfig: ApplicationConfig = {
       domain: ENV.auth0Domain,
       clientId: ENV.auth0ClientId,
       authorizationParams: {
+        scope: 'openid profile email offline_access',
         redirect_uri: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:4200'
       },
       // Enable caching of tokens in localStorage

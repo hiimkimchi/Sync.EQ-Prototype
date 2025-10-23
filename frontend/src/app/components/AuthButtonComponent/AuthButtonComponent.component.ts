@@ -11,4 +11,10 @@ import { NgIf, AsyncPipe } from '@angular/common';
 })
 export class AuthButtonComponent {
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) {}
+
+  loginToCreate() {
+    this.auth.loginWithRedirect({
+      appState: {target: "/create"},
+    })
+  }
 }
