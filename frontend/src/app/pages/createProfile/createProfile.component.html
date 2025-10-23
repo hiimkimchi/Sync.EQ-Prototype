@@ -1,26 +1,17 @@
-<form>
-    <label for="_id">Username:</label><br>
-    <input type="text" id="_id" name="_id"><br>
-    <label for="artist_alias">Artist Alias:</label><br>
-    <input type="text" id="artist_alias" name="artist_alias"><br>
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email"><br>
+<form [formGroup]="createAcc" (ngSubmit)="onSubmit()">
+    <label for="artistAlias">Artist Alias:</label><br>
+    <input type="text" id="artistAlias" formControlName="artistAlias"><br>
     <label for="phone_num">Phone Number:</label><br>
-    <input
-        type="text"
-        name="phone_num"
-        pattern="[0-9]*"
-        inputmode="numeric"
-    /><br>
+    <input type="text" id="phone_num" formControlName="phone_num" pattern="[0-9]*" inputmode="numeric"><br>
     <label for="profession">Profession:</label><br>
-    <input type="text" id="profession" name="profession"><br>
+    <input type="text" id="profession" formControlName="profession"><br>
     <label for="genre">Genre:</label><br>
-    <input type="text" id="genre" name="genre"><br>
-    <label for="genre">Biography:</label><br>
-    <input type="text" id="biography" name="biography"><br>
-    <label for="DAW">Digital Audio Workspace:</label><br>
-    <input type="text" id="DAW" name="DAW"><br>
-    <label for="socials">Social Media:</label><br>
-    <input type="text" id="socials" name="socials"><br>
-</form>  
-<button type="submit">Create Profile</button>
+    <input type="text" id="genre" formControlName="genre"><br>
+    <label for="biography">Biography:</label><br>
+    <input type="text" id="biography" formControlName="biography"><br>
+    <label for="daws">Digital Audio Workspace:</label><br>
+    <input type="text" id="daws" formControlName="daws"><br>
+    <label for="social_media">Social Media:</label><br>
+    <input type="text" id="social_media" formControlName="social_media"><br>
+    <button type="submit">Create Profile</button>
+</form>

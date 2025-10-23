@@ -3,15 +3,15 @@ import User from "../models/user.js";
 import { jwtCheck } from "../middleware/auth.js";
 const app = express.Router();
 
-// // create a user
-// app.post("/", jwtCheck, async (req, res) => {
-//     try {
-//         const user = await User.create(req.body);
-//         res.status(201).json(user);
-//     } catch(err) {
-//         res.status(400).json({error: err.message});
-//     } 
-// });
+// create a user
+app.post("/", async (req, res) => {
+    try {
+        const user = await User.create(req.body);
+        res.status(201).json(user);
+    } catch(err) {
+        res.status(400).json({error: err.message});
+    } 
+});
 
 app.get("/", jwtCheck, (req, res) => {
     res.status(200).send("auth passed");
