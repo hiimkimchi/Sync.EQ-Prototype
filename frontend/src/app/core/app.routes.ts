@@ -2,8 +2,9 @@ import { Routes } from '@angular/router';
 import { HomePage } from '../pages/home/home.component';
 import { DashboardPage } from '../pages/dashboard/dashboard.component';
 import { ProfilePage } from '../pages/profile/profile.component';
-import { CreateProfilePage } from '../pages/createProfile/createProfile.component';
 import { authGuard } from '../guards/auth.guard';
+import { CreatePage } from '../pages/create/create.component';
+import { CallbackPage } from '../pages/callback/callback.component';
 
 export const routes: Routes = [
     {
@@ -21,6 +22,10 @@ export const routes: Routes = [
     },
     {
         path: 'create',
-        component: CreateProfilePage
+        component: CreatePage
+    },
+    {
+        path: 'callback',
+        component: CallbackPage
     },
 ];

@@ -14,7 +14,7 @@ export class AuthButtonComponent {
 
   loginToCreate() {
     this.auth.loginWithRedirect({
-      appState: {target: "/create"},
+      appState: {target: "/callback"},
     })
   }
 }
