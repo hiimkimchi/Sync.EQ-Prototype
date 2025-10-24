@@ -9,22 +9,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { userInfo } from 'os';
 
 @Component({
-  selector: 'app-user-profile',
+  selector: 'app-create-profile',
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: 'createProfile.component.html',
-  // template: `
-  //   <ul *ngIf="auth.user$ | async as user">
-  //     <li>{{ user.sub }}</li>
-  //     <li>{{ user.name }}</li>
-  //     <li>{{ user.nickname }}</li>
-  //     <li>{{ user.email }}</li>
-  //     <li>{{ user.email_verified }}</li> 
-  //   </ul>`,
+  templateUrl: 'create.component.html',
   standalone: true
 })
 
-export class CreateProfilePage implements OnInit{
-    title = 'create-profile-dashboard';
+export class CreatePage implements OnInit {
+    title = 'create-profile';
     createAcc: FormGroup;
     auth0Info: any;
 
@@ -50,14 +42,6 @@ export class CreateProfilePage implements OnInit{
         this.auth.user$.subscribe({
           next: (res) => {
             this.auth0Info = res;
-            this.httpC.get(`http://localhost:3000/api/users/get/${res?.nickname}`).subscribe({
-              next: (response) => {
-                this.router.navigateByUrl("/profile");
-              },
-              error: (error) => {
-                console.log("creating profile");  
-              },
-            })
         }});
       }
     }
