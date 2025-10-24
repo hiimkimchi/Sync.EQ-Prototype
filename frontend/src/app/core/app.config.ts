@@ -4,7 +4,7 @@ import { provideAuth0 } from '@auth0/auth0-angular';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { ENV, setEnv } from './environment';
+import { ENV } from './environment';
 
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
