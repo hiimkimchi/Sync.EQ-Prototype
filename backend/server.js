@@ -2,6 +2,7 @@
 import express from "express";
 import connectMongoose from "./db.js";
 import userRoutes from "./routes/userRoutes.js"
+import postRoutes from "./routes/postRoutes.js"
 import dotenv from "dotenv"
 import cors from "cors"
 const app = express();
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 });
 
 app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 
 // captures a port to listen for HTTP requests
 app.listen(port, () => {

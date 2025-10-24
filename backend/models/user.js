@@ -26,6 +26,8 @@ const UserSchema = new mongoose.Schema({
         type: Map,
         of: String
     }
-}, {_id: false});
+}, {
+    _id: false
+});
 
 export default mongoose.model("User", UserSchema);
