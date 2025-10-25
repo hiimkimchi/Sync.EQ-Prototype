@@ -23,19 +23,21 @@ export class CallbackPage implements OnInit {
 
     // initiates when a page is loaded
     ngOnInit(): void {
-        const api_url = ENV.apiUrl + "/api/users/get";
+        const api_url = ENV.apiUrl + "api/users/get";
+        
         if(this.auth.isAuthenticated$) {    
             this.auth.user$.subscribe({
                 next: (res) => {
-                this.httpC.get(`${api_url}/${res?.nickname}`).subscribe({
-                    next: (response) => {
-                        this.router.navigateByUrl("/");
-                    },
-                    error: (error) => {
-                        if(error.status === 404) 
-                            this.router.navigateByUrl("/create");  
-                    },
-                })
+                    this.httpC.get(`${api_url}/${res?.nickname}`).subscribe({
+                        next: (response) => {
+                            this.router.navigateByUrl("/");
+                        },
+                        error: (error) => {
+                            if(error.status === 404) {
+                                this.router.navigateByUrl("/create");  
+                            }
+                        },
+                    })
                 }
             });
         }
