@@ -26,6 +26,7 @@ export class CreatePage implements OnInit {
     ) {
         this.createAcc = this.createF.group({
             artistAlias: [''],
+            username: [''],
             profession: [''],
             genre: [''],
             biography: [''],
@@ -55,7 +56,7 @@ export class CreatePage implements OnInit {
             social_media: { twitter: formData.social_media },
         };
 
-        this.httpC.post(ENV.apiUrl+ '/api/users/', accountPayload).subscribe({
+        this.httpC.post(ENV.apiUrl+ 'api/users/', accountPayload).subscribe({
             next: (response) => {
                 console.log('Server Response:', response);
                 this.router.navigateByUrl("/profile");

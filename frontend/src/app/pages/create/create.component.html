@@ -1,6 +1,8 @@
 <form [formGroup]="createAcc" (ngSubmit)="onSubmit()">
     <label for="artistAlias">Artist Alias:</label><br>
     <input type="text" id="artistAlias" formControlName="artistAlias"><br>
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" formControlName="username"><br>
     <label for="phone_num">Phone Number:</label><br>
     <input type="text" id="phone_num" formControlName="phone_num" pattern="[0-9]*" inputmode="numeric"><br>
     <label for="profession">Profession:</label><br>
