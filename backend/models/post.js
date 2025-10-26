@@ -2,7 +2,7 @@
 import mongoose from "mongoose";
 
 const PostSchema = new Schema({
-    _id: {type: String, required: true}, //assuming we're going to generate an id for this
+    _id: {type: String, required: true},
     author: {type: String, required: true},
     title: {type: String, required: true},
     content: {type: String, required: true, default: null},
@@ -13,7 +13,7 @@ const PostSchema = new Schema({
     likes_usernames: {type: [String], required: true},
     reposts_usernames: {type: [String], required: true},
 }, {
-    timestamps: true, _id: false
+    timestamps: true
 })
 
 export default mongoose.model("Post", PostSchema);
