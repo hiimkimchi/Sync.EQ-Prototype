@@ -1,7 +1,7 @@
 // post.js 
 import mongoose from "mongoose";
 
-const PostSchema = new Schema({
+const PostSchema = new mongoose.Schema({
     _id: {type: String, required: true},
     postId: {type: Number, required: true},
     author: {type: String, required: true},
