@@ -1,6 +1,5 @@
 import express from "express";
 import Post from "../models/post.js";
-import { jwtCheck } from "../middleware/auth.js";
 const app = express.Router();
 
 //create a post
@@ -14,11 +13,11 @@ app.post("/", async (req, res) => {
 });
 
 //get a post via unique post_id
-app.get("/:username/:post_id", async (req, res) => {
+app.get("/:username/:postId", async (req, res) => {
     try {
-        const post = await Post.findById(req.params.post_id);
+        const post = await Post.findById(req.params.postId);
         if(!post) {
-            console.log(`failed to find user of name: ${req.params.post_id}`)
+            console.log(`failed to find user of name: ${req.params.postId}`)
             return res.status(404).json({ error: "Post not found" });
         }
         res.status(200).json(post);
