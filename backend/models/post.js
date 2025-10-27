@@ -1,8 +1,10 @@
 // post.js 
 import mongoose from "mongoose";
+const ObjectId = mongoose.Types.ObjectId; 
 
-const PostSchema = new Schema({
-    _id: {type: String, required: true},
+const PostSchema = new mongoose.Schema({
+    _id: {type: ObjectId, required: true},
+    postId: {type: Number, required: true},
     author: {type: String, required: true},
     title: {type: String, required: true},
     content: {type: String, required: true, default: null},

@@ -2,11 +2,13 @@
 // documentation sources from https://www.npmjs.com/package/mongoose
 
 import mongoose from "mongoose";
+const ObjectId = mongoose.Types.ObjectId; 
 
 // User Class
 const UserSchema = new mongoose.Schema({
-    _id: {type: String},
+    _id: {type: ObjectId},
     auth0id: {type: String, required: true, unique: true},
+    username: {type: String, required: true},
     artistAlias: {type: String, required: true},
     profession: {type: [String], required: true},
     genre: {type: [String], required: true, default: []},
@@ -26,8 +28,6 @@ const UserSchema = new mongoose.Schema({
         type: Map,
         of: String
     }
-}, {
-    _id: false
 });
 
 export default mongoose.model("User", UserSchema);
