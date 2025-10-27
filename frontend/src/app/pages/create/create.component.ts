@@ -52,7 +52,7 @@ export class CreatePage implements OnInit {
             ...formData,
             auth0id: this.auth0Info?.sub,
             email: this.auth0Info?.email,
-            _id: this.auth0Info?.nickname,
+            username: this.auth0Info?.nickname,
             social_media: { twitter: formData.social_media },
         };
 

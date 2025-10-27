@@ -12,7 +12,7 @@ app.post("/", async (req, res) => {
     } 
 });
 
-//get a post via unique post_id
+//get a post via unique post id
 app.get("/:username/:postId", async (req, res) => {
     try {
         const post = await Post.findById(req.params.postId);
