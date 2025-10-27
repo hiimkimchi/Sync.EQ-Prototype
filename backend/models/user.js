@@ -2,6 +2,7 @@
 // documentation sources from https://www.npmjs.com/package/mongoose
 
 import mongoose from "mongoose";
+const ObjectId = mongoose.Types.ObjectId; 
 
 // User Class
 const UserSchema = new mongoose.Schema({
