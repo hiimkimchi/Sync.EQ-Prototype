@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router'
 import { AuthService } from '@auth0/auth0-angular';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { ENV } from '../../core/environment'
+
 
 @Component({
     selector: 'app-create-profile',
@@ -45,16 +46,17 @@ export class CreatePage implements OnInit {
     }
 
     onSubmit(): void {
+        const api_url = ENV.apiUrl + "api/users/";
         const formData = this.createAcc.value;
         const accountPayload = {
             ...formData,
             auth0id: this.auth0Info?.sub,
             email: this.auth0Info?.email,
-            _id: this.auth0Info?.nickname,
+            username: this.auth0Info?.nickname,
             social_media: { twitter: formData.social_media },
         };
 
-        this.httpC.post('http://localhost:3000/api/users/', accountPayload).subscribe({
+        this.httpC.post(api_url, accountPayload).subscribe({
             next: (response) => {
                 console.log('Server Response:', response);
                 this.router.navigateByUrl("/profile");
