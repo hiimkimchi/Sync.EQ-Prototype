@@ -19,3 +19,23 @@
 body, html {
   font-family: 'Montserrat', sans-serif !important;
 }
+
+/* to change primary color, change --bs-primary */
+/* to change primary hover color, change --bs-primary-hover */
+:root {
+  --bs-primary: #8a2be2;
+  --bs-primary-rgb: 138, 43, 226;
+  --bs-primary-hover: #7326b3;
+}
+
+/* color overrides for buttons */
+.btn-primary {
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--bs-primary-hover) !important;
+  border-color: var(--bs-primary-hover) !important;
+}

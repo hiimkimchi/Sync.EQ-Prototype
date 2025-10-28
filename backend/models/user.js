@@ -7,7 +7,7 @@ const ObjectId = mongoose.Types.ObjectId;
 // User Class
 const UserSchema = new mongoose.Schema({
     auth0id: {type: String, required: true, unique: true},
-    username: {type: String, required: true},
+    username: {type: String, required: true, unique: true},
     artistAlias: {type: String, required: true},
     profession: {type: [String], required: true},
     genre: {type: [String], required: true, default: []},
@@ -27,6 +27,6 @@ const UserSchema = new mongoose.Schema({
         type: Map,
         of: String
     }
-});
+}, );
 
 export default mongoose.model("User", UserSchema);

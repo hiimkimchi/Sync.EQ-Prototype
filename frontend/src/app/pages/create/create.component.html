@@ -1,19 +1,59 @@
-<form [formGroup]="createAcc" (ngSubmit)="onSubmit()">
-    <label for="artistAlias">Artist Alias:</label><br>
-    <input type="text" id="artistAlias" formControlName="artistAlias"><br>
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" formControlName="username"><br>
-    <label for="phone_num">Phone Number:</label><br>
-    <input type="text" id="phone_num" formControlName="phone_num" pattern="[0-9]*" inputmode="numeric"><br>
-    <label for="profession">Profession:</label><br>
-    <input type="text" id="profession" formControlName="profession"><br>
-    <label for="genre">Genre:</label><br>
-    <input type="text" id="genre" formControlName="genre"><br>
-    <label for="biography">Biography:</label><br>
-    <input type="text" id="biography" formControlName="biography"><br>
-    <label for="daws">Digital Audio Workspace:</label><br>
-    <input type="text" id="daws" formControlName="daws"><br>
-    <label for="social_media">Social Media:</label><br>
-    <input type="text" id="social_media" formControlName="social_media"><br>
-    <button type="submit">Create Profile</button>
-</form>
+<!-- create.component.html -->
+<!-- Form to help with onboarding to the platform -->
+<div class="container py-5 d-flex justify-content-center align-items-center">
+  <div class="card shadow-lg p-4 rounded-4" style="max-width: 500px; width: 100%;">
+    <h2 class="text-center mb-4 fw-bold text-primary">Create Profile</h2>
+
+    <form [formGroup]="createAcc" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="artistAlias" class="form-label fw-semibold">Nickname</label>
+        <input type="text" id="artistAlias" formControlName="artistAlias" class="form-control" placeholder="Enter your nickname">
+      </div>
+
+      <div class="mb-3">
+        <label for="phone_num" class="form-label fw-semibold">Phone Number</label>
+        <input type="text" id="phone_num" formControlName="phone_num" pattern="[0-9]*" inputmode="numeric" class="form-control" placeholder="1234567890">
+      </div>
+
+      <div class="mb-3">
+        <label for="profession" class="form-label fw-semibold">Profession</label>
+        <select id="profession" formControlName="profession" class="form-select">
+          <option value="">Select profession</option>
+          <option value="Artist">Artist</option>
+          <option value="Producer">Producer</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="genre" class="form-label fw-semibold">Genre</label>
+        <input type="text" id="genre" formControlName="genre" class="form-control" placeholder="Hip-hop, EDM, etc.">
+      </div>
+
+      <div class="mb-3">
+        <label for="biography" class="form-label fw-semibold">Biography</label>
+        <textarea id="biography" formControlName="biography" class="form-control" rows="3" placeholder="Tell us about yourself"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="daws" class="form-label fw-semibold">Digital Audio Workstation (DAW)</label>
+        <select id="daws" formControlName="daws" class="form-select mb-2">
+          <option value="">Select DAW</option>
+          <option value="FL Studio">FL Studio</option>
+          <option value="Ableton">Ableton</option>
+          <option value="Pro Tools">Pro Tools</option>
+          <option value="Reason">Reason</option>
+          <option value="Logic Pro">Logic Pro</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="social_media" class="form-label fw-semibold">Social Media</label>
+        <input type="text" id="social_media" formControlName="social_media" class="form-control" placeholder="@yourhandle">
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 fw-semibold mt-3">
+        Create Profile
+      </button>
+    </form>
+  </div>
+</div>
