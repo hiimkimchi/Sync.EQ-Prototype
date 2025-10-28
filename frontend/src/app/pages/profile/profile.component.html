@@ -5,10 +5,11 @@
 
     <!-- Profile Card -->
     <div
-      class="card shadow-lg rounded-4 overflow-auto position-relative z-2 p-5 bg-light-subtle text-dark"
+      class="card shadow-lg rounded-4 overflow-hidden position-relative z-2 p-5 bg-light-subtle text-dark"
       style="width: 90vh; height: 85vh;"
     >
-      <div class="row g-4 align-items-center">
+      <!-- Top Section -->
+      <div class="row g-4">
         <!-- Left Column: Profile Picture + Info -->
         <div class="col-md-4 d-flex flex-column align-items-center text-center">
           <div
@@ -23,16 +24,33 @@
           </div>
         </div>
 
-        <!-- Right Column: Bio -->
-        <div class="col-md-8">
-          <div class="card bg-body-secondary border-0 rounded-3 p-4">
-            <h5 class="fw-semibold mb-3">About</h5>
-            <p class="mb-0 fs-6">{{ user?.biography }}</p>
+        <!-- Right Column: Profession and DAW -->
+        <div class="col-md-8 d-flex flex-column justify-content-center">
+          <div class="mb-3">
+            <h6 class="fw-semibold text-uppercase">Main Roles</h6>
+            <p class="mb-0 fs-6">{{ user?.professions || '—' }}</p>
           </div>
+          <div class="mb-3">
+            <h6 class="fw-semibold text-uppercase">Preferred Genres</h6>
+            <p class="mb-0 fs-6">{{ user?.genres || '—' }}</p>
+          </div>
+          <div class="mb-3">
+            <h6 class="fw-semibold text-uppercase">DAW</h6>
+            <p class="mb-0 fs-6">{{ user?.daws || '—' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Section: Bio -->
+      <div class="mt-4 mb-2 overflow-auto">
+        <div class="card bg-body-secondary border-0 rounded-3 p-4 shadow-sm">
+          <h5 class="fw-semibold mb-3">Bio</h5>
+          <p class="mb-0 fs-6">{{ user?.biography || 'No biography added yet.' }}</p>
         </div>
       </div>
     </div>
 
+    <!-- Vinyl Record Component -->
     <vinyl-record></vinyl-record>
 
   </div>
