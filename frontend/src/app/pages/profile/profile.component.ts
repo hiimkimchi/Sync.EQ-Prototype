@@ -1,13 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SynceqHeader } from '../../components/homeHeader/homeHeader.component';
+import { VinylRecord } from '../../components/vinylRecord/vinylRecord.component';
 import { User } from '../../models/users';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, SynceqHeader],
+  imports: [CommonModule, SynceqHeader, VinylRecord],
   templateUrl: './profile.component.html',
 })
 export class ProfilePage {
