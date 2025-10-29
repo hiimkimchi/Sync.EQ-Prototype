@@ -14,6 +14,10 @@ node server.js
 ## env vars
 ```
 MONGO_URL
+PORT
+ISSUER_URL
+FRONTEND
+API_URL
 ```
 ### NOTE: your .env file should be in /backend
 
@@ -31,8 +35,12 @@ npm install
 npm run start
 ```
 
-## env vars
+## environment.ts vars
 ```
-API_URL
+export interface EnvConfig {
+    apiUrl: string;
+    auth0Domain: string;
+    auth0ClientId: string;
+}
 ```
-### NOTE: your .env file should be in the /frontend
+### NOTE: your environment.ts should be in /frontend/src/app/core
