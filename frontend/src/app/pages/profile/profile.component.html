@@ -1,86 +1,58 @@
 <synceq-header />
 
-<div class="d-flex justify-content-center align-items-center" style="height: 100vh; padding: 2vh 0; background-color: #817f7f;">
-  <div class="position-relative d-flex justify-content-center align-items-center w-100" style="max-width: 1100px; height: 96vh;">
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-secondary-subtle py-4">
+  <div class="position-relative container d-flex justify-content-center align-items-center" style="max-width: 1300px;">
 
-    <!-- Light grey square -->
+    <!-- Profile Card -->
     <div
-      class="rounded-3 shadow text-dark overflow-auto p-4 d-flex flex-column justify-content-center"
-      style="
-        background-color: #d9d9d9;
-        width: 96vh;
-        height: 96vh;
-        z-index: 2;
-        scrollbar-width: thin;
-        scrollbar-color: #555 #d9d9d9;
-      "
+      class="card shadow-lg rounded-4 overflow-hidden position-relative z-2 p-5 bg-light-subtle text-dark"
+      style="width: 90vh; height: 85vh;"
     >
-        <div class="d-flex mb-4">
-            <!-- Left column: Profile picture with name & handle underneath -->
-            <div class="d-flex flex-column align-items-center me-4 flex-shrink-0">
-                <!-- Profile picture -->
-                <div
-                    class="rounded-circle bg-light border border-dark d-flex align-items-center justify-content-center"
-                    style="width: 120px; height: 120px;"
-                >
-                    <small class="fw-bold text-dark">{{ user?.profile_pic }}</small>
-                </div>
-
-                <!-- Name & handle under the picture -->
-                <div class="text-center mt-2">
-                    <h5 class="fw-bold mb-0">{{ user?.artist_name }}</h5>
-                    <h5 class="fw-bold mb-0">{{ user?.username }}</h5>
-                </div>
-            </div>
-
-            <!-- Right column: Profession & bio -->
-            <div class="flex-grow-1 d-flex flex-column justify-content-center">
-                <!-- <h5 class="fw-bold mb-2">{{ user?.profession }}</h5> -->
-                <p class="mb-0 pt-4 rounded" style="background-color: #bbbbbb;">{{ user?.biography }}</p>
-            </div>
+      <!-- Top Section -->
+      <div class="row g-4">
+        <!-- Left Column: Profile Picture + Info -->
+        <div class="col-md-4 d-flex flex-column align-items-center text-center">
+          <div
+            class="rounded-circle bg-light border border-dark d-flex align-items-center justify-content-center"
+            style="width: 140px; height: 140px;"
+          >
+            <small class="fw-bold text-dark">{{ user?.profile_pic }}</small>
+          </div>
+          <div class="mt-3">
+            <h4 class="fw-bold mb-0">{{ user?.artistAlias }}</h4>
+            <p class="text-muted mb-0 fs-6">{{ '@' + user?.username }}</p>
+          </div>
         </div>
 
+        <!-- Right Column: Profession and DAW -->
+        <div class="col-md-8 d-flex flex-column justify-content-center">
+          <div class="mb-3">
+            <h6 class="fw-semibold text-uppercase">Main Roles</h6>
+            <p class="mb-0 fs-6">{{ user?.professions || '—' }}</p>
+          </div>
+          <div class="mb-3">
+            <h6 class="fw-semibold text-uppercase">Preferred Genres</h6>
+            <p class="mb-0 fs-6">{{ user?.genres || '—' }}</p>
+          </div>
+          <div class="mb-3">
+            <h6 class="fw-semibold text-uppercase">DAW</h6>
+            <p class="mb-0 fs-6">{{ user?.daws || '—' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Section: Bio -->
+      <div class="mt-4 mb-2 overflow-auto">
+        <div class="card bg-body-secondary border-0 rounded-3 p-4 shadow-sm">
+          <h5 class="fw-semibold mb-3">Bio</h5>
+          <p class="mb-0 fs-6">{{ user?.biography || 'No biography added yet.' }}</p>
+        </div>
+      </div>
     </div>
 
-    <!-- Vinyl record poking out (static, closer to square) -->
-    <div
-        class="position-absolute top-50 translate-middle-y rounded-circle d-flex align-items-center justify-content-center"
-        style="
-            width: 90vh;
-            height: 90vh;
-            right: -15vh;
-            z-index: 1;
-            background: radial-gradient(circle at 30% 30%, #000 60%, #111 100%);
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
-            border: 2px solid #222;
-        "
-    >
-    <!-- Grooves (5 thin inner rings) -->
-    <div
-        class="rounded-circle position-relative d-flex align-items-center justify-content-center"
-        style="
-        width: 100%;
-        height: 100%;
-        box-shadow:
-            0 0 0 2px #222,
-            0 0 0 6px #181818,
-            0 0 0 10px #222,
-            0 0 0 14px #181818,
-            0 0 0 18px #222;
-        "
-    >
-        <!-- White label -->
-        <div
-            class="rounded-circle bg-light border border-dark"
-            style="
-                width: 25%;
-                height: 25%;
-                box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
-            "
-        >
-        </div>
-    </div>
-    </div>
+    <!-- Vinyl Record Component -->
+    <vinyl-record></vinyl-record>
+
   </div>
 </div>
 
