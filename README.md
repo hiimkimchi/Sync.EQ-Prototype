@@ -8,7 +8,7 @@ Quarter Long Project for CPSC 5240
 ```
 cd backend
 npm install
-node server.js
+npm run dev
 ```
 
 ## env vars

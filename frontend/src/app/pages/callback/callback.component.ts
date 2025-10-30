@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router'
 import { AuthService } from '@auth0/auth0-angular';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ENV } from '../../core/environment';
+import { User } from '../../models/users';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-create-profile',
@@ -19,16 +20,15 @@ export class CallbackPage implements OnInit {
     constructor(private auth:AuthService, 
                 private httpC: HttpClient,
                 private router: Router,
+                private userService: UserService
     ) {}
 
     // initiates when a page is loaded
     ngOnInit(): void {
-        const api_url = ENV.apiUrl + "api/users/get";
-        
         if(this.auth.isAuthenticated$) {    
             this.auth.user$.subscribe({
                 next: (res) => {
-                    this.httpC.get(`${api_url}/${res?.nickname}`).subscribe({
+                    this.userService.getProfile(res?.nickname ?? "").subscribe({
                         next: (response) => {
                             this.router.navigateByUrl("/");
                         },
@@ -43,3 +43,4 @@ export class CallbackPage implements OnInit {
         }
     }
 }
+

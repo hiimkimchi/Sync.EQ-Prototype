@@ -2,7 +2,7 @@
 import mongoose from "mongoose"
 const ObjectId = mongoose.Types.ObjectId;
 
-const MessageSchema = new Schema({
+const MessageSchema = new mongoose.Schema({
     _id: {type: ObjectId, required: true},
     chatID: {type: String, required: true},
     author: {type: String, required: true},
