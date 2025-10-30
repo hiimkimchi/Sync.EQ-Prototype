@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const ObjectId = mongoose.Types.ObjectId; 
 
 // if this is a media 
-const MediaSchema = new Schema({
+const MediaSchema = new mongoose.Schema({
     _id: {type: ObjectId, required: true},
     author: {type: String, required: true},
     fileType: {type: String, required: true},
