@@ -10,4 +10,4 @@ const ChatSchema = new Schema({
     chatMessages: {type: [String], required: true, default: []},
 });
 
-mongoose.model("Chat", ChatSchema);
+export default mongoose.model("Chat", ChatSchema);
