@@ -3,7 +3,7 @@ import express from "express";
 import connectMongoose from "./db.js";
 import userRoutes from "./routes/userRoutes.js"
 import postRoutes from "./routes/postRoutes.js"
-import authRoutes from "./routes/postRoutes.js"
+import authRoutes from "./routes/authRoutes.js"
 import dotenv from "dotenv"
 import cors from "cors"
 const app = express();

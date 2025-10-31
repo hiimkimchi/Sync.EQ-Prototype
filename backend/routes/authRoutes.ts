@@ -3,3 +3,5 @@ import * as uc from "../controllers/authController";
 const app = express.Router();
 
 app.get("/check", uc.authenticateUser);
+
+export default app
