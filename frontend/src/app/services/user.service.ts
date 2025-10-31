@@ -13,7 +13,7 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     getProfile(username: string): Observable<User> {
-        return this.http.get<User>(`${this.baseUrl}/get/${username}`);
+        return this.http.get<User>(`${this.baseUrl}/${username}`);
     }
 
     getAllProfiles(): Observable<User> {
