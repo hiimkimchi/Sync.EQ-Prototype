@@ -41,4 +41,8 @@ export class HomePage implements OnInit {
     routeToProfile(): void {
       this.router.navigate(['/profile', this.auth0Info.username]);
     }
+
+    routeToExplore(): void {
+      this.router.navigate(['/explore']);
+    }
 }
