@@ -1,0 +1,27 @@
+<synceq-header/>
+<!-- Middle Section of Homepage -->
+<!-- <section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">SYNC.EQ
+        <ng-icon name="bootstrapMusicNoteBeamed" style="color: black"></ng-icon>
+      </h1>
+      <p class="lead text-body-secondary">
+        Explore Your Network Today
+      </p>
+    </div>
+  </div>
+</section> -->
+
+<!-- Recommended profiles for logged in user -->
+<div class="album py-5 bg-body-tertiary">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <!-- takes in input from app.component.ts and renders onto page based on input -->
+    @for (card of cards; track card) {
+      <profile-card [card]="card"/>
+    }
+    </div>
+  </div>
+</div>
+<synceq-footer/>
