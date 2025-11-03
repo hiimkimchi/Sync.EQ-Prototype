@@ -28,7 +28,7 @@
         <div class="col-md-8 d-flex flex-column justify-content-center">
           <div class="mb-3">
             <h6 class="fw-semibold text-uppercase">Main Roles</h6>
-            <p class="mb-0 fs-6">{{ user?.professions || '—' }}</p>
+            <input-field [inputField]="user?.professions?.join(', ')"></input-field>
           </div>
           <div class="mb-3">
             <h6 class="fw-semibold text-uppercase">Preferred Genres</h6>

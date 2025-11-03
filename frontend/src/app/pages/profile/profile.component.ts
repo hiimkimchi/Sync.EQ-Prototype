@@ -1,14 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { bootstrapPencil } from '@ng-icons/bootstrap-icons';
 import { SynceqHeader } from '../../components/homeHeader/homeHeader.component';
 import { VinylRecord } from '../../components/vinylRecord/vinylRecord.component';
+import { InputField } from '../../components/inputField/inputField.component';
 import { User } from '../../models/users';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, SynceqHeader, VinylRecord],
+  imports: [CommonModule, NgIconComponent, InputField, SynceqHeader, VinylRecord],
+  providers: [provideIcons({ bootstrapPencil })],
   templateUrl: './profile.component.html',
 })
 export class ProfilePage {
@@ -45,5 +49,10 @@ export class ProfilePage {
         console.error(err);
       },
     });
+  }
+
+  onEditRoles() {
+    console.log('Edit roles button clicked!');
+    // Later you can open a modal or navigate to an edit form here
   }
 }
