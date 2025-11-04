@@ -11,7 +11,7 @@
       <!-- Top Section -->
       <div class="row g-4">
         <!-- Left Column: Profile Picture + Info -->
-        <div class="col-md-4 d-flex flex-column align-items-center text-center">
+        <div class="col-md-4 d-flex flex-column align-items-center justify-content-start">
           <div
             class="rounded-circle bg-light border border-dark d-flex align-items-center justify-content-center"
             style="width: 140px; height: 140px;"
@@ -19,7 +19,7 @@
             <small class="fw-bold text-dark">{{ user?.profile_pic }}</small>
           </div>
           <div class="mt-3">
-            <h4 class="fw-bold mb-0">{{ user?.artistAlias }}</h4>
+            <input-field [inputField]="user?.artistAlias" [isTitle]="true"></input-field>
             <p class="text-muted mb-0 fs-6">{{ '@' + user?.username }}</p>
           </div>
         </div>
@@ -32,11 +32,12 @@
           </div>
           <div class="mb-3">
             <h6 class="fw-semibold text-uppercase">Preferred Genres</h6>
-            <p class="mb-0 fs-6">{{ user?.genres || '—' }}</p>
+            <input-field [inputField]="user?.genres?.join(', ')"></input-field>
           </div>
           <div class="mb-3">
             <h6 class="fw-semibold text-uppercase">DAW</h6>
             <p class="mb-0 fs-6">{{ user?.daws || '—' }}</p>
+            <!-- make this one a toggle input instead of a free input -->
           </div>
         </div>
       </div>

@@ -1,5 +1,7 @@
 <div class="d-flex align-items-center justify-content-start">
-    <p class="mb-0 fs-6">{{ inputField || '—' }}</p>
+    <!-- if isTitle, h4, if not smaller -->
+    <p *ngIf="!isTitle" class="mb-0 fs-6">{{ inputField || '—' }}</p>
+    <h4 *ngIf="isTitle" class="fw-bold mb-0">{{ inputField || '—' }}</h4>
     <button
         class="btn d-flex align-items-center justify-content-center ms-4"
         (click)="onEdit()"

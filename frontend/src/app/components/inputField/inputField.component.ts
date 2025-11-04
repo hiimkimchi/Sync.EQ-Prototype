@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router'
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { bootstrapPencil } from '@ng-icons/bootstrap-icons';
 
-
 @Component({
   selector: 'input-field',
   imports: [CommonModule, NgIconComponent, RouterModule],
@@ -14,6 +13,7 @@ import { bootstrapPencil } from '@ng-icons/bootstrap-icons';
 export class InputField {
     title = 'input-field';
     @Input() inputField: string | undefined
+    @Input() isTitle?: boolean = false
 
     onEdit() {
         //add logic to change the p to an editable input
