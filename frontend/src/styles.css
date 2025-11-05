@@ -18,12 +18,13 @@
 
 body, html {
   font-family: 'Montserrat', sans-serif !important;
+  background-color: #F3CCA7;
 }
 
 /* to change primary color, change --bs-primary */
 /* to change primary hover color, change --bs-primary-hover */
 :root {
-  --bs-primary: #8a2be2;
+  --bs-primary: #218AFF;
   --bs-primary-rgb: 138, 43, 226;
   --bs-primary-hover: #7326b3;
 }
@@ -63,4 +64,14 @@ body, html {
   width: 25%;
   height: 25%;
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.home-modal {
+  background-color: #f39131;
+}
+
+.home-modal img {
+  max-height: 200px;
+  width: auto;
+  object-fit: contain;
 }
