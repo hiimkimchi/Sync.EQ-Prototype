@@ -27,6 +27,24 @@ export async function getSpecificUser(req: Request, res: Response) {
     }
 }
 
+export async function modifySpecificUser(req: Request, res: Response) {
+    try {
+        console.log("received request for " + req.params.username)
+        const user = await User.findOneAndUpdate(
+            { username: req.params.username },
+            req.body,
+            { new: true }
+        );
+        if(!user) {
+            console.log(`failed to find user of name: ${req.params.username}`)
+            return res.status(404).json({ error: "User not found" });
+        }
+        res.status(204).json(user);
+    } catch(err: any) {
+        res.status(400).json({error: err.message});
+    }
+}
+
 export async function createUser(req: Request, res: Response) {
     try {
         const user = await User.create(req.body);
