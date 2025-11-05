@@ -75,3 +75,7 @@ body, html {
   width: auto;
   object-fit: contain;
 }
+
+.home-modal .big-image img{
+  max-height: 400px;
+}
