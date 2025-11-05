@@ -4,8 +4,9 @@
     <h4 *ngIf="isTitle" class="fw-bold mb-0">{{ inputField || '—' }}</h4>
     <button
         class="btn d-flex align-items-center justify-content-center ms-4"
-        (click)="onEdit()"
+        (click)="switchEdit()"
     >
-    <ng-icon name="bootstrapPencil" size="16" />
+    <ng-icon *ngIf="!isEditing" name="bootstrapPencil" size="16" />
+    <span *ngIf="isEditing" class="ms-1" style="font-size:16px; line-height:16px; display:inline-flex; align-items:center;">Save</span>
     </button>
 </div>

@@ -14,8 +14,9 @@ export class InputField {
     title = 'input-field';
     @Input() inputField: string | undefined
     @Input() isTitle?: boolean = false
+    isEditing: boolean = false
 
-    onEdit() {
-        //add logic to change the p to an editable input
+    switchEdit() {
+      this.isEditing = !this.isEditing
     }
 }
