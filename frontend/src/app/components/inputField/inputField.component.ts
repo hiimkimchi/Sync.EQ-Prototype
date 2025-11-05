@@ -1,22 +1,34 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router'
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { bootstrapPencil } from '@ng-icons/bootstrap-icons';
+import { bootstrapPencil, bootstrapCheck } from '@ng-icons/bootstrap-icons';
 
 @Component({
   selector: 'input-field',
-  imports: [CommonModule, NgIconComponent, RouterModule],
-  providers: [provideIcons({ bootstrapPencil })],
+  imports: [CommonModule, NgIconComponent, FormsModule, RouterModule],
+  providers: [provideIcons({ bootstrapPencil, bootstrapCheck })],
   templateUrl: './inputField.component.html',
 })
 export class InputField {
     title = 'input-field';
     @Input() inputField: string | undefined
     @Input() isTitle?: boolean = false
+    @Output() fieldUpdated = new EventEmitter<string>();
     isEditing: boolean = false
+    showToast: boolean = false
 
     switchEdit() {
+      if (this.isEditing) {
+        this.fieldUpdated.emit(this.inputField || '')
+        this.showToastBanner()
+      } 
       this.isEditing = !this.isEditing
+    }
+
+    showToastBanner() {
+      this.showToast = true;
+      setTimeout(() => (this.showToast = false), 5000); // Hide after 5 seconds
     }
 }

@@ -48,6 +48,31 @@ export class ProfilePage {
     });
   }
 
+  updateUserField(field: string | undefined, value: string) {
+    if (!this.user) return;
+    if (!field || !value) return;
+
+    var updatedUser = {}
+
+    if (field === 'professions' || field === 'genres') {
+      updatedUser = { ...this.user, [field]: [value] };
+    } else {
+      updatedUser = { ...this.user, [field]: value };
+    }
+    
+
+    this.userService.updateProfile(this.username, updatedUser).subscribe({
+      next: (data) => {
+        this.user = data;
+        console.log('Profile updated successfully:', data);
+        this.fetchUser()
+      },
+      error: (err) => {
+        console.error('Failed to update profile:', err);
+      },
+    });
+  }
+
   onEditRoles() {
     console.log('Edit roles button clicked!');
     // Later you can open a modal or navigate to an edit form here

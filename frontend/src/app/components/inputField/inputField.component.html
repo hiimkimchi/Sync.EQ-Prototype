@@ -1,12 +1,33 @@
 <div class="d-flex align-items-center justify-content-start">
-    <!-- if isTitle, h4, if not smaller -->
+  <!-- Display mode -->
+  <ng-container *ngIf="!isEditing">
     <p *ngIf="!isTitle" class="mb-0 fs-6">{{ inputField || '—' }}</p>
     <h4 *ngIf="isTitle" class="fw-bold mb-0">{{ inputField || '—' }}</h4>
-    <button
-        class="btn d-flex align-items-center justify-content-center ms-4"
-        (click)="switchEdit()"
-    >
-    <ng-icon *ngIf="!isEditing" name="bootstrapPencil" size="16" />
-    <span *ngIf="isEditing" class="ms-1" style="font-size:16px; line-height:16px; display:inline-flex; align-items:center;">Save</span>
-    </button>
+  </ng-container>
+
+  <!-- Edit mode -->
+  <ng-container *ngIf="isEditing">
+    <input
+      type="text"
+      [(ngModel)]="inputField"
+      class="form-control mb-0"
+      [ngClass]="{ 'fs-6': !isTitle, 'fw-bold fs-4': isTitle }"
+      style="width: auto; max-width: 300px;"
+    />
+  </ng-container>
+
+  <button
+    class="btn d-flex align-items-center justify-content-center ms-4"
+    (click)="switchEdit()"
+  >
+    <ng-icon *ngIf="!isEditing" name="bootstrapPencil" size="16"></ng-icon>
+    <ng-icon *ngIf="isEditing" name="bootstrapCheck" size="16"></ng-icon>
+  </button>
+</div>
+
+<div
+  *ngIf="showToast"
+  class="toast-banner position-fixed top-0 start-50 translate-middle-x mt-3 p-3 rounded shadow-sm text-white bg-success"
+>
+  Saved successfully!
 </div>
