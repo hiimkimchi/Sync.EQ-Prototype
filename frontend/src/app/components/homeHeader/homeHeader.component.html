@@ -9,19 +9,19 @@
         </button>
         <ul class="dropdown-menu text-small shadow bg-dark" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34px, 0px);" data-popper-placement="bottom-start"> 
           <li>
-            <a class="dropdown-item text-white" href="#">Feed</a>
+            <a class="dropdown-item text-white" routerLink="/">Feed</a>
           </li> 
           <li>
-            <a class="dropdown-item text-white" href="#">Explore</a>
+            <a class="dropdown-item text-white" routerLink="/">Explore</a>
           </li> 
           <li>
-            <a class="dropdown-item text-white" href="#">Messages</a>
+            <a class="dropdown-item text-white" routerLink="/">Messages</a>
           </li> 
           <li>
             <hr class="dropdown-divider">
           </li> 
           <li>
-            <a class="dropdown-item text-white" href="#">About</a>
+            <a class="dropdown-item text-white" routerLink="/">About</a>
           </li> 
         </ul> 
       </div>
@@ -51,7 +51,7 @@
       <div class="d-flex align-items-right"><
         <!-- Profile Picture for logged in user -->
         <div class="dropdown">
-          <a class = "d-flex align-items-center" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class = "d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
             <img
               src="https://media.licdn.com/dms/image/v2/D5603AQHOeL3fYFhTZg/profile-displayphoto-crop_800_800/B56ZhTCdBDHUAM-/0/1753739813067?e=1762992000&v=beta&t=LCIPBV_9a5kRZh-5FQrW2iR-Gu1a9BZrELtBG8lQhC4"
               class="rounded-circle ms-3"
@@ -61,10 +61,10 @@
             >
           </a>
           <ul class="dropdown-menu text-small shadow bg-dark">
-            <li><a class="dropdown-item text-white" href="#">Profile</a></li>
-            <li><a class="dropdown-item text-white" href="#">Settings</a></li>
+            <li><a class="dropdown-item text-white" (click)="routeToProfile()">Profile</a></li>
+            <li><a class="dropdown-item text-white" routerLink="/">Settings</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-white" href="#">Logout</a></li>
+            <li><a class="dropdown-item text-white" routerLink="/">Logout</a></li>
           </ul>
         </div>
         <!--Login/Logout Button-->
