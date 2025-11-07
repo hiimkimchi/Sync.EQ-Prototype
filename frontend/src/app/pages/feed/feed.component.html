@@ -1,3 +1,13 @@
 <synceq-header/>
-
+<!-- Recommended profiles for logged in user -->
+<div class="album py-5 bg-body-tertiary">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <!-- takes in input from app.component.ts and renders onto page based on input -->
+    @for (post of posts; track post) {
+      <post-card [post]="post"/>
+    }
+    </div>
+  </div>
+</div>
 <synceq-footer/>
