@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
   imports: [CommonModule, NgIconComponent, RouterModule, AuthButtonComponent],
   providers: [provideIcons({ bootstrapSearch, bootstrapHouse, bootstrapListUl })],
   templateUrl: './homeHeader.component.html',
+  styleUrls: ['./homeHeader.component.css'],
 })
 export class SynceqHeader {
     title = 'synceq-header';

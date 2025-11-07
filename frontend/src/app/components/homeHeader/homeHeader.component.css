@@ -1,0 +1,10 @@
+/* make hover/focus a light gray and keep good contrast */
+.dropdown-menu .dropdown-item {
+  color: #fff; /* normal text color on dark dropdown */
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+  background-color: #404040; /* light gray */
+  color: #111;               /* dark text for readability on light hover */
+}
