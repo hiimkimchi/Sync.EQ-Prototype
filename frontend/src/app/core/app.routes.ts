@@ -6,6 +6,7 @@ import { authGuard } from '../guards/auth.guard';
 import { CreatePage } from '../pages/create/create.component';
 import { CallbackPage } from '../pages/callback/callback.component';
 import { NotFoundPage } from '../pages/notFound/notFound.component';
+import { ExplorePage } from '../pages/explore/explore.component';
 
 export const routes: Routes = [
     {
@@ -29,8 +30,12 @@ export const routes: Routes = [
         path: 'callback',
         component: CallbackPage
     },
+        {
+        path: 'explore',
+        component: ExplorePage
+    },
     {
         path: '**',
         component: NotFoundPage
-    }
+    },
 ];

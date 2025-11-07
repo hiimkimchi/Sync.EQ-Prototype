@@ -11,12 +11,12 @@ import { User } from '../../models/users';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, NgIconComponent, SynceqHeader, SynceqFooter],
+  imports: [CommonModule, ProfileCard, SynceqHeader, SynceqFooter],
   providers: [provideIcons({ bootstrapMusicNoteBeamed })],
-  templateUrl: './home.component.html',
+  templateUrl: './explore.component.html',
 })
-export class HomePage implements OnInit {
-    title = 'home-page';
+export class ExplorePage implements OnInit {
+    title = 'explore-page';
     auth0Info = {} as User ;
     cards = [
         { image: 'assets/images/bryan.jpg', username: 'HiImKimchi', genre: 'EDM' },
@@ -40,9 +40,5 @@ export class HomePage implements OnInit {
 
     routeToProfile(): void {
       this.router.navigate(['/profile', this.auth0Info.username]);
-    }
-
-    routeToExplore(): void {
-      this.router.navigate(['/explore']);
     }
 }

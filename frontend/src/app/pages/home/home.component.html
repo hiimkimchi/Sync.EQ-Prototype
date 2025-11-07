@@ -1,30 +1,104 @@
 <synceq-header/>
+
 <!-- Middle Section of Homepage -->
-<section class="py-5 text-center container">
-  <div class="row py-lg-5">
-    <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light">SYNC.EQ
-        <ng-icon name="bootstrapMusicNoteBeamed" style="color: black"></ng-icon>
-      </h1>
-      <p class="lead text-body-secondary">
-        Equalize your connections.
-      </p>
-      <div class="d-flex justify-content-center">
-        <a (click)="routeToProfile()" class="btn btn-primary mx-2">Go To Your Profile</a>
+<section 
+  class="homepage-hero d-flex justify-content-center align-items-center position-relative text-center"
+  style="overflow: hidden; height: 40vh;"
+>
+<!-- background -->
+  <div
+    style="
+      position: absolute;
+      inset: 0;
+      background-image: url('https://www.aliveco.com/wp-content/uploads/2023/08/TheGorgeAmphitheater_20230527_335.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: blur(5px) brightness(75%);
+      transform: scale(1.1);
+      z-index: 0;
+    "
+  ></div>
+
+  <!-- foreground -->
+  <div class="position-relative text-center" style="z-index: 1;">
+    <h1 class="fw-light text-white mb-3">
+      SYNC.EQ
+      <ng-icon name="bootstrapMusicNoteBeamed" style="color: white"></ng-icon>
+    </h1>
+
+    <!-- Carousel -->
+    <div class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+      <div class="carousel-inner text-white">
+        <div class="carousel-item active">
+          <p>Equalize Your Connections</p>
+        </div>
+        <div class="carousel-item">
+          <p>Expand Your Network</p>
+        </div>
+        <div class="carousel-item">
+          <p>Find Amazing Collaborators</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="d-flex justify-content-center mt-3">
+      <a (click)="routeToExplore()" class="btn btn-primary mx-2">Find Collaborators</a>
+    </div>
+  </div>
+</section>
+
+<section id="information">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="card h-100 home-modal p-4 d-flex flex-column justify-content-center align-items-center text-center">        
+            <img src="https://cdn-icons-png.flaticon.com/512/6171/6171865.png"/>
+            <h1 class="card-title fw-bold">What is Sync.EQ?</h1>
+            <h4 class="card-subtitle">Built By Musicians, For Musicians</h4>
+            <p class="card-body text-center">
+              We are a networking platform made for musicians to connect, collaborate, and develop partnerships! <br>
+              In a sense, we are the musically gifted LinkedIn.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-2"> 
+        </div>
+        <div class="col-md-5">
+          <div class="card h-100 home-modal d-flex flex-column justify-content-center align-items-center text-center">    
+            <img src="https://cdn-icons-png.flaticon.com/512/1642/1642359.png"/>    
+            <h1 class="card-title fw-bold">What sets us apart?</h1>
+            <p class="mx-4">
+              We are the very first, and only social platform targeted towards the music industry. 
+              With networking becoming such a massive aspect in collaboring and growing your audience, 
+              we seek to solve that discrepency, making it easier for smaller artists to grow their network of connections.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="container mt-4 mb-4">
+    <div class="card home-modal overflow-hidden border-0 shadow-lg">
+      <div class="row g-0 align-items-center">
+        <div class="big-image col-md-6">
+          <img 
+            src="https://cdn-icons-png.flaticon.com/512/5044/5044509.png" 
+            class="img-fluid h-100 w-100"
+          />
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center p-5 text-center text-md-start">
+          <h1 class="card-title mb-3 fw-bold">What do we offer?</h1>
+          <h4 class="card-subtitle mb-4 text-muted">We offer a wide variety of services</h4>
+          <div class="card-body p-0">
+            <p class="mb-2">#1 Connecting musicians, artists, & producers via interests</p>
+            <p class="mb-2">#2 In-app messaging to streamline communication</p>
+            <p>#3 Music sharing platform to preview tracks you have produced</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
 
-<!-- Recommended profiles for logged in user -->
-<div class="album py-5 bg-body-tertiary">
-  <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-    <!-- takes in input from app.component.ts and renders onto page based on input -->
-    @for (card of cards; track card) {
-      <profile-card [card]="card"/>
-    }
-    </div>
-  </div>
-</div>
 <synceq-footer/>
