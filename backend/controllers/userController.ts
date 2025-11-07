@@ -27,7 +27,7 @@ export async function getSpecificUser(req: Request, res: Response) {
     }
 }
 
-export async function modifySpecificUser(req: Request, res: Response) {
+export async function updateSpecificUser(req: Request, res: Response) {
     try {
         console.log("received request for " + req.params.username)
         const user = await User.findOneAndUpdate(
