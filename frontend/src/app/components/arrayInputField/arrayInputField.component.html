@@ -23,3 +23,9 @@
         <ng-icon *ngIf="isEditing" name="bootstrapCheck" size="16"></ng-icon>
     </button>
 </div>
+
+<div *ngIf="showToast"
+    class="toast-banner position-fixed top-0 start-50 translate-middle-x mt-3 p-3 rounded shadow-sm text-white bg-success"
+    style="transition: opacity 0.5s ease; opacity: 1;">
+    Saved successfully!
+</div>
