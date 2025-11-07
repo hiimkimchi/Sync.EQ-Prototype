@@ -1,0 +1,23 @@
+<!-- Profile Card component for Homepage -->
+<div class="col">
+    <div class="card shadow-sm">
+        <div class="card-body">
+        <p class="card-text">
+            {{post.author}}
+        </p>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary">
+                Profile
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">
+                Message
+            </button>
+            </div>
+            <small class="text-body-secondary">
+                {{post.content}}
+            </small>
+        </div>
+        </div>
+    </div>
+</div>
