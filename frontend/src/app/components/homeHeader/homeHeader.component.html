@@ -1,11 +1,42 @@
 <!-- Header for website -->
 <header>
   <div class="navbar navbar-dark bg-dark box-shadow">
-    <div class="container d-flex align-items-center justify-content-center">
+    <div class="d-flex align-items-left">
+      <!-- Drop Down Menu -->
+      <div class="dropdown"> 
+        <button class="d-flex align-items-center btn btn-dark ms-3" data-bs-toggle="dropdown" aria-expanded="true" > 
+          <ng-icon name="bootstrapListUl" class="me-2 text-white" style="width: 24px; height: 24px;"></ng-icon>
+        </button>
+        <ul class="dropdown-menu text-small shadow bg-dark" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34px, 0px);" data-popper-placement="bottom-start"> 
+          <li>
+            <a class="dropdown-item text-white" routerLink="/">Feed</a>
+          </li> 
+          <li>
+            <a class="dropdown-item text-white" routerLink="/">Explore</a>
+          </li> 
+          <li>
+            <a class="dropdown-item text-white" routerLink="/">Messages</a>
+          </li> 
+          <li>
+            <hr class="dropdown-divider">
+          </li> 
+          <li>
+            <a class="dropdown-item text-white" routerLink="/">About</a>
+          </li> 
+        </ul> 
+      </div>
+
       <!-- Go to Homepage -->
-      <a routerLink="/" class="btn btn-dark align-items-center me-3">
-        <ng-icon name="bootstrapHouse"></ng-icon>
-      </a>
+    <a routerLink="/" class="btn btn-dark align-items-center ms-3">
+        <strong>Sync.Eq</strong>
+    </a>
+    
+    </div>
+
+    <div class="container d-flex align-items-center justify-content-center">
+      
+
+    
       <!-- Search bar for searching for other profiles -->
       <div class="search-container position-relative mx-auto" style="max-width: 400px; flex: 1;">
         <input
@@ -15,16 +46,30 @@
         >
         <ng-icon name="bootstrapSearch" class="search-icon position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);"></ng-icon>
       </div>
-      <!-- Profile Picture for logged in user -->
-      <img
-        src="https://media.licdn.com/dms/image/v2/D5603AQHOeL3fYFhTZg/profile-displayphoto-crop_800_800/B56ZhTCdBDHUAM-/0/1753739813067?e=1762992000&v=beta&t=LCIPBV_9a5kRZh-5FQrW2iR-Gu1a9BZrELtBG8lQhC4"
-        class="rounded-circle ms-3"
-        width="40"
-        height="40"
-        alt="Profile"
-      >
-      <!--Login/Logout Button-->
-      <app-auth-button></app-auth-button>
-    </div>
+
+
+      <div class="d-flex align-items-right"><
+        <!-- Profile Picture for logged in user -->
+        <div class="dropdown">
+          <a class = "d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D5603AQHOeL3fYFhTZg/profile-displayphoto-crop_800_800/B56ZhTCdBDHUAM-/0/1753739813067?e=1762992000&v=beta&t=LCIPBV_9a5kRZh-5FQrW2iR-Gu1a9BZrELtBG8lQhC4"
+              class="rounded-circle ms-3"
+              width="40"
+              height="40"
+              alt="Profile"
+            >
+          </a>
+          <ul class="dropdown-menu text-small shadow bg-dark">
+            <li><a class="dropdown-item text-white btn" (click)="routeToProfile()">Profile</a></li>
+            <li><a class="dropdown-item text-white" routerLink="/">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-white" routerLink="/">Logout</a></li>
+          </ul>
+        </div>
+        <!--Login/Logout Button-->
+          <app-auth-button></app-auth-button>
+        </div>
+      </div>
   </div>
 </header>
