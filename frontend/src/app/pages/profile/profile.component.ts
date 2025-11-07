@@ -1,15 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SynceqHeader } from '../../components/homeHeader/homeHeader.component';
 import { VinylRecord } from '../../components/vinylRecord/vinylRecord.component';
 import { InputField } from '../../components/inputField/inputField.component';
+import { ArrayInputField } from '../../components/arrayInputField/arrayInputField.component';
 import { User } from '../../models/users';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, InputField, SynceqHeader, VinylRecord],
+  imports: [CommonModule, InputField, ArrayInputField, SynceqHeader, VinylRecord],
   templateUrl: './profile.component.html',
 })
 export class ProfilePage {
@@ -48,18 +49,11 @@ export class ProfilePage {
     });
   }
 
-  updateUserField(field: string | undefined, value: string) {
+  updateUserField(field: string | undefined, value: string | string[]) {
     if (!this.user) return;
     if (!field || !value) return;
 
-    var updatedUser = {}
-
-    if (field === 'professions' || field === 'genres') {
-      updatedUser = { ...this.user, [field]: [value] };
-    } else {
-      updatedUser = { ...this.user, [field]: value };
-    }
-    
+    const updatedUser = { ...this.user, [field]: value };
 
     this.userService.updateProfile(this.username, updatedUser).subscribe({
       next: (data) => {
@@ -71,10 +65,5 @@ export class ProfilePage {
         console.error('Failed to update profile:', err);
       },
     });
-  }
-
-  onEditRoles() {
-    console.log('Edit roles button clicked!');
-    // Later you can open a modal or navigate to an edit form here
   }
 }

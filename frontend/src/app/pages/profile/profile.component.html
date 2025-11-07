@@ -22,8 +22,8 @@
             <input-field 
               [inputField]="user?.artistAlias" 
               [isTitle]="true"
-              (fieldUpdated)="updateUserField('artistAlias', $event)"
-            ></input-field>
+              (fieldUpdated)="updateUserField('artistAlias', $event)">
+            </input-field>
             <p class="text-muted mb-0 fs-6">{{ '@' + user?.username }}</p>
           </div>
         </div>
@@ -32,13 +32,17 @@
         <div class="col-md-8 d-flex flex-column justify-content-center">
           <div class="mb-3">
             <h6 class="fw-semibold text-uppercase">Main Roles</h6>
-            <input-field [inputField]="user?.professions?.join(', ')" (fieldUpdated)="updateUserField('professions', $event)"></input-field>
+            <array-input-field 
+              [inputField]="user?.professions || []" 
+              (fieldUpdated)="updateUserField('professions', $event)">
+            </array-input-field>
           </div>
           <div class="mb-3">
             <h6 class="fw-semibold text-uppercase">Preferred Genres</h6>
-            <input-field 
-              [inputField]="user?.genres?.join(', ')"
-              (fieldUpdated)="updateUserField('genres', $event)"></input-field>
+            <array-input-field 
+              [inputField]="user?.genres || []"
+              (fieldUpdated)="updateUserField('genres', $event)">
+            </array-input-field>
           </div>
           <div class="mb-3">
             <h6 class="fw-semibold text-uppercase">DAW</h6>
