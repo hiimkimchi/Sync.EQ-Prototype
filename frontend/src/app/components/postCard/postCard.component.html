@@ -1,9 +1,12 @@
-<!-- Profile Card component for Homepage -->
+<!-- Post Card component -->
+<!-- Base idea for design
+    1) Hold a carousel to scroll through different types of posts
+-->
 <div class="col">
     <div class="card shadow-sm">
         <div class="card-body">
         <p class="card-text">
-            {{post.author}}
+            {{post.author}} - {{post.createdAt}}
         </p>
         <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
