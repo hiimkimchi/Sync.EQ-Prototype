@@ -1,33 +1,26 @@
-<div class="d-flex align-items-center justify-content-start">
-  <!-- Display mode -->
-  <ng-container *ngIf="!isEditing">
-    <p *ngIf="!isTitle" class="mb-0 fs-6">{{ inputField || '—' }}</p>
-    <h4 *ngIf="isTitle" class="fw-bold mb-0">{{ inputField || '—' }}</h4>
-  </ng-container>
+<div class="d-flex align-items-start justify-content-between flex-wrap">
+    <!-- Display mode -->
+    <ng-container *ngIf="!isEditing">
+        <p *ngIf="!isTitle" class="mb-0 fs-6">{{ inputField || '—' }}</p>
+        <h4 *ngIf="isTitle" class="fw-bold mb-0">{{ inputField || '—' }}</h4>
+    </ng-container>
 
-  <!-- Edit mode -->
-  <ng-container *ngIf="isEditing">
-    <input
-      type="text"
-      [(ngModel)]="inputField"
-      class="form-control mb-0"
-      [ngClass]="{ 'fs-6': !isTitle, 'fw-bold fs-4': isTitle }"
-      style="width: auto; max-width: 300px;"
-    />
-  </ng-container>
+    <!-- Edit mode -->
+    <ng-container *ngIf="isEditing">
+        <!-- Single string edit -->
+        <input type="text" [(ngModel)]="inputField" class="form-control mb-2"
+            [ngClass]="{ 'fs-6': !isTitle, 'fw-bold fs-4': isTitle }" style="width: auto; max-width: 300px;" />
+    </ng-container>
 
-  <button
-    class="btn d-flex align-items-center justify-content-center ms-4"
-    (click)="switchEdit()"
-  >
-    <ng-icon *ngIf="!isEditing" name="bootstrapPencil" size="16"></ng-icon>
-    <ng-icon *ngIf="isEditing" name="bootstrapCheck" size="16"></ng-icon>
-  </button>
+    <button class="btn d-flex align-items-center justify-content-center ms-3" (click)="switchEdit()">
+        <ng-icon *ngIf="!isEditing" name="bootstrapPencil" size="16"></ng-icon>
+        <ng-icon *ngIf="isEditing" name="bootstrapCheck" size="16"></ng-icon>
+    </button>
 </div>
 
-<div
-  *ngIf="showToast"
-  class="toast-banner position-fixed top-0 start-50 translate-middle-x mt-3 p-3 rounded shadow-sm text-white bg-success"
->
-  Saved successfully!
+<!-- Toast -->
+<div *ngIf="showToast"
+    class="toast-banner position-fixed top-0 start-50 translate-middle-x mt-3 p-3 rounded shadow-sm text-white bg-success"
+    style="transition: opacity 0.5s ease; opacity: 1;">
+    Saved successfully!
 </div>

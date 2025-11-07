@@ -12,23 +12,23 @@ import { bootstrapPencil, bootstrapCheck } from '@ng-icons/bootstrap-icons';
   templateUrl: './inputField.component.html',
 })
 export class InputField {
-    title = 'input-field';
-    @Input() inputField: string | undefined
-    @Input() isTitle?: boolean = false
-    @Output() fieldUpdated = new EventEmitter<string>();
-    isEditing: boolean = false
-    showToast: boolean = false
+  title = 'input-field';
+  @Input() inputField: string | undefined;
+  @Input() isTitle?: boolean = false;
+  @Output() fieldUpdated = new EventEmitter<string>();
+  isEditing = false;
+  showToast = false;
 
-    switchEdit() {
-      if (this.isEditing) {
-        this.fieldUpdated.emit(this.inputField || '')
-        this.showToastBanner()
-      } 
-      this.isEditing = !this.isEditing
+  switchEdit() {
+    if (this.isEditing) {
+      this.fieldUpdated.emit(this.inputField || '');
+      this.showToastBanner();
     }
+    this.isEditing = !this.isEditing;
+  }
 
-    showToastBanner() {
-      this.showToast = true;
-      setTimeout(() => (this.showToast = false), 5000); // Hide after 5 seconds
-    }
+  showToastBanner() {
+    this.showToast = true;
+    setTimeout(() => (this.showToast = false), 5000);
+  }
 }
