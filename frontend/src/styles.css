@@ -23,9 +23,9 @@ body, html {
 /* to change primary color, change --bs-primary */
 /* to change primary hover color, change --bs-primary-hover */
 :root {
-  --bs-primary: #8a2be2;
+  --bs-primary: #ea1e1e;
   --bs-primary-rgb: 138, 43, 226;
-  --bs-primary-hover: #7326b3;
+  --bs-primary-hover: #ea1e1ecc;
 }
 
 /* color overrides for buttons */
