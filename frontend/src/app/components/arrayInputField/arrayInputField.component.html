@@ -1,0 +1,25 @@
+<div class="d-flex align-items-start justify-content-between flex-wrap">
+    <ng-container *ngIf="!isEditing">
+        <!-- Array display -->
+        <p class="mb-0 fs-6">
+            {{ inputField.join(', ') || '—' }}
+        </p>
+    </ng-container>
+
+    <ng-container *ngIf="isEditing">
+        <!-- Array edit -->
+        <div class="d-flex flex-column gap-2">
+            <div *ngFor="let item of inputField; let i = index; trackBy: trackByIndex" class="d-flex align-items-center gap-2">
+                <input type="text" [(ngModel)]="inputField[i]" class="form-control"
+                    style="width: auto; max-width: 250px;" />
+                <button class="btn btn-sm btn-danger" (click)="removeItem(i)">-</button>
+            </div>
+            <button class="btn btn-sm btn-secondary mt-2" (click)="addItem()">+ Add Item</button>
+        </div>
+    </ng-container>
+
+    <button class="btn d-flex align-items-center justify-content-center ms-3" (click)="switchEdit()">
+        <ng-icon *ngIf="!isEditing" name="bootstrapPencil" size="16"></ng-icon>
+        <ng-icon *ngIf="isEditing" name="bootstrapCheck" size="16"></ng-icon>
+    </button>
+</div>
