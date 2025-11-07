@@ -17,8 +17,8 @@ export class PostService {
     }
 
     // will return an array of maxSize 20
-    getAllPosts(): Observable<Post> {
-        return this.http.get<Post>(`${this.baseUrl}`);
+    getAllPosts(): Observable<[Post]> {
+        return this.http.get<[Post]>(`${this.baseUrl}`);
     }
 
     createPost(username: string, data: Partial<Post>): Observable<Post> {
