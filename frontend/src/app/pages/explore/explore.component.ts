@@ -11,7 +11,7 @@ import { User } from '../../models/users';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, NgIconComponent, ProfileCard, SynceqHeader, SynceqFooter],
+  imports: [CommonModule, ProfileCard, SynceqHeader, SynceqFooter],
   providers: [provideIcons({ bootstrapMusicNoteBeamed })],
   templateUrl: './explore.component.html',
 })
