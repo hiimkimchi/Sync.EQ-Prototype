@@ -1,0 +1,34 @@
+<div class="d-flex align-items-start justify-content-between flex-wrap">
+    <!-- Display Mode -->
+    <ng-container *ngIf="!isEditing">
+        <p *ngIf="!isTitle" class="mb-0 fs-6">
+            {{ inputField.length ? inputField.join(', ') : '—' }}
+        </p>
+        <h4 *ngIf="isTitle" class="fw-bold mb-0">
+            {{ inputField.length ? inputField.join(', ') : '—' }}
+        </h4>
+    </ng-container>
+
+    <!-- Edit Mode -->
+    <ng-container *ngIf="isEditing">
+        <select multiple class="form-select mb-0" [ngClass]="{ 'fs-6': !isTitle, 'fw-bold fs-4': isTitle }"
+            style="width: auto; max-width: 300px; min-height: 120px;" (change)="onSelectChange($event)">
+            <option *ngFor="let opt of options" [value]="opt" [selected]="inputField.includes(opt)">
+                {{ opt }}
+            </option>
+        </select>
+    </ng-container>
+
+    <!-- Toggle Edit Button -->
+    <button class="btn d-flex align-items-center justify-content-center ms-3" (click)="switchEdit()">
+        <ng-icon *ngIf="!isEditing" name="bootstrapPencil" size="16"></ng-icon>
+        <ng-icon *ngIf="isEditing" name="bootstrapCheck" size="16"></ng-icon>
+    </button>
+</div>
+
+<!-- Toast -->
+<div *ngIf="showToast"
+    class="toast-banner position-fixed top-0 start-50 translate-middle-x mt-3 p-3 rounded shadow-sm text-white bg-success"
+    style="transition: opacity 0.5s ease; opacity: 1;">
+    Saved successfully!
+</div>
