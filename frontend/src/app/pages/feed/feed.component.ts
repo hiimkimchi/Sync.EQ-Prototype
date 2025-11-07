@@ -3,11 +3,12 @@ import { SynceqFooter } from '../../components/homeFooter/homeFooter.component';
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../../models/post';
 import { PostService } from '../../services/post.service';
+import { CommonModule } from '@angular/common';
 import { PostCard } from '../../components/postCard/postCard.component';
 
 @Component({
   selector: 'app-home',
-  imports: [SynceqHeader, SynceqFooter, PostCard],
+  imports: [SynceqHeader, SynceqFooter, PostCard, CommonModule],
   providers: [],
   templateUrl: './feed.component.html',
 })
