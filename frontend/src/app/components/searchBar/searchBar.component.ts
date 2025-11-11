@@ -1,6 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { bootstrapSearch } from '@ng-icons/bootstrap-icons';
@@ -13,7 +13,12 @@ import { bootstrapSearch } from '@ng-icons/bootstrap-icons';
     templateUrl: './searchBar.component.html',
 })
 export class SearchBar {
+    constructor(
+        private router: Router
+    ) { }
+
     modalOpen = false;
+    searchText = '';
 
     filters = {
         professions: [] as string[],
@@ -29,11 +34,6 @@ export class SearchBar {
         this.modalOpen = true;
     }
 
-    applyFilters() {
-        console.log('Filters applied:', this.filters);
-        this.modalOpen = false;
-    }
-
     toggleProfession(profession: string, isChecked: boolean) {
         if (isChecked) {
             if (!this.filters.professions.includes(profession)) {
@@ -42,8 +42,6 @@ export class SearchBar {
         } else {
             this.filters.professions = this.filters.professions.filter(p => p !== profession);
         }
-
-        console.log('Updated professions:', this.filters.professions);
     }
 
     @HostListener('document:click', ['$event'])
@@ -52,5 +50,21 @@ export class SearchBar {
         const inside = target.closest('search-bar');
 
         if (!inside) this.modalOpen = false;
+    }
+
+    routeToExplore(): void {
+        this.router.navigate(['/explore'], {
+            queryParams: {
+                genre: this.filters.genre,
+                professions: this.filters.professions,
+                username: this.searchText
+            }
+        });
+    }
+
+    handleEnter(input: HTMLInputElement): void {
+        if (document.activeElement === input) {
+            this.routeToExplore();
+        }
     }
 }
