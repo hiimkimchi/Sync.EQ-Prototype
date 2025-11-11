@@ -13,12 +13,31 @@ export async function getUsers(req: Request, res: Response) {
     }
 }
 
+export async function getSpecificUsers(req: Request, res: Response) {
+    try {
+        const genres = req.query.genres
+        const professions = req.query.professions
+        const search = req.query.search
+        const filters: { [key: string]: any } = {}
+
+        if (genres) filters.genres = genres
+        if (professions) filters.professions = professions
+        if (search) filters.search = search
+
+        const users = await User.find(filters)
+        if (users.length === 0) {
+            return res.status(404).json({error: "No users in db"});
+        }
+        res.status(200).json(users);
+    } catch (err: any) {
+        res.status(400).json({error: err.message})
+    }
+}
+
 export async function getSpecificUser(req: Request, res: Response) {
     try {
-        console.log("received request for " + req.params.username)
         const user = await User.findOne({ username: req.params.username });
         if(!user) {
-            console.log(`failed to find user of name: ${req.params.username}`)
             return res.status(404).json({ error: "User not found" });
         }
         res.status(200).json(user);
@@ -29,14 +48,12 @@ export async function getSpecificUser(req: Request, res: Response) {
 
 export async function updateSpecificUser(req: Request, res: Response) {
     try {
-        console.log("received request for " + req.params.username)
         const user = await User.findOneAndUpdate(
             { username: req.params.username },
             req.body,
             { new: true }
         );
         if(!user) {
-            console.log(`failed to find user of name: ${req.params.username}`)
             return res.status(404).json({ error: "User not found" });
         }
         res.status(204).json(user);
