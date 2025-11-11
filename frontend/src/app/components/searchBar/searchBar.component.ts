@@ -34,6 +34,7 @@ export class SearchBar {
         this.modalOpen = true;
     }
 
+    // toggles the professions in the professions array
     toggleProfession(profession: string, isChecked: boolean) {
         if (isChecked) {
             if (!this.filters.professions.includes(profession)) {
@@ -52,6 +53,7 @@ export class SearchBar {
         if (!inside) this.modalOpen = false;
     }
 
+    // routes the page to the explore page with query parameters
     routeToExplore(): void {
         this.router.navigate(['/explore'], {
             queryParams: {
@@ -62,6 +64,7 @@ export class SearchBar {
         });
     }
 
+    // handles enter key
     handleEnter(input: HTMLInputElement): void {
         if (document.activeElement === input) {
             this.routeToExplore();
