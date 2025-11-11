@@ -21,7 +21,8 @@ export class SynceqHeader {
   title = 'synceq-header';
   auth0Info = {} as User;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private auth: AuthService
   ) { };
 
@@ -34,7 +35,6 @@ export class SynceqHeader {
       });
     }
   }
-
 
   routeToProfile(): void {
     this.router.navigate(['/profile', this.auth0Info.username]);
