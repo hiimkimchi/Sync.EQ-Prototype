@@ -15,12 +15,12 @@ export async function getUsers(req: Request, res: Response) {
 
 export async function getSpecificUsers(req: Request, res: Response) {
     try {
-        const genres = req.query.genres
+        const genre = req.query.genre
         const professions = req.query.professions
         const search = req.query.search
         const filters: { [key: string]: any } = {}
 
-        if (genres) filters.genres = genres
+        if (genre) filters.genres = genre
         if (professions) filters.professions = professions
         if (search) filters.search = search
 
