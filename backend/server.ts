@@ -19,6 +19,7 @@ app.use(cors({
     origin: frontend,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 // default route
