@@ -21,9 +21,12 @@ export class PostCard {
         return;
       }
       if(this.post.likes_usernames?.includes(this.user.username)) {
-        return;
+        this.post.likes_usernames = this.post.likes_usernames.filter(
+          (name:String) => name !== this.user.username
+        );
+      } else {
+        this.post.likes_usernames?.push(this.user.username);
       }
-      this.post.likes_usernames?.push(this.user.username);
       const res = this.postService.updatePost(this.post);
       // so the updates are not persistent unless the subscribe is there so idk what we can do to mediate this
       res.subscribe({
@@ -42,9 +45,12 @@ export class PostCard {
         return;
       }
       if(this.post.reposts_usernames?.includes(this.user.username)) {
-        return;
+        this.post.reposts_usernames = this.post.reposts_usernames.filter(
+          (name:String) => name !== this.user.username
+        );
+      } else {
+        this.post.reposts_usernames?.push(this.user.username);
       }
-      this.post.reposts_usernames?.push(this.user.username);
       const res = this.postService.updatePost(this.post);
       // so the updates are not persistent unless the subscribe is there so idk what we can do to mediate this
       res.subscribe({
