@@ -45,7 +45,14 @@ export async function getSpecificPost(
 
 export async function createPost(req: Request, res: Response): Promise<any> {
 	try {
-		const post = await Post.create(req.body);
+		const lastPost = await Post.findOne({author: req.body.author}).sort({
+			postId: -1
+		});
+		const nextPostId = lastPost ? lastPost.postId + 1 : 1;
+		const post = await Post.create({
+			...req.body,
+			postId: nextPostId
+		});
 		return res.status(201).json(post);
 	} catch (err: any) {
 		return res.status(400).json({ error: err.message });
