@@ -5,39 +5,42 @@ import { Post } from '../models/post';
 import { ENV } from '../core/environment';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostService {
-    private baseUrl = `${ENV.apiUrl}api/posts`;
+  private baseUrl = `${ENV.apiUrl}api/posts`;
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-    private filterTimeStamps(post: Post): Post {
-        return {
-            ...post,
-            createdAt: post.createdAt ? new Date(post.createdAt) : undefined,
-            updatedAt: post.updatedAt ? new Date(post.updatedAt) : undefined
-        };
-    }
+  private filterTimeStamps(post: Post): Post {
+    return {
+      ...post,
+      createdAt: post.createdAt ? new Date(post.createdAt) : undefined,
+      updatedAt: post.updatedAt ? new Date(post.updatedAt) : undefined,
+    };
+  }
 
-    getSpecificUserPosts(username: string): Observable<Post[]> {
-        return this.http.get<Post[]>(`${this.baseUrl}/${username}`)
-            .pipe(map(posts=>posts.map(p=>this.filterTimeStamps(p))));
+  getSpecificUserPosts(username: string): Observable<Post[]> {
+    return this.http
+      .get<Post[]>(`${this.baseUrl}/${username}`)
+      .pipe(map((posts) => posts.map((p) => this.filterTimeStamps(p))));
+  }
 
-    }
+  // will return an array of maxSize 20
+  getAllPosts(): Observable<Post[]> {
+    return this.http
+      .get<Post[]>(`${this.baseUrl}`)
+      .pipe(map((posts) => posts.map((p) => this.filterTimeStamps(p))));
+  }
 
-    // will return an array of maxSize 20
-    getAllPosts(): Observable<Post[]> {
-        return this.http
-            .get<Post[]>(`${this.baseUrl}`)
-            .pipe(map( posts=>posts.map ( p=>this.filterTimeStamps(p) )));
-    }
+  createPost(username: string, data: Partial<Post>): Observable<Post> {
+    return this.http.post<Post>(`${this.baseUrl}/`, data);
+  }
 
-    createPost(username: string, data: Partial<Post>): Observable<Post> {
-        return this.http.post<Post>(`${this.baseUrl}/`, data);
-    }
-
-    updatePost(post: Partial<Post>): Observable<Post> {
-        return this.http.put<Post>(`${this.baseUrl}/${post.author}/${post.postId}`, post);
-    }
+  updatePost(post: Partial<Post>): Observable<Post> {
+    return this.http.put<Post>(
+      `${this.baseUrl}/${post.author}/${post.postId}`,
+      post
+    );
+  }
 }

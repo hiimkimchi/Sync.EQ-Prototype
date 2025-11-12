@@ -15,27 +15,25 @@ import { User } from '../../models/users';
   templateUrl: './feed.component.html',
 })
 export class FeedPage implements OnInit {
-    title = 'explore-page';
-    posts?: Post[];
-    user?: User;
-    
-    constructor(private postService: PostService,
-                private auth : AuthService,
-    ) {};
+  title = 'explore-page';
+  posts?: Post[];
+  user?: User;
 
-    ngOnInit(): void {
-      this.postService.getAllPosts().subscribe({
-        next: (data) => {
-          this.posts = data;
-        }
+  constructor(private postService: PostService, private auth: AuthService) {}
+
+  ngOnInit(): void {
+    this.postService.getAllPosts().subscribe({
+      next: (data) => {
+        this.posts = data;
+      },
+    });
+    if (this.auth.isAuthenticated$) {
+      this.auth.user$.subscribe({
+        next: (res) => {
+          this.user = res!;
+          this.user.username = res?.nickname;
+        },
       });
-      if(this.auth.isAuthenticated$) {    
-        this.auth.user$.subscribe({
-          next: (res) => {
-            this.user = res!;
-            this.user.username = res?.nickname;
-          }
-        });
-      }
     }
+  }
 }
