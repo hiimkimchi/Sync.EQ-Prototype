@@ -5,6 +5,8 @@ import { Post } from '../../models/post';
 import { PostService } from '../../services/post.service';
 import { CommonModule } from '@angular/common';
 import { PostCard } from '../../components/postCard/postCard.component';
+import { AuthService } from '@auth0/auth0-angular';
+import { User } from '../../models/users';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +17,10 @@ import { PostCard } from '../../components/postCard/postCard.component';
 export class FeedPage implements OnInit {
     title = 'explore-page';
     posts?: Post[];
+    user?: User;
     
-    constructor(private postService: PostService
+    constructor(private postService: PostService,
+                private auth : AuthService,
     ) {};
 
     ngOnInit(): void {
@@ -26,5 +30,13 @@ export class FeedPage implements OnInit {
           this.posts = data;
         }
       });
+      if(this.auth.isAuthenticated$) {    
+        this.auth.user$.subscribe({
+          next: (res) => {
+            this.user = res!;
+            this.user.username = res?.nickname;
+          }
+        });
+      }
     }
 }
