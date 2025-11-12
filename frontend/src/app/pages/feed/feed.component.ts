@@ -26,7 +26,6 @@ export class FeedPage implements OnInit {
     ngOnInit(): void {
       this.postService.getAllPosts().subscribe({
         next: (data) => {
-          console.log(data);
           this.posts = data;
         }
       });
