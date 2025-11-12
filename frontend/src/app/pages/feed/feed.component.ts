@@ -14,7 +14,7 @@ import { PostCard } from '../../components/postCard/postCard.component';
 })
 export class FeedPage implements OnInit {
     title = 'explore-page';
-    posts?: [Post];
+    posts?: Post[];
     
     constructor(private postService: PostService
     ) {};
