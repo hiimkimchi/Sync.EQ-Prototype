@@ -3,48 +3,42 @@
   <div class="navbar navbar-dark bg-dark box-shadow">
     <div class="d-flex align-items-left">
       <!-- Drop Down Menu -->
-      <div class="dropdown"> 
-        <button class="d-flex align-items-center btn btn-dark ms-3" data-bs-toggle="dropdown" aria-expanded="true" > 
+      <div class="dropdown">
+        <button class="d-flex align-items-center btn btn-dark ms-3" data-bs-toggle="dropdown" aria-expanded="true">
           <ng-icon name="bootstrapListUl" class="me-2 text-white" style="width: 24px; height: 24px;"></ng-icon>
         </button>
-        <ul class="dropdown-menu text-small shadow bg-dark" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34px, 0px);" data-popper-placement="bottom-start"> 
+        <ul class="dropdown-menu text-small shadow bg-dark"
+          style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34px, 0px);"
+          data-popper-placement="bottom-start">
           <li>
             <a class="dropdown-item text-white" routerLink="/feed">Feed</a>
-          </li> 
-          <li>
-            <a class="dropdown-item text-white" routerLink="/explore">Explore</a>
           </li> 
           <li>
             <a class="dropdown-item text-white" routerLink="/chat">Messages</a>
           </li> 
           <li>
             <hr class="dropdown-divider">
-          </li> 
+          </li>
           <li>
             <a class="dropdown-item text-white" routerLink="/">About</a>
-          </li> 
-        </ul> 
+          </li>
+        </ul>
       </div>
 
       <!-- Go to Homepage -->
-    <a routerLink="/" class="btn btn-dark align-items-center ms-3">
+      <a routerLink="/" class="btn btn-dark align-items-center ms-3">
         <strong>Sync.Eq</strong>
-    </a>
-    
+      </a>
+
     </div>
 
     <div class="container d-flex align-items-center justify-content-center">
-      
 
-    
+
+
       <!-- Search bar for searching for other profiles -->
       <div class="search-container position-relative mx-auto" style="max-width: 400px; flex: 1;">
-        <input
-          type="text"
-          class="form-control search-input"
-          placeholder="Look for Musicians..."
-        >
-        <ng-icon name="bootstrapSearch" class="search-icon position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);"></ng-icon>
+        <search-bar></search-bar>
       </div>
 
 
@@ -69,7 +63,7 @@
         </div>
         <!--Login/Logout Button-->
           <app-auth-button></app-auth-button>
-        </div>
       </div>
+    </div>
   </div>
 </header>

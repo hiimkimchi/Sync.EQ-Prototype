@@ -11,6 +11,7 @@ app.post("/", uc.createUser);
 // });
 
 app.get("/", uc.getUsers);
+app.get("/search", uc.getSpecificUsers)
 app.get("/:username", uc.getSpecificUser);
 app.put("/:username", uc.updateSpecificUser);
 
