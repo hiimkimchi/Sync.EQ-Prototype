@@ -36,4 +36,8 @@ export class PostService {
     createPost(username: string, data: Partial<Post>): Observable<Post> {
         return this.http.post<Post>(`${this.baseUrl}/`, data);
     }
+
+    updatePost(post: Post): Observable<Post> {
+        return this.http.post<Post>(`${this.baseUrl}/`, post);
+    }
 }
