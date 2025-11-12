@@ -3,7 +3,9 @@ import Post from "../models/post.js"
 
 export async function getAllPosts(req: Request, res: Response): Promise<any> {
     try {
-        const posts = await Post.find();
+        const posts = await Post.find()
+            .sort({createdAt: -1})
+            .limit(20);
         if(posts.length === 0) {
             return res.status(404).json({ error: "No posts exist on Sync.EQ" });
         }

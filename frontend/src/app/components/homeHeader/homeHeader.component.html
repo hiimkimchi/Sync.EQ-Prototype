@@ -11,11 +11,11 @@
           style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34px, 0px);"
           data-popper-placement="bottom-start">
           <li>
-            <a class="dropdown-item text-white" routerLink="/">Feed</a>
-          </li>
+            <a class="dropdown-item text-white" routerLink="/feed">Feed</a>
+          </li> 
           <li>
-            <a class="dropdown-item text-white" routerLink="/">Messages</a>
-          </li>
+            <a class="dropdown-item text-white" routerLink="/chat">Messages</a>
+          </li> 
           <li>
             <hr class="dropdown-divider">
           </li>
@@ -43,23 +43,25 @@
 
 
       <div class="d-flex align-items-right">
-        < <!-- Profile Picture for logged in user -->
-          <div class="dropdown">
-            <a class="d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-              <img
-                src="https://media.licdn.com/dms/image/v2/D5603AQHOeL3fYFhTZg/profile-displayphoto-crop_800_800/B56ZhTCdBDHUAM-/0/1753739813067?e=1762992000&v=beta&t=LCIPBV_9a5kRZh-5FQrW2iR-Gu1a9BZrELtBG8lQhC4"
-                class="rounded-circle ms-3" width="40" height="40" alt="Profile">
-            </a>
-            <ul class="dropdown-menu text-small shadow bg-dark">
-              <li><a class="dropdown-item text-white btn" (click)="routeToProfile()">Profile</a></li>
-              <li><a class="dropdown-item text-white" routerLink="/">Settings</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item text-white" routerLink="/">Logout</a></li>
-            </ul>
-          </div>
-          <!--Login/Logout Button-->
+        <!-- Profile Picture for logged in user -->
+        <div class="dropdown">
+          <a class = "d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+            <img
+              src="https://media.licdn.com/dms/image/v2/D5603AQHOeL3fYFhTZg/profile-displayphoto-crop_800_800/B56ZhTCdBDHUAM-/0/1753739813067?e=1762992000&v=beta&t=LCIPBV_9a5kRZh-5FQrW2iR-Gu1a9BZrELtBG8lQhC4"
+              class="rounded-circle ms-3"
+              width="40"
+              height="40"
+              alt="Profile"
+            >
+          </a>
+          <ul class="dropdown-menu text-small shadow bg-dark">
+            <li><a class="dropdown-item text-white btn" (click)="routeToProfile()">Profile</a></li>
+            <li><a class="dropdown-item text-white" routerLink="/">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-white" routerLink="/">Logout</a></li>
+          </ul>
+        </div>
+        <!--Login/Logout Button-->
           <app-auth-button></app-auth-button>
       </div>
     </div>

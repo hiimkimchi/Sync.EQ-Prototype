@@ -1,0 +1,25 @@
+<synceq-header/>
+<div id="post-carousel" class="carousel slide" data-bs-interval="false">
+    <div class="carousel-inner">
+        <div 
+            *ngFor="let post of posts; let i = index" 
+            class="carousel-item" 
+            [class.active]="i === 0">
+            <div class="d-flex justify-content-center align-items-center p-4">
+                <post-card [post]="post"/>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carousel controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#post-carousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#post-carousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<synceq-footer/>

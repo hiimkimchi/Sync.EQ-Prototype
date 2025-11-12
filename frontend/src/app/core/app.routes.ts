@@ -7,6 +7,7 @@ import { CreatePage } from '../pages/create/create.component';
 import { CallbackPage } from '../pages/callback/callback.component';
 import { NotFoundPage } from '../pages/notFound/notFound.component';
 import { ExplorePage } from '../pages/explore/explore.component';
+import { FeedPage } from '../pages/feed/feed.component';
 
 export const routes: Routes = [
     {
@@ -33,6 +34,10 @@ export const routes: Routes = [
         {
         path: 'explore',
         component: ExplorePage
+    },
+    {
+        path: 'feed',
+        component: FeedPage
     },
     {
         path: '**',
