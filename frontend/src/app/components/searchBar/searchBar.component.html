@@ -1,7 +1,13 @@
 <div class="position-relative w-100">
 
     <!-- Search Input -->
-    <input #searchInput type="text" class="form-control search-input" placeholder="Look for Musicians..." [(ngModel)]="searchText" name="searchText" (focus)="openModal()" (keydown.enter)="handleEnter(searchInput)" />
+    <input #searchInput type="text" 
+        class="form-control search-input" 
+        placeholder="Look for Musicians..." 
+        [(ngModel)]="searchText" name="searchText" 
+        (focus)="openModal()" 
+        (keydown.enter)="handleEnter(searchInput)"
+    />
 
     <ng-icon name="bootstrapSearch" class="search-icon position-absolute"
         style="top: 50%; right: 10px; transform: translateY(-50%);"></ng-icon>
