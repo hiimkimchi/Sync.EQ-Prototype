@@ -1,0 +1,39 @@
+<!-- createPost.component.html -->
+<div class="p-3">
+  <h5 class="modal-title">Share Your Story</h5>
+
+  <!-- Form / Modal Body -->
+  <div class="modal-body">
+    <p>Input Your Headliner & Post Details</p>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Post title"
+      [(ngModel)]="title"
+    />
+    <textarea
+      class="form-control mt-2"
+      placeholder="Post content"
+      [(ngModel)]="content"
+      rows="10"
+    ></textarea>
+  </div>
+
+  <!-- Footer -->
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="submitPost()"
+    >
+      Save changes
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="closeModal()"
+    >
+      Close
+    </button>
+  </div>
+</div>
