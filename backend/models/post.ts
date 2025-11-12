@@ -11,8 +11,8 @@ const PostSchema = new mongoose.Schema({
 
     //can collect usernames of likes and reposts, 
     //calculate and cache total for numbers of likes and reposts
-    likes_usernames: {type: [String], required: true},
-    reposts_usernames: {type: [String], required: true},
+    likes_usernames: {type: [String], required: true, default: []},
+    reposts_usernames: {type: [String], required: true, default: []},
 }, {
     timestamps: true
 })
