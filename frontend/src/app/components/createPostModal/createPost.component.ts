@@ -18,7 +18,6 @@ export class CreatePostModal {
 
   submitPost() {
     const postData = { 
-        postId: "67",
         title: this.title, 
         content: this.content, 
         author: this.user?.username 
