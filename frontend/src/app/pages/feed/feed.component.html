@@ -1,4 +1,15 @@
 <synceq-header />
+
+<button class="btn btn-primary" (click)="openModal()">Create Post</button>
+
+<div class="modal fade show d-block" *ngIf="showModal" style="background-color: rgba(0,0,0,0.5)">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <create-post-modal [user]="{username: 'jomi'}" (closed)="closeModal()"></create-post-modal>
+    </div>
+  </div>
+</div>
+
 <div id="post-carousel" class="carousel slide" data-bs-interval="false">
   <div class="carousel-inner">
     <div

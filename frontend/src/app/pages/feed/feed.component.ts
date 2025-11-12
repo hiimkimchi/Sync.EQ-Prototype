@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
 import { PostCard } from '../../components/postCard/postCard.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { User } from '../../models/users';
+import { CreatePostModal } from '../../components/createPostModal/createPost.component';
 
 @Component({
   selector: 'app-home',
-  imports: [SynceqHeader, SynceqFooter, PostCard, CommonModule],
+  imports: [SynceqHeader, SynceqFooter, PostCard, CommonModule, CreatePostModal],
   providers: [],
   templateUrl: './feed.component.html',
 })
@@ -18,6 +19,7 @@ export class FeedPage implements OnInit {
   title = 'explore-page';
   posts?: Post[];
   user?: User;
+  showModal = false;
 
   constructor(private postService: PostService, private auth: AuthService) {}
 
@@ -35,5 +37,13 @@ export class FeedPage implements OnInit {
         },
       });
     }
+  }
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
   }
 }
