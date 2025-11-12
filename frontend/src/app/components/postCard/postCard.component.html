@@ -5,22 +5,24 @@
 <div class="col">
     <div class="card shadow-sm">
         <div class="card-body">
-        <p class="card-text">
-            {{post.author}} - {{post.createdAt}}
-        </p>
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-secondary">
-                Profile
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">
-                Message
-            </button>
+            <p class="card-text">
+                {{post.author}} - {{ post.createdAt | date: 'MM/dd/yy : h:mma' }}
+            </p>
+            <div class="pb-3">
+                <small class="text-body-secondary">
+                    {{post.content}}
+                </small>
             </div>
-            <small class="text-body-secondary">
-                {{post.content}}
-            </small>
-        </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex gap-3">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                        Likes : {{post.likes_usernames.length}}
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                        Repost : {{post.reposts_usernames.length}}
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
