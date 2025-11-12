@@ -15,10 +15,10 @@
             </div>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex gap-3">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                    <button (click)="addLike()" type="button" class="btn btn-sm btn-outline-secondary">
                         Likes : {{post.likes_usernames.length}}
                     </button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                    <button (click)="addRepost()" type="button" class="btn btn-sm btn-outline-secondary">
                         Repost : {{post.reposts_usernames.length}}
                     </button>
                 </div>
