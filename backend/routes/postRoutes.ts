@@ -10,4 +10,6 @@ app.get("/", pc.getAllPosts);
 app.get("/:username", pc.getUsersPosts);
 app.get("/:username/:postId", pc.getSpecificPost);
 
+app.put("/:username/:postId", pc.updatePost);
+
 export default app;

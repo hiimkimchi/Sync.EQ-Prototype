@@ -48,3 +48,23 @@ export async function createPost(req: Request, res: Response): Promise<any> {
         return res.status(400).json({error: err.message});
     } 
 }
+
+export async function updatePost(req: Request, res: Response): Promise<any> {
+    try {
+        const username = req.params.username;
+        const postId = req.params.postId;
+
+        const post = await Post.findOneAndUpdate(
+            {author: username, postId: Number(postId)},
+            req.body,
+            {new: true}
+        );
+
+        if(!post) {
+            return res.status(404).json({message: "Post Not Found"});
+        }
+        return res.status(204).json(post);
+    } catch(err: any) {
+        return res.status(400).json({error: err.message}); 
+    }
+}
