@@ -8,6 +8,7 @@ import { CallbackPage } from '../pages/callback/callback.component';
 import { NotFoundPage } from '../pages/notFound/notFound.component';
 import { ExplorePage } from '../pages/explore/explore.component';
 import { FeedPage } from '../pages/feed/feed.component';
+import { ChatPage } from '../pages/chat/chat.component';
 
 export const routes: Routes = [
     {
@@ -38,6 +39,10 @@ export const routes: Routes = [
     {
         path: 'feed',
         component: FeedPage
+    },
+    {
+        path: 'chat',
+        component: ChatPage
     },
     {
         path: '**',
