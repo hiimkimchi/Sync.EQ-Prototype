@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
     external_visits: {type: [String], default: []},
     
     // Buffer stores Binary data
-    profile_pic: Buffer,
+    profile_pic: String,
 
     // documentation for map https://mongoosejs.com/docs/schematypes.html#arrays
     social_media: {
