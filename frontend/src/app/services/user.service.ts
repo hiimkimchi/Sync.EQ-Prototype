@@ -12,7 +12,7 @@ export class UserService {
 
     constructor(private http: HttpClient) { }
 
-    getProfile(username: string): Observable<User> {
+    getProfile(username: string|undefined): Observable<User> {
         return this.http.get<User>(`${this.baseUrl}/${username}`);
     }
 

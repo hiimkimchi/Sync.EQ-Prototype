@@ -8,6 +8,7 @@ import { SearchBar } from '../searchBar/searchBar.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { User } from '../../models/users';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class SynceqHeader {
 
   constructor(
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private userService: UserService,
   ) { };
 
   ngOnInit(): void {
@@ -33,6 +35,8 @@ export class SynceqHeader {
           this.auth0Info.username = res?.nickname;
         }
       });
+      // this.userService.getProfile(this.auth0Info.username).subscribe({
+      // });
     }
   }
 

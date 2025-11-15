@@ -1,24 +1,44 @@
 <synceq-header />
 
-<div class="d-flex justify-content-center align-items-center min-vh-100 bg-secondary-subtle py-4">
-  <div class="position-relative container d-flex justify-content-center align-items-center" style="max-width: 1300px;">
-
+<div
+  class="d-flex justify-content-center align-items-center min-vh-100 bg-secondary-subtle py-4"
+>
+  <div
+    class="position-relative container d-flex justify-content-center align-items-center"
+    style="max-width: 1300px"
+  >
     <!-- Profile Card -->
-    <div class="card shadow-lg rounded-4 overflow-hidden position-relative z-2 p-5 bg-light-subtle text-dark"
-      style="width: 90vh; height: 85vh;">
+    <div
+      class="card shadow-lg rounded-4 overflow-hidden position-relative z-2 p-5 bg-light-subtle text-dark"
+      style="width: 90vh; height: 85vh"
+    >
       <!-- Top Section -->
       <div class="row g-4">
         <!-- Left Column: Profile Picture + Info -->
-        <div class="col-md-4 d-flex flex-column align-items-center justify-content-start">
-          <div class="rounded-circle bg-light border border-dark d-flex align-items-center justify-content-center"
-            style="width: 140px; height: 140px;">
-            <small class="fw-bold text-dark">{{ user?.profile_pic }}</small>
+        <div
+          class="col-md-4 d-flex flex-column align-items-center justify-content-start"
+        >
+          <div
+            class="rounded-circle bg-light border border-dark d-flex align-items-center justify-content-center overflow-hidden"
+            style="width: 140px; height: 140px"
+          >
+            <img
+              [src]="
+                user?.profile_pic ||
+                'https://i8.amplience.net/i/naras/ILLENIUM-9506A-3.5.21-jpg-credit-Brian-Ziff'
+              "
+              class="w-100 h-100 object-fit-cover"
+              alt="Thumbnail"
+            />
           </div>
           <div class="mt-3">
-            <input-field [inputField]="user?.artistAlias" [isTitle]="true"
-              (fieldUpdated)="updateUserField('artistAlias', $event)">
+            <input-field
+              [inputField]="user?.artistAlias"
+              [isTitle]="true"
+              (fieldUpdated)="updateUserField('artistAlias', $event)"
+            >
             </input-field>
-            <p class="text-muted mb-0 fs-6">{{ '@' + user?.username }}</p>
+            <p class="text-muted mb-0 fs-6">{{ "@" + user?.username }}</p>
           </div>
         </div>
 
@@ -26,18 +46,27 @@
         <div class="col-md-8 d-flex flex-column justify-content-center">
           <div class="mb-3">
             <h6 class="fw-semibold text-uppercase">Main Roles</h6>
-            <array-input-field [inputField]="user?.professions || []"
-              (fieldUpdated)="updateUserField('professions', $event)">
+            <array-input-field
+              [inputField]="user?.professions || []"
+              (fieldUpdated)="updateUserField('professions', $event)"
+            >
             </array-input-field>
           </div>
           <div class="mb-3">
             <h6 class="fw-semibold text-uppercase">Preferred Genres</h6>
-            <array-input-field [inputField]="user?.genres || []" (fieldUpdated)="updateUserField('genres', $event)">
+            <array-input-field
+              [inputField]="user?.genres || []"
+              (fieldUpdated)="updateUserField('genres', $event)"
+            >
             </array-input-field>
           </div>
           <div class="mb-3">
             <h6 class="fw-semibold text-uppercase">DAW(S)</h6>
-            <select-input-field [inputField]="user?.daws || []" [options]="['FL Studio', 'Ableton', 'Logic Pro']" (fieldUpdated)="updateUserField('daws', $event)">
+            <select-input-field
+              [inputField]="user?.daws || []"
+              [options]="['FL Studio', 'Ableton', 'Logic Pro']"
+              (fieldUpdated)="updateUserField('daws', $event)"
+            >
             </select-input-field>
           </div>
         </div>
@@ -47,13 +76,14 @@
       <div class="mt-4 mb-2 overflow-auto">
         <div class="card bg-body-secondary border-0 rounded-3 p-4 shadow-sm">
           <h5 class="fw-semibold mb-3">Bio</h5>
-          <p class="mb-0 fs-6">{{ user?.biography || 'No biography added yet.' }}</p>
+          <p class="mb-0 fs-6">
+            {{ user?.biography || "No biography added yet." }}
+          </p>
         </div>
       </div>
     </div>
 
     <!-- Vinyl Record Component -->
     <vinyl-record></vinyl-record>
-
   </div>
 </div>

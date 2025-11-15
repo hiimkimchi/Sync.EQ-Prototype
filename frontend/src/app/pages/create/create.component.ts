@@ -27,8 +27,8 @@ export class CreatePage implements OnInit {
         this.createAcc = this.createF.group({
             artistAlias: [''],
             username: [''],
-            profession: [''],
-            genre: [''],
+            professions: [''],
+            genres: [''],
             biography: [''],
             phone_num: [''],
             daws: [''],
