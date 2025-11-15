@@ -32,7 +32,7 @@ export const routes: Routes = [
         path: 'callback',
         component: CallbackPage
     },
-        {
+    {
         path: 'explore',
         component: ExplorePage
     },
