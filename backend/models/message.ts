@@ -3,12 +3,28 @@ import mongoose from "mongoose"
 const ObjectId = mongoose.Types.ObjectId;
 
 const MessageSchema = new mongoose.Schema({
-    _id: {type: ObjectId, required: true},
-    chatID: {type: String, required: true},
-    author: {type: String, required: true},
-    receiver: {type: String, required: true},
-    content: {type: String, required: true, default: null},
-    mediaID: {type: String},
+    chatID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Chat",
+      required: true
+    },
+
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    },
+
+    content: {
+        type: String, 
+        required: true, 
+        default: null
+    },
+
+    mediaID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Media"
+    }
 }, {
     timestamps: true,
 });
