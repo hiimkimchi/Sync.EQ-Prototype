@@ -27,3 +27,25 @@ export async function getSpecificUsersChats(req: Request, res: Response) {
 		return res.status(400).json({ error: err.message });
 	}
 }
+
+export async function getChatById(req: Request, res: Response) {
+    const chatId = req.params.chatId;
+    try {
+        const chat = await Chat.findOne({_id: chatId});
+        if(!chat) {
+            return res.status(404).json("No Chat Found With Specified ID");
+        }
+        return res.status(200).json(chat);
+    } catch(err: any) {
+        return res.status(400).json({error: err.message});
+    }
+}
+
+export async function createChat(req: Request, res: Response) {
+    try {
+        const chat = await Chat.create(req.body);
+        res.status(201).json(chat);
+    } catch(err: any) {
+        res.status(400).json({error: err.message});
+    } 
+}
