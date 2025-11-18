@@ -1,4 +1,15 @@
 <synceq-header/>
-<chatbox></chatbox>
+
+<div class="container">
+  <div class="row">
+    <div class="col-3 mt-4 d-flex flex-column">
+      <chatlist [chats]="chats" style="display:block; height:100%; width:100%;"></chatlist>
+    </div>
+    <div class="col-9 p-4 d-flex flex-column">
+      <chatbox style="display:block; height:100%; width:100%;"></chatbox>
+    </div>
+
+  </div>
+</div>
 
 <synceq-footer/>
