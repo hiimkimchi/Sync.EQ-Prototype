@@ -1,0 +1,29 @@
+<div class="container p-4 bg-white shadow rounded" style="height: 600px">
+  <div class="row h-100">
+    <div id="chatbox" class="d-flex flex-column">
+      <div class="border-bottom pb-2 mb-2">
+        <h5 class="m-0">Chat Box</h5>
+      </div>
+      <div
+        class="flex-grow-1 overflow-auto mb-3"
+        id="messages"
+        style="background: #fafafa; padding: 10px; border-radius: 5px"
+      >
+        <div class="text-start m-2">
+          <span class="p-2 rounded bg-secondary">Hello!</span>
+        </div>
+        <div class="text-end m-2">
+          <span class="p-2 rounded bg-primary text-white">Hey there!</span>
+        </div>
+      </div>
+      <div class="d-flex">
+        <input
+          type="text"
+          class="form-control me-2"
+          placeholder="Type a message..."
+        />
+        <button class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</div>

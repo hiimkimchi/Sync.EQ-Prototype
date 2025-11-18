@@ -1,0 +1,16 @@
+<div id="contacts" class="border-end pe-3 overflow-auto">
+    <div class="mb-3 d-flex align-items-center justify-content-between">
+        <h5 class="m-0 ps-1">Chats</h5>
+        <button class="d-flex align-items-center btn">
+            <ng-icon name="bootstrapEnvelope" class="text-black" style="width: 24px; height: 24px;"></ng-icon>
+        </button>
+    </div>
+  <div class="list-group" style="flex-grow:1; overflow-y:auto;">
+    <button 
+      *ngFor="let chat of chats" 
+      class="list-group-item list-group-item-action"
+    >
+      {{ chat.user1 === user ? chat.user2 : chat.user1 }}
+    </button>
+  </div>
+</div>
