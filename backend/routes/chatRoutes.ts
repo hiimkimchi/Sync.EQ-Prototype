@@ -12,3 +12,5 @@ app.post("/", cc.createChat);
 
 app.get("/:chatId/messages", mc.getMessagesInChat);
 app.post("/:chatId/messages", mc.sendMessage);
+
+export default app;

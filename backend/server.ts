@@ -4,6 +4,7 @@ import connectMongoose from "./db.js";
 import userRoutes from "./routes/userRoutes.js";
 import postRoutes from "./routes/postRoutes.js"
 import authRoutes from "./routes/authRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js"
 import registerSocketHandlers from "./sockets/chatSockets.js";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -46,6 +47,7 @@ app.get('/', (req, res) => {
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/chats", chatRoutes);
 
 io.on("connection", (socket) => {
   console.log(`New client connected: ${socket.id}`);
