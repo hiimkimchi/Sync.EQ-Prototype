@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node server",
-    "dev": "tsx watch server.ts"
+    "dev": "tsx watch server.ts",
+    "load": "tsx watch test.ts"
   },
   "author": "",
   "license": "ISC",

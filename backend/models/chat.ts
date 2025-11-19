@@ -3,11 +3,19 @@ import mongoose from "mongoose";
 const ObjectId = mongoose.Types.ObjectId; 
 
 const ChatSchema = new mongoose.Schema({
-    _id: {type: ObjectId, required: true},
-    user1: {type: String, required: true},
-    user2: {type: String, required: true},
-    // message ids will be stored here
-    chatMessages: {type: [String], required: true, default: []},
+    user1: {
+        type: String, 
+        required: true
+    },
+    user2: {
+        type: String, 
+        required: true
+    },
+    // new design
+    recentMessage: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Message"
+    },
 });
 
 export default mongoose.model("Chat", ChatSchema);

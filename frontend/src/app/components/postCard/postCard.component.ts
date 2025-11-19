@@ -28,7 +28,6 @@ export class PostCard {
       this.post.likes_usernames?.push(this.user.username);
     }
     const res = this.postService.updatePost(this.post);
-    // so the updates are not persistent unless the subscribe is there so idk what we can do to mediate this
     res.subscribe({
       next: (response) => {
         console.log('update successful: ', response);
@@ -52,7 +51,6 @@ export class PostCard {
       this.post.reposts_usernames?.push(this.user.username);
     }
     const res = this.postService.updatePost(this.post);
-    // so the updates are not persistent unless the subscribe is there so idk what we can do to mediate this
     res.subscribe({
       next: (response) => {
         console.log('update successful: ', response);

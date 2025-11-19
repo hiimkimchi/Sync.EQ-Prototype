@@ -4,10 +4,22 @@ const ObjectId = mongoose.Types.ObjectId;
 
 // if this is a media 
 const MediaSchema = new mongoose.Schema({
-    _id: {type: ObjectId, required: true},
-    author: {type: String, required: true},
-    fileType: {type: String, required: true},
-    filePath: {type: String, required: true},
+    _id: {
+        type: ObjectId, 
+        required: true
+    },
+    author: {
+        type: String, 
+        required: true
+    },
+    fileType: {
+        type: String, 
+        required: true
+    },
+    filePath: {
+        type: String, 
+        required: true
+    },
 });
 
 // idea for messaging aspect
