@@ -5,6 +5,7 @@ import userRoutes from "./routes/userRoutes.js";
 import postRoutes from "./routes/postRoutes.js"
 import authRoutes from "./routes/authRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js"
+import mediaRoutes from "./routes/mediaRoutes.js"
 import registerSocketHandlers from "./sockets/chatSockets.js";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -48,6 +49,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/chats", chatRoutes);
+app.use("/api/media", mediaRoutes);
 
 io.on("connection", (socket) => {
   console.log(`New client connected: ${socket.id}`);
