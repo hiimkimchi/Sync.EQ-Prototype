@@ -1,9 +1,9 @@
 import { Message } from "./message";
 
 export interface Chat {
-    _id?: String,
-    user1?: String,
-    user2?: String,
+    _id?: string,
+    user1?: string,
+    user2?: string,
     recentMessage?: Message
 }
 

@@ -1,5 +1,6 @@
 export interface Message {
-    chatID?: String,
-    author?: String,
-    content?: String,
+    chatID?: string,
+    author?: string,
+    content?: string,
+    createdAt?: Date
 }
