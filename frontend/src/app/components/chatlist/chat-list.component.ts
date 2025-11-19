@@ -1,5 +1,5 @@
 // src/app/socket-test/socket-test.component.ts
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output } from '@angular/core';
 import { SocketService } from '../../services/socket.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -19,10 +19,17 @@ import { Chat } from '../../models/chat';
 })
 
 export class ChatListComponent implements OnInit, OnDestroy {
-  @Input() user: string = "";
+  @Input() user?: User;
   @Input() chats: Chat[] = [];
+  @Output() chatSelected = new EventEmitter<Chat>();
 
-  constructor() {}
+  constructor() {
+    console.log("chats: ", this.chats);
+  }
+
+  selectChat(chat: Chat) {
+    this.chatSelected.emit(chat);
+  }
 
   ngOnInit(): void {
 

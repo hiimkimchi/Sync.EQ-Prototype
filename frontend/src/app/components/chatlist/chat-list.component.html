@@ -9,8 +9,9 @@
     <button 
       *ngFor="let chat of chats" 
       class="list-group-item list-group-item-action"
+      (click)="selectChat(chat)"
     >
-      {{ chat.user1 === user ? chat.user2 : chat.user1 }}
+      {{ chat.user1 === user?.username ? chat.user2 : chat.user1 }}
     </button>
   </div>
 </div>
