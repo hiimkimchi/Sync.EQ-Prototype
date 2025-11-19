@@ -26,7 +26,8 @@ export class ChatPage implements OnInit {
   title = 'chat-page';
   tempUser = "jomikaelruiz";
   chats: Chat[] = [];
-  user: User | null | undefined = null;
+  selectedChat?: Chat;
+  user?: User;
 
   constructor(
     private auth: AuthService,
@@ -44,6 +45,10 @@ export class ChatPage implements OnInit {
             console.log(this.user);
         }
     })
+  }
+
+  onChatSelected(chat : Chat) {
+    this.selectedChat = chat;
   }
 
   // initiates when a page is loaded
