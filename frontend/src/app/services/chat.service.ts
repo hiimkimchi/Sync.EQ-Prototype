@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../models/users';
+import { Message } from '../models/message';
 import { ENV } from '../core/environment';
 import { Chat } from '../models/chat';
 
@@ -22,5 +22,9 @@ export class ChatService {
 
     getUsersChats(user?: string) :Observable<Chat[]> {
         return this.http.get<Chat[]>(`${this.baseUrl}/user/${user}`);
+    }
+
+    getUsersMessages(chatID: string): Observable<Message[]> {
+        return this.http.get<Message[]>(`${this.baseUrl}/${chatID}/messages`);
     }
 }
