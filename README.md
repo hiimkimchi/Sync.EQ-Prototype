@@ -18,6 +18,7 @@ PORT
 ISSUER_URL
 FRONTEND
 API_URL
+AZURE_STORAGE_CONN_STRING
 ```
 ### NOTE: your .env file should be in /backend
 
