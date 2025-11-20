@@ -7,25 +7,30 @@ const fileTypeEnum = [
 ]
 
 // if this is a media 
-const MediaSchema = new mongoose.Schema({
-    _id: {
-        type: ObjectId, 
-        required: true
+const MediaSchema = new mongoose.Schema(
+    {
+        _id: {
+            type: ObjectId, 
+            required: true
+        },
+        author: {
+            type: String, 
+            required: true
+        },
+        fileType: {
+            type: String, 
+            enum: fileTypeEnum,
+            required: true
+        },
+        filePath: {
+            type: String, 
+            required: true
+        },
     },
-    author: {
-        type: String, 
-        required: true
-    },
-    fileType: {
-        type: String, 
-        enum: fileTypeEnum,
-        required: true
-    },
-    filePath: {
-        type: String, 
-        required: true
-    },
-});
+    {
+        timestamps: true
+    }
+);
 
 // idea for messaging aspect
 // - if both users online: set up a socket
