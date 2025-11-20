@@ -1,3 +1,5 @@
+import { uploadFile } from "../azure/profilepic";
+import mongoose from "mongoose";
 import Media from "../models/media";
 import { Request, Response } from "express";
 
@@ -38,7 +40,7 @@ export async function getUsersMedia(req: Request, res: Response): Promise<any> {
 }
 
 // profile pic should be unique per user
-export async function getUserProfilePic(req: Request, res: Response): Promise<any> {
+export async function getUserProfilePic(req: Request, res: Response) {
     try {
         const profilepic = await Media.findOne({author: req.params.username, fileType: "profilepic"});
         if(!profilepic) {
@@ -50,4 +52,41 @@ export async function getUserProfilePic(req: Request, res: Response): Promise<an
     }
 }
 
+export async function createUserProfilePic(req: Request, res: Response) {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: "No file uploaded" });
+        }
 
+        // save request metadata
+        const username = req.body.author;
+        const fileBuffer = req.file.buffer;
+        const fileExt = req.file.originalname.split('.').pop();
+        const blobName = `${username}-profilepic.${fileExt}`
+
+        // upload
+        const requestId = await uploadFile("profilepic", blobName, fileBuffer);
+
+        // mongo entry with metadata
+        const mediaMetadata = await Media.create({
+            _id: new mongoose.Types.ObjectId(),
+            author: username,
+            fileType: "profilepic",
+            filePath: blobName
+        });
+
+        // response
+        return res.status(201).json({
+            message: "Profile picture uploaded",
+            requestId,
+            media: mediaMetadata
+        });
+    } catch (err: any) {
+        return res.status(400).json({ error: err.message });
+    }
+}
+
+
+export async function replaceUserProfilePic(req: Request, res: Response) {
+
+}
