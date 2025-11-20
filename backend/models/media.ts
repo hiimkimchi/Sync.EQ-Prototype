@@ -6,7 +6,6 @@ const fileTypeEnum = [
     "profilepic"
 ]
 
-// if this is a media 
 const MediaSchema = new mongoose.Schema(
     {
         _id: {
@@ -26,6 +25,10 @@ const MediaSchema = new mongoose.Schema(
             type: String, 
             required: true
         },
+        projectName: {
+            type: String,
+            required: false
+        }
     },
     {
         timestamps: true
