@@ -1,8 +1,9 @@
-import { BlobServiceClient } from "@azure/storage-blob";
+import { BlobServiceClient, generateBlobSASQueryParameters, BlobSASPermissions, SASProtocol, StorageSharedKeyCredential } from "@azure/storage-blob";
 
-const connectionString = process.env.AZURE_STORAGE_CONN_STRING;
 
+// upload to container
 export async function uploadFile(containerName: string, blobName: string, fileBuffer: Buffer) {
+    const connectionString = getConnectionString()
     if (!connectionString) return;
 
     const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
@@ -10,4 +11,60 @@ export async function uploadFile(containerName: string, blobName: string, fileBu
     const blockBlob = containerClient.getBlockBlobClient(blobName);
     const result = await blockBlob.uploadData(fileBuffer);
     return result.requestId
+}
+
+
+// temp url to access pictures
+export async function getBlobSasUrl(containerName: string, blobName: string) {
+    const connectionString = getConnectionString();
+    if (!connectionString) throw new Error("Missing connection string");
+
+    const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
+    const containerClient = blobServiceClient.getContainerClient(containerName);
+    const blobClient = containerClient.getBlobClient(blobName);
+
+    // 1 hour expiry for safety reasons
+    const expiresOn = new Date(new Date().valueOf() + 60 * 60 * 1000);
+
+    // get credentials for temp url
+    const creds = getSharedKeyCredential(connectionString)
+
+    const sas = generateBlobSASQueryParameters(
+        {
+            containerName,
+            blobName,
+            permissions: BlobSASPermissions.parse("r"), // read-only
+            protocol: SASProtocol.Https,
+            expiresOn,
+        },
+        creds
+    ).toString();
+
+    // Return the full URL
+    return `${blobClient.url}?${sas}`;
+}
+
+
+// get the .env var
+function getConnectionString() {
+    return process.env.AZURE_STORAGE_CONN_STRING;
+}
+
+
+// parses connectionString to grab accountName and key for shared key
+function getSharedKeyCredential(connectionString: string) {
+    const parts = connectionString.split(';');
+    let accountName = '';
+    let accountKey = '';
+
+    for (const part of parts) {
+        if (part.startsWith('AccountName=')) {
+            accountName = part.replace('AccountName=', '');
+        }
+        if (part.startsWith('AccountKey=')) {
+            accountKey = part.replace('AccountKey=', '');
+        }
+    }
+
+    return new StorageSharedKeyCredential(accountName, accountKey);
 }

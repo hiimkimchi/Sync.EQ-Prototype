@@ -1,4 +1,4 @@
-import { uploadFile } from "../azure/profilepic";
+import { uploadFile, getBlobSasUrl } from "../azure/profilepic";
 import mongoose from "mongoose";
 import Media from "../models/media";
 import { Request, Response } from "express";
@@ -42,15 +42,26 @@ export async function getUsersMedia(req: Request, res: Response): Promise<any> {
 // profile pic should be unique per user
 export async function getUserProfilePic(req: Request, res: Response) {
     try {
-        const profilepic = await Media.findOne({author: req.params.username, fileType: "profilepic"});
+        // check for existance of metadata
+        const username = req.params.author;
+        const profilepic = await Media.findOne({
+            author: username,
+            fileType: "profilepic"
+        });
+
         if(!profilepic) {
             return res.status(404).json({error: "Provided user has no profile picture"});
         }
-        return res.status(200).json(profilepic);
+
+        // get temp url to image
+        const sasURL = await getBlobSasUrl("profilepic", profilepic.filePath)
+
+        return res.status(200).json({url: sasURL});
     } catch(err: any) {
         return res.status(400).json({error: err.message});
     }
 }
+
 
 export async function createUserProfilePic(req: Request, res: Response) {
     try {
