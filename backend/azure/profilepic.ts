@@ -1,16 +1,19 @@
-import { BlobServiceClient, generateBlobSASQueryParameters, BlobSASPermissions, SASProtocol, StorageSharedKeyCredential } from "@azure/storage-blob";
+import { BlobServiceClient, generateBlobSASQueryParameters, BlobSASPermissions, SASProtocol, StorageSharedKeyCredential, BlockBlobClient } from "@azure/storage-blob";
 
 
 // upload to container
 export async function uploadFile(containerName: string, blobName: string, fileBuffer: Buffer) {
-    const connectionString = getConnectionString()
-    if (!connectionString) return;
-
-    const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
-    const containerClient = blobServiceClient.getContainerClient(containerName);
-    const blockBlob = containerClient.getBlockBlobClient(blobName);
+    const blockBlob = await setupConnection(containerName, blobName);
     const result = await blockBlob.uploadData(fileBuffer);
     return result.requestId
+}
+
+
+// deletes blob
+export async function deleteFile(containerName: string, blobName: string) {
+    const blockBlob = await setupConnection(containerName, blobName);
+    const result = await blockBlob.deleteIfExists()
+    return result.succeeded
 }
 
 
@@ -48,6 +51,16 @@ export async function getBlobSasUrl(containerName: string, blobName: string) {
 // get the .env var
 function getConnectionString() {
     return process.env.AZURE_STORAGE_CONN_STRING;
+}
+
+
+function setupConnection(containerName: string, blobName: string): BlockBlobClient {
+    const connectionString = getConnectionString()
+    if (!connectionString) throw new Error("Missing connection string");
+
+    const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
+    const containerClient = blobServiceClient.getContainerClient(containerName);
+    return containerClient.getBlockBlobClient(blobName);
 }
 
 
