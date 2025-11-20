@@ -2,6 +2,10 @@
 import mongoose from "mongoose";
 const ObjectId = mongoose.Types.ObjectId; 
 
+const fileTypeEnum = [
+    "profilepic"
+]
+
 // if this is a media 
 const MediaSchema = new mongoose.Schema({
     _id: {
@@ -14,6 +18,7 @@ const MediaSchema = new mongoose.Schema({
     },
     fileType: {
         type: String, 
+        enum: fileTypeEnum,
         required: true
     },
     filePath: {
