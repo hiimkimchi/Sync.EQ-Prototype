@@ -24,7 +24,6 @@ import { User } from '../../models/users';
 })
 export class ChatPage implements OnInit {
   title = 'chat-page';
-  tempUser = "jomikaelruiz";
   chats: Chat[] = [];
   selectedChat?: Chat;
   user?: User;
@@ -60,10 +59,12 @@ export class ChatPage implements OnInit {
             this.fetchUser(res?.nickname);
         },
       });
+    } else {
+      this.router.navigateByUrl("/create");
     }
 
     // gets a users chats to send to userList
-    this.chatService.getUsersChats(this.tempUser).subscribe({
+    this.chatService.getUsersChats(this.user?.username).subscribe({
       next: (data) => {
         console.log('API chat data:', data);
 
