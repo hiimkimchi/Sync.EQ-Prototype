@@ -11,5 +11,5 @@ app.get("/:username/profilepic", upload.single("file"), mc.getUserProfilePic);
 app.get("/:username/:mediaID", mc.getSpecificMedia);
 
 app.post("/:username/profilepic", mc.createUserProfilePic);
-app.put("/:username/profilepic", mc.replaceUserProfilePic);
+app.put("/:username/profilepic", upload.single("file"), mc.replaceUserProfilePic);
 export default app;

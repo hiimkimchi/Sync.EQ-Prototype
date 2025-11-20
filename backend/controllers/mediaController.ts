@@ -1,4 +1,4 @@
-import { uploadFile, getBlobSasUrl } from "../azure/profilepic";
+import { uploadFile, getBlobSasUrl, deleteFile } from "../azure/profilepic";
 import mongoose from "mongoose";
 import Media from "../models/media";
 import { Request, Response } from "express";
@@ -39,7 +39,7 @@ export async function getUsersMedia(req: Request, res: Response): Promise<any> {
     }
 }
 
-// profile pic should be unique per user
+
 export async function getUserProfilePic(req: Request, res: Response) {
     try {
         // check for existance of metadata
@@ -99,5 +99,41 @@ export async function createUserProfilePic(req: Request, res: Response) {
 
 
 export async function replaceUserProfilePic(req: Request, res: Response) {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: "No file uploaded" });
+        }
 
+        const username = req.body.author;
+        const fileBuffer = req.file.buffer;
+        const fileExt = req.file.originalname.split('.').pop();
+        const blobName = `${username}-profilepic.${fileExt}`;
+
+        const oldMedia = await Media.findOne({ 
+            author: username, 
+            fileType: "profilepic" 
+        });
+
+        if (oldMedia) {
+            await deleteFile("profilepic", blobName);
+        }
+
+        const requestId = await uploadFile("profilepic", blobName, fileBuffer);
+
+        // NOTE: this is to set updatedAt via mongoose. none of the other metadata should change
+        const updatedMetadata = await Media.findOneAndUpdate({
+            author: username,
+            fileType: "profilepic",
+            filePath: blobName
+        })
+
+        // response
+        return res.status(201).json({
+            message: "Profile picture uploaded",
+            requestId,
+            media: updatedMetadata
+        });
+    } catch (err: any) {
+        return res.status(400).json({ error: err.message });
+    }
 }
