@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Media } from '../../models/media'
+import { Media, SasURL } from '../../models/media'
 import { ENV } from '../../core/environment';
 
 @Injectable({
@@ -12,8 +12,8 @@ export class MediaImageService {
 
     constructor(private http: HttpClient) { }
 
-    getUserProfilePic(user?: string): Observable<string> {
-        return this.http.get<string>(`${this.baseUrl}/${user}/profilepic`);
+    getUserProfilePic(user?: string): Observable<SasURL> {
+        return this.http.get<SasURL>(`${this.baseUrl}/${user}/profilepic`);
     }
 
 

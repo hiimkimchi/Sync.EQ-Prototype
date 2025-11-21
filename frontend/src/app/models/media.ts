@@ -7,3 +7,7 @@ export interface Media {
     createdAt?: Date;
     updatedAt?: Date;
 }
+
+export interface SasURL {
+    url: string;
+}

@@ -56,7 +56,7 @@ export class ProfilePage {
 
   fetchProfilePic() {
     this.mediaService.getUserProfilePic(this.username).subscribe({
-        next: (data: any) => {
+        next: (data) => {
             console.log(data.url);
             this.profilePicURL = data.url;
         },
