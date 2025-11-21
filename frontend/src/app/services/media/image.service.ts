@@ -15,4 +15,20 @@ export class MediaImageService {
     getUserProfilePic(user?: string): Observable<Media> {
         return this.http.get<Media>(`${this.baseUrl}/${user}/profilepic`);
     }
+
+
+    createUserProfilePic(user: string, file: File): Observable<Media> {
+        const form = new FormData();
+        form.append('file', file);
+
+        return this.http.post<Media>(`${this.baseUrl}/${user}/profilepic`, form);
+    }
+
+
+    replaceUserProfilePic(user: string, file: File): Observable<Media> {
+        const form = new FormData();
+        form.append('file', file);
+
+        return this.http.put<Media>(`${this.baseUrl}/${user}/profilepic`, form);
+    }
 }
