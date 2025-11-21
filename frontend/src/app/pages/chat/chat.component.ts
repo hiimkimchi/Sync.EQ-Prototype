@@ -5,8 +5,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserService } from '../../services/user.service';
 import { ChatBoxComponent } from '../../components/chatbox/chat-box.component';
-import { SynceqHeader } from '../../components/homeHeader/homeHeader.component';
-import { SynceqFooter } from '../../components/homeFooter/homeFooter.component';
 import { ChatListComponent } from '../../components/chatlist/chat-list.component';
 import { ChatService } from '../../services/chat.service';
 import { Chat } from '../../models/chat';
@@ -17,8 +15,6 @@ import { User } from '../../models/users';
     CommonModule,
     ChatBoxComponent,
     ChatListComponent,
-    SynceqHeader,
-    SynceqFooter,
   ],
   templateUrl: 'chat.component.html',
 })
