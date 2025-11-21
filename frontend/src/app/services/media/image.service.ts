@@ -12,8 +12,8 @@ export class MediaImageService {
 
     constructor(private http: HttpClient) { }
 
-    getUserProfilePic(user?: string): Observable<Media> {
-        return this.http.get<Media>(`${this.baseUrl}/${user}/profilepic`);
+    getUserProfilePic(user?: string): Observable<string> {
+        return this.http.get<string>(`${this.baseUrl}/${user}/profilepic`);
     }
 
 
