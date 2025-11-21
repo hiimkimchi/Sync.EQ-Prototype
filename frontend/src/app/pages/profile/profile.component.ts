@@ -7,6 +7,7 @@ import { ArrayInputField } from '../../components/arrayInputField/arrayInputFiel
 import { SelectInputField } from '../../components/selectInputField/selectInputField.component';
 import { User } from '../../models/users';
 import { UserService } from '../../services/user.service';
+import { MediaImageService } from '../../services/media/image.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -20,8 +21,10 @@ export class ProfilePage {
   isLoading? = true;
   error = '';
   username!: string;
+  profilePicURL!: string;
 
   constructor(private userService: UserService,
+              private mediaService: MediaImageService,
               private route : ActivatedRoute
   ) {}
 
@@ -29,6 +32,7 @@ export class ProfilePage {
     this.username = this.route.snapshot.paramMap.get('username') ?? '';
     if (this.username) {
       this.fetchUser();
+      this.fetchProfilePic();
     } else {
       console.log("nothing found");
     }
@@ -47,6 +51,19 @@ export class ProfilePage {
         this.isLoading = false;
         console.error(err);
       },
+    });
+  }
+
+  fetchProfilePic() {
+    this.mediaService.getUserProfilePic(this.username).subscribe({
+        next: (data: any) => {
+            console.log(data.url);
+            this.profilePicURL = data.url;
+        },
+        error: (err) => {
+            console.error('Failed to fetch profile pic', err);
+            this.profilePicURL = '';
+        }
     });
   }
 
