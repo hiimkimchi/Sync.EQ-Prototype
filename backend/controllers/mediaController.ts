@@ -43,7 +43,7 @@ export async function getUsersMedia(req: Request, res: Response): Promise<any> {
 export async function getUserProfilePic(req: Request, res: Response) {
     try {
         // check for existance of metadata
-        const username = req.params.author;
+        const username = req.params.username;
         const profilepic = await Media.findOne({
             author: username,
             fileType: "profilepic"
@@ -54,7 +54,7 @@ export async function getUserProfilePic(req: Request, res: Response) {
         }
 
         // get temp url to image
-        const sasURL = await getBlobSasUrl("profilepic", profilepic.filePath)
+        const sasURL = await getBlobSasUrl("profilepics", profilepic.filePath)
 
         return res.status(200).json({url: sasURL});
     } catch(err: any) {
@@ -70,13 +70,13 @@ export async function createUserProfilePic(req: Request, res: Response) {
         }
 
         // save request metadata
-        const username = req.body.author;
+        const username = req.params.username;
         const fileBuffer = req.file.buffer;
         const fileExt = req.file.originalname.split('.').pop();
         const blobName = `${username}-profilepic.${fileExt}`
 
         // upload
-        const requestId = await uploadFile("profilepic", blobName, fileBuffer);
+        const requestId = await uploadFile("profilepics", blobName, fileBuffer);
 
         // mongo entry with metadata
         const mediaMetadata = await Media.create({
@@ -104,7 +104,7 @@ export async function replaceUserProfilePic(req: Request, res: Response) {
             return res.status(400).json({ error: "No file uploaded" });
         }
 
-        const username = req.body.author;
+        const username = req.params.username;
         const fileBuffer = req.file.buffer;
         const fileExt = req.file.originalname.split('.').pop();
         const blobName = `${username}-profilepic.${fileExt}`;
@@ -118,7 +118,7 @@ export async function replaceUserProfilePic(req: Request, res: Response) {
             await deleteFile("profilepic", blobName);
         }
 
-        const requestId = await uploadFile("profilepic", blobName, fileBuffer);
+        const requestId = await uploadFile("profilepics", blobName, fileBuffer);
 
         // NOTE: this is to set updatedAt via mongoose. none of the other metadata should change
         const updatedMetadata = await Media.findOneAndUpdate({
