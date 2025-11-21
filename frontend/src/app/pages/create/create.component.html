@@ -7,17 +7,19 @@
     <form [formGroup]="createAcc" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="artistAlias" class="form-label fw-semibold">Nickname</label>
-        <input type="text" id="artistAlias" formControlName="artistAlias" class="form-control" placeholder="Enter your nickname">
+        <input type="text" id="artistAlias" formControlName="artistAlias" class="form-control"
+          placeholder="Enter your nickname">
       </div>
 
       <div class="mb-3">
         <label for="phone_num" class="form-label fw-semibold">Phone Number</label>
-        <input type="text" id="phone_num" formControlName="phone_num" pattern="[0-9]*" inputmode="numeric" class="form-control" placeholder="1234567890">
+        <input type="text" id="phone_num" formControlName="phone_num" pattern="[0-9]*" inputmode="numeric"
+          class="form-control" placeholder="1234567890">
       </div>
 
       <div class="mb-3">
-        <label for="profession" class="form-label fw-semibold">Profession</label>
-        <select id="profession" formControlName="profession" class="form-select">
+        <label for="professions" class="form-label fw-semibold">Profession</label>
+        <select id="professions" formControlName="professions" class="form-select">
           <option value="">Select profession</option>
           <option value="Artist">Artist</option>
           <option value="Producer">Producer</option>
@@ -25,13 +27,14 @@
       </div>
 
       <div class="mb-3">
-        <label for="genre" class="form-label fw-semibold">Genre</label>
-        <input type="text" id="genre" formControlName="genre" class="form-control" placeholder="Hip-hop, EDM, etc.">
+        <label for="genres" class="form-label fw-semibold">Genre</label>
+        <input type="text" id="genres" formControlName="genres" class="form-control" placeholder="Hip-hop, EDM, etc.">
       </div>
 
       <div class="mb-3">
         <label for="biography" class="form-label fw-semibold">Biography</label>
-        <textarea id="biography" formControlName="biography" class="form-control" rows="3" placeholder="Tell us about yourself"></textarea>
+        <textarea id="biography" formControlName="biography" class="form-control" rows="3"
+          placeholder="Tell us about yourself"></textarea>
       </div>
 
       <div class="mb-3">
@@ -48,7 +51,16 @@
 
       <div class="mb-3">
         <label for="social_media" class="form-label fw-semibold">Social Media</label>
-        <input type="text" id="social_media" formControlName="social_media" class="form-control" placeholder="@yourhandle">
+        <input type="text" id="social_media" formControlName="social_media" class="form-control"
+          placeholder="@yourhandle">
+      </div>
+
+      <div class="mb-3">
+        <label for="profilePic" class="form-label fw-semibold">Profile Picture</label>
+        <input type="file" id="profilePic" class="form-control" (change)="onFileSelected($event)" accept="image/*" />
+
+        <!-- preview -->
+        <img *ngIf="profilePicPreview" [src]="profilePicPreview" class="img-thumbnail mt-2" style="max-width: 150px;" />
       </div>
 
       <button type="submit" class="btn btn-primary w-100 fw-semibold mt-3">
