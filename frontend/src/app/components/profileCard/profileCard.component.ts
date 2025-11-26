@@ -21,6 +21,10 @@ export class ProfileCard {
   }
 
   routeToChat() {
-    
+    this.router.navigate(["/chat"], {
+      queryParams: {
+          genre: this.card.username,
+      }
+    });
   }
 }
