@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserService } from '../../services/user.service';
 import { ChatBoxComponent } from '../../components/chatbox/chat-box.component';
@@ -30,10 +30,10 @@ export class ChatPage implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private httpC: HttpClient,
     private router: Router,
     private userService: UserService,
     private chatService: ChatService,
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
@@ -53,15 +53,28 @@ export class ChatPage implements OnInit {
   // initiates when a page is loaded
   ngOnInit(): void {
     // ensure user is authenticated
-    if (this.auth.isAuthenticated$) {
-      this.auth.user$.subscribe({
-        next: (res) => {
-            this.fetchUser(res?.nickname);
-        },
-      });
-    } else {
+    if(!this.auth.isAuthenticated$) {
       this.router.navigateByUrl("/create");
+      return;
     }
+
+    this.auth.user$.subscribe({
+      next: (res) => {
+          this.fetchUser(res?.nickname);
+      },
+    });
+
+    // if there are parameters from explore => create a new chat
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.chatService.createChat(
+        params['username'], 
+        this.user?.username
+      ).subscribe({
+        next: (data) => {
+          this.selectedChat = data;
+        }
+      });
+    });
 
     // gets a users chats to send to userList
     this.chatService.getUsersChats(this.user?.username).subscribe({
