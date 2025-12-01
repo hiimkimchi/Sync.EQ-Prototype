@@ -34,63 +34,56 @@ export class ChatPage implements OnInit {
     private userService: UserService,
     private chatService: ChatService,
     private activatedRoute: ActivatedRoute
-  ) {
-  }
+  ) {}
 
   fetchUser(user?: string) {
     this.userService.getProfile(user).subscribe({
-        next: (res) => {
-            this.user = res;
-            console.log(this.user);
-        }
-    })
-  }
-
-  onChatSelected(chat : Chat) {
-    this.selectedChat = chat;
-  }
-
-  // initiates when a page is loaded
-  ngOnInit(): void {
-    // ensure user is authenticated
-    if(!this.auth.isAuthenticated$) {
-      this.router.navigateByUrl("/create");
-      return;
-    }
-
-    this.auth.user$.subscribe({
       next: (res) => {
-          this.fetchUser(res?.nickname);
+        this.user = res;
+        console.log(this.user);
       },
     });
+  }
 
-    // if there are parameters from explore => create a new chat
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.chatService.createChat(
-        params['username'], 
-        this.user?.username
-      ).subscribe({
-        next: (data) => {
-          this.selectedChat = data;
-        }
+  onChatSelected(chat: Chat) {
+    this.selectedChat = { ...chat };
+  }
+
+  // on initialization, will check if user is authenticated
+  // if they aren't function will return
+  // will then get user's profile & activate query parameters if needed
+  // then will get the users chats and update all frontend utilities
+  ngOnInit(): void {
+    this.auth.user$?.subscribe((authUser) => {
+      if (!authUser?.nickname) return;
+
+      this.userService.getProfile(authUser.nickname).subscribe((profile) => {
+        this.user = profile;
+
+        this.activatedRoute.queryParams.subscribe((params) => {
+          const otherUser = params['username'];
+          if (otherUser && this.user?.username) {
+            this.chatService
+              .createChat(otherUser, this.user.username)
+              .subscribe({
+                next: (chat) => {
+                  this.selectedChat = { ...chat };
+                  this.chats = [chat, ...this.chats];
+                },
+                error: (err) => console.error('Error creating chat:', err),
+              });
+          }
+        });
+
+        this.chatService.getUsersChats(this.user.username).subscribe({
+          next: (data) => {
+            this.chats = Array.isArray(data)
+              ? data
+              : (data as any)?.chats ?? [];
+          },
+          error: (err) => console.error('Error fetching chats:', err),
+        });
       });
-    });
-
-    // gets a users chats to send to userList
-    this.chatService.getUsersChats(this.user?.username).subscribe({
-      next: (data) => {
-        console.log('API chat data:', data);
-
-        // Ensure it's an array
-        if (Array.isArray(data)) {
-          this.chats = data;
-        } else if (data && Array.isArray((data as any).chats)) {
-          this.chats = (data as any).chats;
-        } else {
-          this.chats = [];
-        }
-      },
-      error: (err) => console.error('Error fetching chats:', err),
     });
   }
 }
