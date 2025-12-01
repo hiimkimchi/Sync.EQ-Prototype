@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "github.vscode-pull-request-github",
+    "github.copilot",
+    "christian-kohler.npm-intellisense",
+    "anbuselvanrocky.bootstrap5-vscode",
+    "mhutchie.git-graph",
+    "eamodio.gitlens"
+  ]
+}
