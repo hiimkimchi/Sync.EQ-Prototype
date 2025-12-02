@@ -18,7 +18,7 @@ export async function deleteFile(containerName: string, blobName: string) {
 
 
 // temp url to access pictures
-export async function getBlobSasUrl(containerName: string, blobName: string) {
+export async function getBlobSASURL(containerName: string, blobName: string) {
     const connectionString = getConnectionString();
     if (!connectionString) throw new Error("Missing connection string");
 

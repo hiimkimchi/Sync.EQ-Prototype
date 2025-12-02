@@ -6,6 +6,12 @@ const fileTypeEnum = [
     "profilepic"
 ]
 
+// Rules for media objects:
+// 1. If filetype is profilepic, it is assumed the profile pic is unique per user.
+// 2. If filetype is audio, retrieve via projectName.
+//     - projectName is not necessarily unique in backend as implementation may work without it; however, frontend will have safeguards to make unique anyways.
+//     - not implemented yet so idk actually
+
 const MediaSchema = new mongoose.Schema(
     {
         _id: {
@@ -35,7 +41,4 @@ const MediaSchema = new mongoose.Schema(
     }
 );
 
-// idea for messaging aspect
-// - if both users online: set up a socket
-// - else: run backend services and deliver to a chathistory object
 export default mongoose.model("Media", MediaSchema);
