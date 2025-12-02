@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/users';
 import { ENV } from '../core/environment';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Injectable({
     providedIn: 'root'
@@ -41,5 +42,20 @@ export class UserService {
 
     updateProfile(username: string, data: Partial<User>): Observable<User> {
         return this.http.put<User>(`${this.baseUrl}/${username}`, data);
+    }
+
+    getUserObject(auth0: AuthService): any {
+        if(!auth0.isAuthenticated$) {
+            return null;
+        }
+        auth0.user$.subscribe({
+            next: (res) => {
+                this.getProfile(res?.nickname).subscribe({
+                    next: (user) => {
+                        return user;
+                    }
+                })
+            }
+        })
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserService } from '../../services/user.service';
 import { ChatBoxComponent } from '../../components/chatbox/chat-box.component';
@@ -26,54 +26,60 @@ export class ChatPage implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private httpC: HttpClient,
     private router: Router,
     private userService: UserService,
     private chatService: ChatService,
-  ) {
-  }
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   fetchUser(user?: string) {
     this.userService.getProfile(user).subscribe({
-        next: (res) => {
-            this.user = res;
-            console.log(this.user);
-        }
-    })
-  }
-
-  onChatSelected(chat : Chat) {
-    this.selectedChat = chat;
-  }
-
-  // initiates when a page is loaded
-  ngOnInit(): void {
-    // ensure user is authenticated
-    if (this.auth.isAuthenticated$) {
-      this.auth.user$.subscribe({
-        next: (res) => {
-            this.fetchUser(res?.nickname);
-        },
-      });
-    } else {
-      this.router.navigateByUrl("/create");
-    }
-
-    // gets a users chats to send to userList
-    this.chatService.getUsersChats(this.user?.username).subscribe({
-      next: (data) => {
-        console.log('API chat data:', data);
-
-        // Ensure it's an array
-        if (Array.isArray(data)) {
-          this.chats = data;
-        } else if (data && Array.isArray((data as any).chats)) {
-          this.chats = (data as any).chats;
-        } else {
-          this.chats = [];
-        }
+      next: (res) => {
+        this.user = res;
+        console.log(this.user);
       },
-      error: (err) => console.error('Error fetching chats:', err),
+    });
+  }
+
+  onChatSelected(chat: Chat) {
+    this.selectedChat = { ...chat };
+  }
+
+  // on initialization, will check if user is authenticated
+  // if they aren't function will return
+  // will then get user's profile & activate query parameters if needed
+  // then will get the users chats and update all frontend utilities
+  ngOnInit(): void {
+    this.auth.user$?.subscribe((authUser) => {
+      if (!authUser?.nickname) return;
+
+      this.userService.getProfile(authUser.nickname).subscribe((profile) => {
+        this.user = profile;
+
+        this.activatedRoute.queryParams.subscribe((params) => {
+          const otherUser = params['username'];
+          if (otherUser && this.user?.username) {
+            this.chatService
+              .createChat(otherUser, this.user.username)
+              .subscribe({
+                next: (chat) => {
+                  this.selectedChat = { ...chat };
+                  this.chats = [chat, ...this.chats];
+                },
+                error: (err) => console.error('Error creating chat:', err),
+              });
+          }
+        });
+
+        this.chatService.getUsersChats(this.user.username).subscribe({
+          next: (data) => {
+            this.chats = Array.isArray(data)
+              ? data
+              : (data as any)?.chats ?? [];
+          },
+          error: (err) => console.error('Error fetching chats:', err),
+        });
+      });
     });
   }
 }

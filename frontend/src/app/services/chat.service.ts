@@ -13,7 +13,7 @@ export class ChatService {
 
     constructor(private http: HttpClient) { }
 
-    createChat(user1: string, user2: string) {
+    createChat(user1: string, user2?: string) {
         return this.http.post<Chat>(`${this.baseUrl}/`, {
             user1: user1,
             user2: user2

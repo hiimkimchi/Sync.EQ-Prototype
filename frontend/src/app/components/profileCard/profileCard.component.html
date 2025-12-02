@@ -1,25 +1,42 @@
 <!-- Profile Card component for Homepage -->
 <div class="col">
-    <div class="card shadow-sm">
-        <img [src]="card.image || 'https://i8.amplience.net/i/naras/ILLENIUM-9506A-3.5.21-jpg-credit-Brian-Ziff'" class="card-img-top" alt="Thumbnail" />
-        <div class="card-body">
-        <p class="card-text">
-            <strong>{{card.username}}</strong>
-        </p>
-        <p><strong>{{card.professions}}</strong></p>
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-secondary">
-                Profile
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">
-                Message
-            </button>
-            </div>
-            <small class="text-body-secondary">
-            {{card.genre}}
-            </small>
+  <div class="card shadow-sm">
+    <img
+      [src]="
+        card.image ||
+        'https://i8.amplience.net/i/naras/ILLENIUM-9506A-3.5.21-jpg-credit-Brian-Ziff'
+      "
+      class="card-img-top"
+      alt="Thumbnail"
+    />
+    <div class="card-body">
+      <p class="card-text">
+        <strong>{{ card.username }}</strong>
+      </p>
+      <p>
+        <strong>{{ card.professions }}</strong>
+      </p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+          <button 
+            type="button" 
+            class="btn btn-sm btn-outline-secondary"
+            (click)="routeToProfile()"
+          >
+            Profile
+          </button>
+          <button 
+            type="button" 
+            class="btn btn-sm btn-outline-secondary"
+            (click)="routeToChat()"
+            >
+            Message
+          </button>
         </div>
-        </div>
+        <small class="text-body-secondary">
+          {{ card.genre }}
+        </small>
+      </div>
     </div>
+  </div>
 </div>
