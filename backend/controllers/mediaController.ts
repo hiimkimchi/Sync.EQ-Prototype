@@ -1,4 +1,4 @@
-import { uploadFile, getBlobSasUrl, deleteFile } from "../azure/profilepic";
+import { uploadFile, getBlobSASURL, deleteFile } from "../azure/profilepic";
 import mongoose from "mongoose";
 import Media from "../models/media";
 import { Request, Response } from "express";
@@ -54,7 +54,7 @@ export async function getUserProfilePic(req: Request, res: Response) {
         }
 
         // get temp url to image
-        const sasURL = await getBlobSasUrl("profilepics", profilepic.filePath)
+        const sasURL = await getBlobSASURL("profilepics", profilepic.filePath)
 
         return res.status(200).json({url: sasURL});
     } catch(err: any) {
