@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { provideIcons } from '@ng-icons/core';
 import { bootstrapMusicNoteBeamed } from '@ng-icons/bootstrap-icons';
 import { ProfileCard } from '../../components/profileCard/profileCard.component';
-import { SynceqHeader } from '../../components/homeHeader/homeHeader.component';
-import { SynceqFooter } from '../../components/homeFooter/homeFooter.component';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { User } from '../../models/users';
@@ -13,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, ProfileCard, SynceqHeader, SynceqFooter],
+  imports: [CommonModule, ProfileCard],
   providers: [provideIcons({ bootstrapMusicNoteBeamed })],
   templateUrl: './explore.component.html',
 })

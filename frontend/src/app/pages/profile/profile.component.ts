@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SynceqHeader } from '../../components/homeHeader/homeHeader.component';
 import { VinylRecord } from '../../components/vinylRecord/vinylRecord.component';
 import { InputField } from '../../components/inputField/inputField.component';
 import { ArrayInputField } from '../../components/arrayInputField/arrayInputField.component';
@@ -12,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, InputField, ArrayInputField, SelectInputField, SynceqHeader, VinylRecord],
+  imports: [CommonModule, InputField, ArrayInputField, SelectInputField, VinylRecord],
   templateUrl: './profile.component.html',
 })
 export class ProfilePage {

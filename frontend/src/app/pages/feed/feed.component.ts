@@ -1,5 +1,3 @@
-import { SynceqHeader } from '../../components/homeHeader/homeHeader.component';
-import { SynceqFooter } from '../../components/homeFooter/homeFooter.component';
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../../models/post';
 import { PostService } from '../../services/post.service';
@@ -11,7 +9,7 @@ import { CreatePostModal } from '../../components/createPostModal/createPost.com
 
 @Component({
   selector: 'app-home',
-  imports: [SynceqHeader, SynceqFooter, PostCard, CommonModule, CreatePostModal],
+  imports: [PostCard, CommonModule, CreatePostModal],
   providers: [],
   templateUrl: './feed.component.html',
 })
