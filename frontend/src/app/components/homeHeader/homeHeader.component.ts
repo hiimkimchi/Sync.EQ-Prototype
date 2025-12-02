@@ -8,7 +8,6 @@ import { SearchBar } from '../searchBar/searchBar.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { User } from '../../models/users';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
 import { MediaImageService } from '../../services/media/image.service';
 
 
@@ -22,6 +21,7 @@ import { MediaImageService } from '../../services/media/image.service';
 export class SynceqHeader {
   title = 'synceq-header';
   auth0Info = {} as User;
+  isLoggedIn = false;
   profilePicURL!: string;
 
   constructor(
@@ -36,11 +36,16 @@ export class SynceqHeader {
         next: (res) => {
           this.auth0Info.username = res?.nickname;
           this.fetchProfilePic()
+          this.isLoggedIn = true
         }
       });
     }
   }
 
+  ngOnChanges(): void {
+
+  }
+  
   fetchProfilePic() {
     this.mediaService.getUserProfilePic(this.auth0Info.username).subscribe({
       next: (data) => {
