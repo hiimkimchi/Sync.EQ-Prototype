@@ -22,22 +22,22 @@ jobs:
 
       - name: Generate environment.ts
         run: |
-          mkdir -p frontend/src/app/core/environment
-          echo "export interface EnvConfig {" > frontend/src/app/core/environment/environment.ts
-          echo "  apiUrl: string;" >> frontend/src/app/core/environment/environment.ts
-          echo "  auth0Domain: string;" >> frontend/src/app/core/environment/environment.ts
-          echo "  auth0ClientId: string;" >> frontend/src/app/core/environment/environment.ts
-          echo "}" >> frontend/src/app/core/environment/environment.ts
-          echo "" >> frontend/src/app/core/environment/environment.ts
-          echo "export let ENV: EnvConfig = {" >> frontend/src/app/core/environment/environment.ts
-          echo "  apiUrl: '${{ secrets.API_URL }}'," >> frontend/src/app/core/environment/environment.ts
-          echo "  auth0Domain: '${{ secrets.AUTH0_DOMAIN }}'," >> frontend/src/app/core/environment/environment.ts
-          echo "  auth0ClientId: '${{ secrets.AUTH0_CLIENT_ID }}'" >> frontend/src/app/core/environment/environment.ts
-          echo "};" >> frontend/src/app/core/environment/environment.ts
-          echo "" >> frontend/src/app/core/environment/environment.ts
-          echo "export function setEnv(config: EnvConfig) {" >> frontend/src/app/core/environment/environment.ts
-          echo "  ENV = config;" >> frontend/src/app/core/environment/environment.ts
-          echo "};" >> frontend/src/app/core/environment/environment.ts
+          mkdir -p frontend/src/app/core
+          echo "export interface EnvConfig {" > frontend/src/app/core/environment.ts
+          echo "  apiUrl: string;" >> frontend/src/app/core/environment.ts
+          echo "  auth0Domain: string;" >> frontend/src/app/core/environment.ts
+          echo "  auth0ClientId: string;" >> frontend/src/app/core/environment.ts
+          echo "}" >> frontend/src/app/core/environment.ts
+          echo "" >> frontend/src/app/core/environment.ts
+          echo "export let ENV: EnvConfig = {" >> frontend/src/app/core/environment.ts
+          echo "  apiUrl: '${{ secrets.API_URL }}'," >> frontend/src/app/core/environment.ts
+          echo "  auth0Domain: '${{ secrets.AUTH0_DOMAIN }}'," >> frontend/src/app/core/environment.ts
+          echo "  auth0ClientId: '${{ secrets.AUTH0_CLIENT_ID }}'" >> frontend/src/app/core/environment.ts
+          echo "};" >> frontend/src/app/core/environment.ts
+          echo "" >> frontend/src/app/core/environment.ts
+          echo "export function setEnv(config: EnvConfig) {" >> frontend/src/app/core/environment.ts
+          echo "  ENV = config;" >> frontend/src/app/core/environment.ts
+          echo "};" >> frontend/src/app/core/environment.ts
 
       - name: npm install, build, and test
         run: |
