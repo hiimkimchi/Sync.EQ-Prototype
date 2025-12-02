@@ -15,7 +15,7 @@ export const routes: Routes = [
     },
     {
         path: 'profile/:username',
-        component: ProfilePage
+        component: ProfilePage,
     },
     {
         path: 'create',

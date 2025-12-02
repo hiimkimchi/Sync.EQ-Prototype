@@ -10,10 +10,14 @@ import registerSocketHandlers from "./sockets/chatSockets.js";
 import dotenv from "dotenv";
 import cors from "cors";
 import http from "http";
+import path from "path";
 import { Server } from "socket.io";
+import { fileURLToPath } from "url";
 
 const app = express();
 const server = http.createServer(app);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const io = new Server(server, {
   cors: {
@@ -50,6 +54,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/chats", chatRoutes);
 app.use("/api/media", mediaRoutes);
+
+const angular = path.join(__dirname, "../frontend/dist/synceq");
+app.use(express.static(angular));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(angular, "index.html"));
+})
 
 io.on("connection", (socket) => {
   console.log(`New client connected: ${socket.id}`);
