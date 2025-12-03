@@ -30,6 +30,7 @@
             <input-field
               [inputField]="user?.artistAlias"
               [isTitle]="true"
+              [isEditable]="isEditable"
               (fieldUpdated)="updateUserField('artistAlias', $event)"
             >
             </input-field>
@@ -43,6 +44,7 @@
             <h6 class="fw-semibold text-uppercase">Main Roles</h6>
             <array-input-field
               [inputField]="user?.professions || []"
+              [isEditable]="isEditable"
               (fieldUpdated)="updateUserField('professions', $event)"
             >
             </array-input-field>
@@ -51,6 +53,7 @@
             <h6 class="fw-semibold text-uppercase">Preferred Genres</h6>
             <array-input-field
               [inputField]="user?.genres || []"
+              [isEditable]="isEditable"
               (fieldUpdated)="updateUserField('genres', $event)"
             >
             </array-input-field>
@@ -60,6 +63,7 @@
             <select-input-field
               [inputField]="user?.daws || []"
               [options]="['FL Studio', 'Ableton', 'Logic Pro']"
+              [isEditable]="isEditable"
               (fieldUpdated)="updateUserField('daws', $event)"
             >
             </select-input-field>
