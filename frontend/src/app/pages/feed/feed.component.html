@@ -24,7 +24,7 @@
     ">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <create-post-modal [user]="{username: 'jomi'}" (closed)="closeModal()"></create-post-modal>
+        <create-post-modal [user]="this.user" (closed)="closeModal()"></create-post-modal>
       </div>
     </div>
   </div>

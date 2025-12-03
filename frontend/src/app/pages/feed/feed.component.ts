@@ -16,7 +16,7 @@ import { CreatePostModal } from '../../components/createPostModal/createPost.com
 export class FeedPage implements OnInit {
   title = 'explore-page';
   posts?: Post[];
-  user?: User;
+  user!: User;
   showModal = false;
 
   constructor(private postService: PostService, private auth: AuthService) {}
@@ -30,7 +30,9 @@ export class FeedPage implements OnInit {
     if (this.auth.isAuthenticated$) {
       this.auth.user$.subscribe({
         next: (res) => {
-          this.user = res!;
+          if(res) {
+            this.user = res;
+          }
           this.user.username = res?.nickname;
         },
       });

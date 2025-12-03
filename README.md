@@ -23,11 +23,6 @@ AZURE_STORAGE_CONN_STRING
 ### NOTE: your .env file should be in /backend
 
 ## To run the Angular Frontend
-### Generate config.json
-```
-cd frontend
-npm run createConfig
-```
 
 ### Run App
 ```
