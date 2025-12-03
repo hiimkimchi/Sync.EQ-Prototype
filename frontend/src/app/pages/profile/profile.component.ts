@@ -8,6 +8,7 @@ import { User } from '../../models/users';
 import { UserService } from '../../services/user.service';
 import { MediaImageService } from '../../services/media/image.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-profile',
@@ -18,12 +19,14 @@ export class ProfilePage {
   title = 'profile-page';
   user?: User;
   isLoading? = true;
+  isEditable? = false;
   error = '';
   username!: string;
   profilePicURL!: string;
 
   constructor(private userService: UserService,
               private mediaService: MediaImageService,
+              private auth: AuthService,
               private route : ActivatedRoute
   ) {}
 
@@ -32,6 +35,13 @@ export class ProfilePage {
     if (this.username) {
       this.fetchUser();
       this.fetchProfilePic();
+      if (this.auth.user$) {
+        this.auth.user$.subscribe(authUser => {
+          if (authUser && authUser.nickname === this.username) {
+            this.isEditable = true;
+          }
+        });
+      }
     } else {
       console.log("nothing found");
     }
