@@ -1,22 +1,23 @@
-<div class="container">
-  <div class="row">
-    <div class="col-3 mt-4 d-flex flex-column">
-      <chatlist 
-        [chats]="chats" 
-        [user]="user"
-        style="display:block; height:100%; width:100%;"
-        (chatSelected)="onChatSelected($event)"
-        >
-    </chatlist>
+<div class="container-fluid"
+  style="height: calc(100vh - 120px); padding-top: 20px; padding-left: 30px; padding-right: 30px;">
+  <div class="row h-100">
+
+    <!-- CHAT LIST -->
+    <div class="col-3 d-flex flex-column border-end" style="height: 100%; overflow: hidden; padding-right: 0;">
+
+      <chatlist [chats]="chats" [user]="user" style="display: block; height: 100%; width: 100%;"
+        (chatSelected)="onChatSelected($event)">
+      </chatlist>
+
     </div>
-    <div class="col-9 p-4 d-flex flex-column">
-      <chatbox 
-        *ngIf="selectedChat"
-        [chat]="selectedChat"
-        [user]="user"
-        style="display:block; height:100%; width:100%;"
-      >
-    </chatbox>
+
+    <!-- CHAT BOX -->
+    <div class="col-9 d-flex flex-column" style="height: 100%; overflow: hidden;">
+
+      <chatbox *ngIf="selectedChat" [chat]="selectedChat" [user]="user"
+        style="display: block; height: 100%; width: 100%;">
+      </chatbox>
+
     </div>
 
   </div>
