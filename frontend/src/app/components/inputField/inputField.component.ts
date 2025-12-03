@@ -15,6 +15,7 @@ export class InputField {
   title = 'input-field';
   @Input() inputField: string | undefined;
   @Input() isTitle?: boolean = false;
+  @Input() isEditable?: boolean = false;
   @Output() fieldUpdated = new EventEmitter<string>();
   isEditing = false;
   showToast = false;
