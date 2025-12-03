@@ -1,44 +1,59 @@
-<button class="btn btn-primary" (click)="openModal()">Create Post</button>
+<div style="
+    min-height: 100vh;
+    padding-bottom: 60px; /* same height as your fixed footer */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  ">
 
-<div class="modal fade show d-block" *ngIf="showModal" style="background-color: rgba(0,0,0,0.5)">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <create-post-modal [user]="{username: 'jomi'}" (closed)="closeModal()"></create-post-modal>
-    </div>
-  </div>
-</div>
+  <!-- Create Post Button -->
+  <button class="btn btn-primary mt-4" (click)="openModal()" style="align-self: flex-end; margin-right: 20px;">
+    Create Post
+  </button>
 
-<div id="post-carousel" class="carousel slide" data-bs-interval="false">
-  <div class="carousel-inner">
-    <div
-      *ngFor="let post of posts; let i = index"
-      class="carousel-item"
-      [class.active]="i === 0"
-    >
-      <div class="d-flex justify-content-center align-items-center p-4">
-        <post-card [post]="post" [user]="this.user" />
+  <!-- Modal -->
+  <div class="modal fade show d-block" *ngIf="showModal" style="
+      background-color: rgba(0,0,0,0.5);
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    ">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <create-post-modal [user]="{username: 'jomi'}" (closed)="closeModal()"></create-post-modal>
       </div>
     </div>
   </div>
 
-  <!-- Carousel controls -->
-  <button
-    class="carousel-control-prev"
-    type="button"
-    data-bs-target="#post-carousel"
-    data-bs-slide="prev"
-  >
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
+  <!-- Carousel Container -->
+  <div id="post-carousel" class="carousel slide" data-bs-interval="false" style="
+      width: 100%;
+      max-width: 800px;
+      flex-grow: 1; /* makes carousel expand to fill screen height */
+      display: flex;
+      align-items: center;
+    ">
+    <div class="carousel-inner" style="width: 100%;">
+      <div *ngFor="let post of posts; let i = index" class="carousel-item" [class.active]="i === 0">
+        <div class="d-flex justify-content-center align-items-center p-4" style="min-height: 60vh;">
+          <post-card [post]="post" [user]="this.user" />
+        </div>
+      </div>
+    </div>
 
-  <button
-    class="carousel-control-next"
-    type="button"
-    data-bs-target="#post-carousel"
-    data-bs-slide="next"
-  >
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#post-carousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#post-carousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 </div>
