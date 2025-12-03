@@ -3,19 +3,27 @@
 >
   <div
     class="position-relative container d-flex justify-content-center align-items-center"
-    style="max-width: 1300px"
+    style="max-width: 1300px; height: 100vh; overflow: visible"
   >
-    <!-- Profile Card -->
+
+    <!-- PROFILE CARD (slides left when vinylOpen = true) -->
     <div
-      class="card shadow-lg rounded-4 overflow-hidden position-relative z-2 p-5 bg-light-subtle text-dark"
+      [@profileSlide]="vinylOpen ? 'hidden' : 'visible'"
+      class="card shadow-lg rounded-4 overflow-visible position-absolute d-flex flex-column p-5 bg-light-subtle text-dark"
       style="width: 90vh; height: 85vh"
     >
+
+      <!-- Toggle button -->
+      <button class="btn btn-dark position-absolute top-0 end-0 mt-3 me-3"
+              (click)="toggleVinyl()">
+        View Records
+      </button>
+
       <!-- Top Section -->
       <div class="row g-4">
-        <!-- Left Column: Profile Picture + Info -->
-        <div
-          class="col-md-4 d-flex flex-column align-items-center justify-content-start"
-        >
+
+        <!-- Left Column -->
+        <div class="col-md-4 d-flex flex-column align-items-center justify-content-start">
           <div
             class="rounded-circle bg-light border border-dark d-flex align-items-center justify-content-center overflow-hidden"
             style="width: 140px; height: 140px"
@@ -26,55 +34,60 @@
               alt="Loading"
             />
           </div>
-          <div class="mt-3">
+
+          <div class="mt-3 text-center">
             <input-field
               [inputField]="user?.artistAlias"
               [isTitle]="true"
               [isEditable]="isEditable"
               (fieldUpdated)="updateUserField('artistAlias', $event)"
-            >
-            </input-field>
-            <p class="text-muted mb-0 fs-6">{{ "@" + user?.username }}</p>
+            ></input-field>
+
+            <p class="text-muted mb-0 fs-6">
+              {{ "@" + user?.username }}
+            </p>
           </div>
         </div>
 
-        <!-- Right Column: Profession and DAW -->
+        <!-- Right Column -->
         <div class="col-md-8 d-flex flex-column justify-content-center">
+
           <div class="mb-3">
             <h6 class="fw-semibold text-uppercase">Main Roles</h6>
             <array-input-field
               [inputField]="user?.professions || []"
               [isEditable]="isEditable"
               (fieldUpdated)="updateUserField('professions', $event)"
-            >
-            </array-input-field>
+            ></array-input-field>
           </div>
+
           <div class="mb-3">
             <h6 class="fw-semibold text-uppercase">Preferred Genres</h6>
             <array-input-field
               [inputField]="user?.genres || []"
               [isEditable]="isEditable"
               (fieldUpdated)="updateUserField('genres', $event)"
-            >
-            </array-input-field>
+            ></array-input-field>
           </div>
+
           <div class="mb-3">
-            <h6 class="fw-semibold text-uppercase">DAW(S)</h6>
+            <h6 class="fw-semibold text-uppercase">DAW(s)</h6>
             <select-input-field
               [inputField]="user?.daws || []"
               [options]="['FL Studio', 'Ableton', 'Logic Pro']"
               [isEditable]="isEditable"
               (fieldUpdated)="updateUserField('daws', $event)"
-            >
-            </select-input-field>
+            ></select-input-field>
           </div>
+
         </div>
       </div>
 
-      <!-- Bottom Section: Bio -->
+      <!-- Bio Section -->
       <div class="mt-4 mb-2 overflow-auto">
         <div class="card bg-body-secondary border-0 rounded-3 p-4 shadow-sm">
           <h5 class="fw-semibold mb-3">Bio</h5>
+
           <p class="mb-0 fs-6">
             {{ user?.biography || "No biography added yet." }}
           </p>
@@ -82,8 +95,24 @@
       </div>
     </div>
 
-    <!-- adding a subpage on the record for uploaded audio files -->
-    <!-- Vinyl Record Component -->
-    <vinyl-record></vinyl-record>
+    <!-- Vinyl Record - Outside profile card, independent animation -->
+    <div
+      [@vinylSlide]="vinylOpen ? 'visible' : 'hidden'"
+      class="position-absolute d-flex justify-content-center align-items-center flex-column"
+      style="left: 50%; top: 30%; transform: translate(-50%, -50%); width: 400px; height: 400px; z-index: 10;"
+    >
+      <vinyl-record></vinyl-record>
+    </div>
+    
+    <!-- Top-right Back button inside container (visible when vinylOpen) -->
+    <button
+      *ngIf="vinylOpen"
+      class="btn btn-dark position-absolute"
+      style="top: 12px; right: 12px; z-index: 9999;"
+      (click)="toggleVinyl()"
+      aria-label="Back to profile"
+    >
+      Back to Profile
+    </button>
   </div>
 </div>
