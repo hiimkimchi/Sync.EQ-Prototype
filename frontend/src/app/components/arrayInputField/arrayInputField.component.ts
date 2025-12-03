@@ -15,6 +15,7 @@ export class ArrayInputField {
   title = 'array-input-field';
   @Input() inputField: string[] = [];
   @Input() isTitle?: boolean = false;
+  @Input() isEditable?: boolean = false;
   @Output() fieldUpdated = new EventEmitter<string[]>();
   isEditing = false;
   showToast = false;

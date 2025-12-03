@@ -18,7 +18,7 @@
         </div>
     </ng-container>
 
-    <button class="btn d-flex align-items-center justify-content-center ms-3" (click)="switchEdit()">
+    <button *ngIf="isEditable" class="btn d-flex align-items-center justify-content-center ms-3" (click)="switchEdit()">
         <ng-icon *ngIf="!isEditing" name="bootstrapPencil" size="16"></ng-icon>
         <ng-icon *ngIf="isEditing" name="bootstrapCheck" size="16"></ng-icon>
     </button>

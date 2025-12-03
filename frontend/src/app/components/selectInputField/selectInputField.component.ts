@@ -15,6 +15,7 @@ export class SelectInputField {
     @Input() inputField: string[] = [];
     @Input() options: string[] = [];
     @Input() isTitle?: boolean = false;
+    @Input() isEditable?: boolean = false;
 
     @Output() fieldUpdated = new EventEmitter<string[]>();
 
