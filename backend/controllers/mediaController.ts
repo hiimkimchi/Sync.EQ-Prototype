@@ -1,6 +1,6 @@
-import { uploadFile, getBlobSASURL, deleteFile } from "../azure/profilepic";
+import { uploadFile, getBlobSASURL, deleteFile } from "../azure/profilepic.js";
 import mongoose from "mongoose";
-import Media from "../models/media";
+import Media from "../models/media.js";
 import { Request, Response } from "express";
 
 export async function getAllMedia(req: Request, res: Response): Promise<any> {
