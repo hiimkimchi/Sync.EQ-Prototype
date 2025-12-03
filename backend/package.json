@@ -8,7 +8,7 @@
     "start": "node dist/server",
     "dev": "tsx watch server.ts",
     "load": "tsx watch test.ts",
-    "postinstall": "npm run build && cd ../frontend && npm install && npm run build"
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",

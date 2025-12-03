@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/8ac1262f-7506-4e77-ad40-2ce6fb948cf9/resourceGroups/SyncEQ/providers/Microsoft.Web/sites/SyncEQ",
+    "appService.deploySubpath": "frontend/dist/synceq"
+}

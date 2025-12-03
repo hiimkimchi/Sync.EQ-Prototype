@@ -1,8 +1,8 @@
 import express from "express";
-import chat from "../models/chat";
+import chat from "../models/chat.js";
 const app = express.Router();
-import * as cc from "../controllers/chatController"
-import * as mc from "../controllers/messageController"
+import * as cc from "../controllers/chatController.js"
+import * as mc from "../controllers/messageController.js"
 
 app.get("/", cc.getAllChats);
 app.get("/user/:username", cc.getSpecificUsersChats);

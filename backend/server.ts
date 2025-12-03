@@ -55,12 +55,12 @@ app.use("/api/posts", postRoutes);
 app.use("/api/chats", chatRoutes);
 app.use("/api/media", mediaRoutes);
 
-const angular = path.join(__dirname, "../frontend/dist/synceq");
-app.use(express.static(angular));
+// const angular = path.join(__dirname, "../frontend/dist/synceq");
+// app.use(express.static(angular));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(angular, "index.html"));
-})
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(angular, "index.html"));
+// })
 
 io.on("connection", (socket) => {
   console.log(`New client connected: ${socket.id}`);
