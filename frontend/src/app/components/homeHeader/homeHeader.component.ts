@@ -35,8 +35,10 @@ export class SynceqHeader {
       this.auth.user$.subscribe({
         next: (res) => {
           this.auth0Info.username = res?.nickname;
-          this.fetchProfilePic()
-          this.isLoggedIn = true
+          if (this.auth0Info.username) {
+            this.fetchProfilePic()
+            this.isLoggedIn = true
+          }
         }
       });
     }
@@ -61,5 +63,9 @@ export class SynceqHeader {
 
   routeToProfile(): void {
     this.router.navigate(['/profile', this.auth0Info.username]);
+  }
+
+  logOut(): void {
+    this.auth.logout({ logoutParams: { returnTo: document.location.origin } })
   }
 }

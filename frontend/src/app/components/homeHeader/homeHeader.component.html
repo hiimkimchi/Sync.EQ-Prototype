@@ -32,7 +32,7 @@
 
     </div>
 
-    <div class="container d-flex align-items-center justify-content-center">
+    <div class="container d-flex align-items-center justify-content-center" style="flex-wrap: nowrap; white-space: nowrap;">
 
 
 
@@ -58,11 +58,13 @@
             <li><a class="dropdown-item text-white btn" (click)="routeToProfile()">Profile</a></li>
             <li><a class="dropdown-item text-white" routerLink="/">Settings</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-white" routerLink="/">Logout</a></li>
+            <li><a class="dropdown-item text-white" (click)="logOut()">Logout</a></li>
           </ul>
         </div>
         <!--Login/Logout Button-->
-        <app-auth-button></app-auth-button>
+        <div *ngIf="!isLoggedIn">
+          <app-auth-button></app-auth-button>
+        </div>
       </div>
     </div>
   </div>
