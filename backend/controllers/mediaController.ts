@@ -1,6 +1,6 @@
 import { uploadFile, uploadAudioFile, getBlobSASURL, deleteFile } from "../azure/blob";
 import mongoose from "mongoose";
-import Media from "../models/media";
+import Media from "../models/media.js";
 import { Request, Response } from "express";
 
 
@@ -77,10 +77,6 @@ export async function replaceUserProfilePic(req: Request, res: Response) {
             author: username, 
             fileType: "profilepic" 
         });
-
-        if (oldMedia) {
-            await deleteFile("profilepic", blobName);
-        }
 
         const requestId = await uploadFile("profilepics", blobName, fileBuffer);
 

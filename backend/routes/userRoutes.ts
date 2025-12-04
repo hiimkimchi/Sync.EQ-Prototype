@@ -1,6 +1,6 @@
 import express from "express";
 // import { jwtCheck } from "../middleware/auth.js";
-import * as uc from "../controllers/userController";
+import * as uc from "../controllers/userController.js";
 const app = express.Router();
 
 // create a user

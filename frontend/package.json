@@ -5,8 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "createConfig": "node src/app/scripts/generateBackendConn.mjs",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "build": "ng build --configuration development",
     "test": "ng test",
     "serve:ssr:synceq": "node dist/synceq/server/server.mjs"
   },

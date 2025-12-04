@@ -69,6 +69,9 @@ export class ProfilePage {
   error = '';
   username!: string;
   profilePicURL!: string;
+  profilePicFile?: File;
+  profilePicPreview: string | ArrayBuffer | null = null;
+
 
   vinylOpen: boolean = false;
 
@@ -92,8 +95,6 @@ export class ProfilePage {
           }
         });
       }
-    } else {
-      console.log('nothing found');
     }
   }
 
@@ -104,29 +105,26 @@ export class ProfilePage {
   fetchUser() {
     this.isLoading = true;
     this.userService.getProfile(this.username).subscribe({
-      next: data => {
-        console.log(data);
+      next: (data) => {
         this.user = data;
         this.isLoading = false;
       },
       error: err => {
         this.error = 'Failed to load profile.';
         this.isLoading = false;
-        console.error(err);
-      }
+      },
     });
   }
 
   fetchProfilePic() {
     this.mediaService.getUserProfilePic(this.username).subscribe({
-      next: data => {
-        console.log(data.url);
-        this.profilePicURL = data.url;
-      },
-      error: err => {
-        console.error('Failed to fetch profile pic', err);
-        this.profilePicURL = '';
-      }
+        next: (data) => {
+            this.profilePicURL = data.url;
+        },
+        error: (err) => {
+            console.error('Failed to fetch profile pic', err);
+            this.profilePicURL = '';
+        }
     });
   }
 
@@ -146,5 +144,36 @@ export class ProfilePage {
         console.error('Failed to update profile:', err);
       }
     });
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (!file) return;
+
+    this.profilePicFile = file;
+
+    // preview
+    const reader = new FileReader();
+    reader.onload = () => (this.profilePicPreview = reader.result);
+    reader.readAsDataURL(file);
+  }
+
+  updateProfilePic() {
+    if(!this.profilePicFile) return;
+
+    this.mediaService.replaceUserProfilePic(this.username, this.profilePicFile).subscribe({
+      next: (data) => {
+          console.log("Profile pic uploaded:", data);
+          this.fetchProfilePic();
+          this.profilePicFile = undefined;
+          this.profilePicPreview = null;
+      },
+      error: (err) => console.error("Profile pic upload error:", err),
+    });
+  }
+
+  triggerFileInput(input: HTMLInputElement) {
+    if (!this.isEditable) return;
+    input.click();
   }
 }

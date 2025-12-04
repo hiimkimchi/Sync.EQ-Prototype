@@ -1,5 +1,5 @@
-import Message from "../models/message";
-import Chat from "../models/chat"
+import Message from "../models/message.js";
+import Chat from "../models/chat.js"
 import { Request, Response } from "express";
 
 export async function getUserMessages(req: Request, res: Response): Promise<any> {

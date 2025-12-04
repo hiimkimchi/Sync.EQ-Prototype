@@ -1,5 +1,5 @@
 import express from "express";
-import * as mc from "../controllers/mediaController";
+import * as mc from "../controllers/mediaController.js";
 import multer from "multer";
 const app = express.Router();
 

@@ -1,4 +1,4 @@
-import Chat from "../models/chat";
+import Chat from "../models/chat.js";
 import { Request, Response } from "express";
 
 async function checkChatExistence(req: Request) {
