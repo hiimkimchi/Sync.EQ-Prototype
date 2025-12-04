@@ -122,7 +122,7 @@ describe('Post Requests', () => {
             expect(responseObject.json).toHaveBeenCalledWith(mockChat);
         });
 
-        test("unsuccessful createChat request when Chat already exists returns 401", async () => {
+        test("unsuccessful createChat request when Chat already exists returns 400", async () => {
             // Arrange
             (Chat.find as jest.Mock).mockResolvedValue([mockChat]);
             mockRequest = {
@@ -137,6 +137,23 @@ describe('Post Requests', () => {
             expect(responseObject.status).toHaveBeenCalledWith(400);
             expect(responseObject.json).toHaveBeenCalledWith({
                 error: "Chat Already Exists"
+            });
+        });
+
+        test("unsuccessful createChat request returns 400", async () => {
+            // Arrange
+            (Chat.find as jest.Mock).mockResolvedValue([]);
+            (Chat.create as jest.Mock).mockImplementation(() => {
+                throw new Error("MongoDB failure");
+            });
+
+            // Act
+            await createChat(mockRequest as Request, mockResponse as Response);
+
+            // Assert
+            expect(responseObject.status).toHaveBeenCalledWith(400);
+            expect(responseObject.json).toHaveBeenCalledWith({
+                error: "MongoDB failure"
             });
         })
     })
