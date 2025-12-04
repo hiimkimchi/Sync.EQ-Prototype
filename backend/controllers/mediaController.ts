@@ -167,7 +167,8 @@ export async function createUserAudio(req: Request, res: Response) {
             _id: new mongoose.Types.ObjectId(),
             author: username,
             fileType: "audio",
-            filePath: blobName
+            filePath: blobName,
+            projectName: req.file.originalname
         });
 
         // response
