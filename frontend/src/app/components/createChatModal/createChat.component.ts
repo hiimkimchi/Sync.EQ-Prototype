@@ -41,20 +41,21 @@ export class CreateChatModal {
     this.loading = true;
     this.error = '';
 
-    this.userService.getAllProfiles().subscribe({
-      next: (users) => {
-        this.results = users.filter(u => 
-          u.username?.toLowerCase().includes(this.searchText.toLowerCase()) &&
-          u.username !== this.currentUser?.username
-        );
-        this.loading = false;
-        if (this.results.length === 0) {
-          this.error = 'No users found';
+    this.userService.getProfile(this.searchText.trim()).subscribe({
+      next: (user) => {
+        if (user.username === this.currentUser?.username) {
+          this.results = [];
+          this.error = 'Cannot start chat with yourself';
+        } else {
+          this.results = [user];
+          this.error = '';
         }
+        this.loading = false;
       },
       error: (err) => {
         console.error('Search error:', err);
-        this.error = 'Search failed';
+        this.results = [];
+        this.error = 'User not found';
         this.loading = false;
       }
     });
