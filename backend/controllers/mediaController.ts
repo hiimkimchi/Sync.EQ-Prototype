@@ -1,4 +1,4 @@
-import { uploadFile, getBlobSASURL, deleteFile } from "../azure/profilepic";
+import { uploadFile, getBlobSASURL, deleteFile } from "../azure/blob";
 import mongoose from "mongoose";
 import Media from "../models/media";
 import { Request, Response } from "express";

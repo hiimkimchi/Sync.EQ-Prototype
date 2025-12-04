@@ -1,5 +1,6 @@
-import { BlobServiceClient, generateBlobSASQueryParameters, BlobSASPermissions, SASProtocol, StorageSharedKeyCredential, BlockBlobClient } from "@azure/storage-blob";
-
+import { BlobServiceClient, generateBlobSASQueryParameters, BlobSASPermissions, SASProtocol } from "@azure/storage-blob";
+import { getConnectionString, setupConnection, getSharedKeyCredential } from './config'
+import * as mime from 'mime'
 
 // upload to container
 export async function uploadFile(containerName: string, blobName: string, fileBuffer: Buffer) {
@@ -8,6 +9,18 @@ export async function uploadFile(containerName: string, blobName: string, fileBu
     return result.requestId
 }
 
+// upload to container (audio should use mime to )
+export async function uploadAudioFile(containerName: string, blobName: string, fileBuffer: Buffer) {
+  // Determine MIME type from file extension
+  const contentType = mime.lookup(blobName) || "application/octet-stream";
+  const blockBlob = await setupConnection(containerName, blobName);
+  const result = await blockBlob.uploadData(fileBuffer, {
+    blobHTTPHeaders: {
+      blobContentType: contentType,
+    },
+  });
+  return result.requestId;
+}
 
 // deletes blob
 export async function deleteFile(containerName: string, blobName: string) {
@@ -17,7 +30,7 @@ export async function deleteFile(containerName: string, blobName: string) {
 }
 
 
-// temp url to access pictures
+// temp url to access an item
 export async function getBlobSASURL(containerName: string, blobName: string) {
     const connectionString = getConnectionString();
     if (!connectionString) throw new Error("Missing connection string");
@@ -45,39 +58,4 @@ export async function getBlobSASURL(containerName: string, blobName: string) {
 
     // Return the full URL
     return `${blobClient.url}?${sas}`;
-}
-
-
-// get the .env var
-function getConnectionString() {
-    return process.env.AZURE_STORAGE_CONN_STRING;
-}
-
-
-function setupConnection(containerName: string, blobName: string): BlockBlobClient {
-    const connectionString = getConnectionString()
-    if (!connectionString) throw new Error("Missing connection string");
-
-    const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
-    const containerClient = blobServiceClient.getContainerClient(containerName);
-    return containerClient.getBlockBlobClient(blobName);
-}
-
-
-// parses connectionString to grab accountName and key for shared key
-function getSharedKeyCredential(connectionString: string) {
-    const parts = connectionString.split(';');
-    let accountName = '';
-    let accountKey = '';
-
-    for (const part of parts) {
-        if (part.startsWith('AccountName=')) {
-            accountName = part.replace('AccountName=', '');
-        }
-        if (part.startsWith('AccountKey=')) {
-            accountKey = part.replace('AccountKey=', '');
-        }
-    }
-
-    return new StorageSharedKeyCredential(accountName, accountKey);
 }
