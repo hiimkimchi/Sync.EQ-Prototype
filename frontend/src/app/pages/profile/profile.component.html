@@ -80,14 +80,14 @@
               style="display: none"
               (change)="onFileSelected($event)"
             />
-            <button
-              *ngIf="isEditable && profilePicFile"
-              class="btn btn-primary btn-sm mt-2"
-              (click)="updateProfilePic()"
-            >
-              Upload New Picture
-            </button>
           </div>
+          <button
+            *ngIf="isEditable && profilePicFile"
+            class="btn btn-primary btn-sm mt-2"
+            (click)="updateProfilePic()"
+          >
+            Upload New Picture
+          </button>
 
 
 
