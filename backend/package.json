@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "node server",
+    "build": "tsc",
     "dev": "tsx watch server.ts",
     "load": "tsx watch test.ts"
   },
@@ -13,6 +14,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@angular/ssr": "^21.0.2",
     "@azure/storage-blob": "^12.29.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",

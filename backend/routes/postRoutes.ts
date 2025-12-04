@@ -1,5 +1,5 @@
 import express from "express";
-import * as pc from "../controllers/postController"
+import * as pc from "../controllers/postController.js"
 const app = express.Router();
 
 //create a post
