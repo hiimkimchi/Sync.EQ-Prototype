@@ -1,25 +1,11 @@
 import { BlobServiceClient, generateBlobSASQueryParameters, BlobSASPermissions, SASProtocol } from "@azure/storage-blob";
 import { getConnectionString, setupConnection, getSharedKeyCredential } from './config.js'
-import * as mime from 'mime'
 
 // upload to container
 export async function uploadFile(containerName: string, blobName: string, fileBuffer: Buffer) {
     const blockBlob = await setupConnection(containerName, blobName);
     const result = await blockBlob.uploadData(fileBuffer);
     return result.requestId
-}
-
-// upload to container (audio should use mime to )
-export async function uploadAudioFile(containerName: string, blobName: string, fileBuffer: Buffer) {
-  // Determine MIME type from file extension
-  const contentType = mime.lookup(blobName) || "application/octet-stream";
-  const blockBlob = await setupConnection(containerName, blobName);
-  const result = await blockBlob.uploadData(fileBuffer, {
-    blobHTTPHeaders: {
-      blobContentType: contentType,
-    },
-  });
-  return result.requestId;
 }
 
 // deletes blob
