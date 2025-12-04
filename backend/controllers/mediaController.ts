@@ -1,4 +1,4 @@
-import { uploadFile, uploadAudioFile, getBlobSASURL, deleteFile } from "../azure/blob";
+import { uploadFile, getBlobSASURL } from "../azure/blob.js";
 import mongoose from "mongoose";
 import Media from "../models/media.js";
 import { Request, Response } from "express";

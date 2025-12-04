@@ -1,5 +1,5 @@
 import { BlobServiceClient, generateBlobSASQueryParameters, BlobSASPermissions, SASProtocol } from "@azure/storage-blob";
-import { getConnectionString, setupConnection, getSharedKeyCredential } from './config'
+import { getConnectionString, setupConnection, getSharedKeyCredential } from './config.js'
 import * as mime from 'mime'
 
 // upload to container
