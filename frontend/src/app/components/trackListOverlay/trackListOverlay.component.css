@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-left: 20px; /* previously 10px */
+  margin-left: 20px;
   max-height: calc((9px + 13px) * 2 + (0.97rem + 0.83rem) * 4 + 8px * 3);
   overflow-y: auto;
   scrollbar-width: thin;
@@ -24,30 +24,32 @@
 .track-item {
   padding: 9px 13px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 80, 80, 0.60);
   backdrop-filter: blur(4px);
   cursor: pointer;
   transition: transform 0.15s ease, background 0.15s ease;
-  color: #d6d6d6;
+  color: #3a3a3a;
+}
+
+.track-item.selected {
+  background: rgba(255, 80, 80, 0.80); 
+  transform: scale(1.05);
 }
 
 .track-item:hover {
   transform: scale(1.03);
 }
 
-.track-item.selected {
-  background: rgba(255, 255, 255, 0.22);
-  transform: scale(1.05);
-}
-
 .track-title {
   font-size: 0.97rem;
   font-weight: 600;
-  color: #e0e0e0;
+  color: #e3e3e3;
 }
 
 .track-duration {
   font-size: 0.83rem;
   opacity: 0.75;
-  color: #cfcfcf;
+  color: #d9d9d9;
 }
+
+
