@@ -5,6 +5,7 @@
     "christian-kohler.npm-intellisense",
     "anbuselvanrocky.bootstrap5-vscode",
     "mhutchie.git-graph",
-    "eamodio.gitlens"
+    "eamodio.gitlens",
+    "orta.vscode-jest"
   ]
 }
