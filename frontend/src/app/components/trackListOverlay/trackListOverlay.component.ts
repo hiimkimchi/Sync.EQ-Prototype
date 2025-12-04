@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { TrackDetails } from '../trackDetails/trackDetails.component';
 import { MediaAudioService } from '../../services/media/audio.service';
 import { Media } from '../../models/media';
-import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'track-list-overlay',
@@ -15,6 +14,7 @@ import { AuthService } from '@auth0/auth0-angular';
 export class TrackListOverlay implements OnInit {
   @Input() isVisible = false;
   @Input() isEditable? = false;
+  @Input() username? = ''; 
   @Output() trackSelected = new EventEmitter<any>();
   @ViewChild('fileInput') fileInput?: ElementRef;
 
@@ -22,48 +22,36 @@ export class TrackListOverlay implements OnInit {
   selectedIndex = 0;
   selectedTrack: Media | null = null;
   isUploading = false;
-  currentUsername = '';
-  
 
   constructor(
-    private audioService: MediaAudioService,
-    private auth: AuthService
+    private audioService: MediaAudioService
   ) {}
 
   ngOnInit() {
     this.loadUserAudio();
   }
 
+  ngOnChanges() {
+    // Reload audio if username changes
+    if (this.username) {
+      this.loadUserAudio();
+    }
+  }
+
   loadUserAudio() {
-    // If we already have the username (e.g. after upload), fetch directly
-    if (this.currentUsername) {
-      this.audioService.getUserAudio(this.currentUsername).subscribe({
-        next: (response: any) => {
-          this.tracks = Array.isArray(response) ? response : (response?.audio || []);
-        },
-        error: () => {
-          this.tracks = [];
-        }
-      });
+    console.log(this.username)
+    if (!this.username) {
+      this.tracks = [];
       return;
     }
 
-    if (!this.auth.user$) {
-      return;
-    }
-
-    this.auth.user$.subscribe((user) => {
-      if (user?.sub) {
-        this.currentUsername = user.sub.split('|')[1];
-        this.audioService.getUserAudio(this.currentUsername).subscribe({
-          next: (response: any) => {
-            // Handle array or single object response
-            this.tracks = Array.isArray(response) ? response : (response?.audio || []);
-          },
-          error: () => {
-            this.tracks = [];
-          }
-        });
+    this.audioService.getUserAudio(this.username).subscribe({
+      next: (response: any) => {
+        console.log(response)
+        this.tracks = Array.isArray(response) ? response : (response?.audio || []);
+      },
+      error: () => {
+        this.tracks = [];
       }
     });
   }
@@ -89,12 +77,12 @@ export class TrackListOverlay implements OnInit {
   }
 
   uploadAudio(file: File) {
-    if (!this.currentUsername) {
+    if (!this.username) {
       return;
     }
 
     this.isUploading = true;
-    this.audioService.createUserAudio(this.currentUsername, file).subscribe({
+    this.audioService.createUserAudio(this.username, file).subscribe({
       next: (_response: Media) => {
         this.isUploading = false;
         // Refresh the track list after upload
