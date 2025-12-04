@@ -1,0 +1,28 @@
+<div 
+  class="details-panel"
+  [class.open]="visible"
+>
+  <h3 class="panel-title">{{ track?.title }}</h3>
+
+  <div class="detail-row">
+    <span class="label">File Type:</span>
+    <span class="value">{{ track?.fileType }}</span>
+  </div>
+
+  <div class="detail-row">
+    <span class="label">Size:</span>
+    <span class="value">{{ track?.size }}</span>
+  </div>
+
+  <div class="detail-row">
+    <span class="label">Genre:</span>
+    <span class="value">{{ track?.genre }}</span>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="button-row">
+    <button class="action-btn">Download</button>
+    <button class="action-btn">Listen</button>
+  </div>
+</div>
+

@@ -1,0 +1,25 @@
+<div *ngIf="isVisible" class="ps3-wrapper">
+
+  <!-- LEFT SIDE: TRACK LIST -->
+  <div class="ps3-overlay-container">
+    <div 
+      *ngFor="let track of tracks; let i = index" 
+      class="track-item"
+      [class.selected]="i === selectedIndex"
+      (click)="selectTrack(i)"
+    >
+      <div class="track-title">{{ track.title }}</div>
+      <div class="track-duration">{{ track.duration }}</div>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE: DETAILS PANEL -->
+  <track-details-panel
+    [track]="selectedTrack"
+    [visible]="!!selectedTrack && isVisible"
+  ></track-details-panel>
+
+</div>
+
+
+
