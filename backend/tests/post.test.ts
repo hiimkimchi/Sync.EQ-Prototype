@@ -102,4 +102,42 @@ describe('Post Requests', () => {
             });
         });
     });
+
+    describe('createChat routes', () => {
+        test("successful createChat request returns 201", async () => {
+            // Arrange
+            (Chat.find as jest.Mock).mockResolvedValue([]);
+            (Chat.create as jest.Mock).mockResolvedValue(mockChat);
+            mockRequest = {
+                body: mockChat
+            }
+
+            // Act
+            await createChat(mockRequest as Request, mockResponse as Response);
+
+            // Assert
+            expect(Chat.create).toHaveBeenCalledWith(mockChat);
+            expect(Chat.create).toHaveBeenCalledTimes(1);
+            expect(responseObject.status).toHaveBeenCalledWith(201);
+            expect(responseObject.json).toHaveBeenCalledWith(mockChat);
+        });
+
+        test("unsuccessful createChat request when Chat already exists returns 401", async () => {
+            // Arrange
+            (Chat.find as jest.Mock).mockResolvedValue([mockChat]);
+            mockRequest = {
+                body: mockChat
+            }
+
+            // Act
+            await createChat(mockRequest as Request, mockResponse as Response);
+
+            // Assert
+            expect(Chat.create).not.toHaveBeenCalled();
+            expect(responseObject.status).toHaveBeenCalledWith(400);
+            expect(responseObject.json).toHaveBeenCalledWith({
+                error: "Chat Already Exists"
+            });
+        })
+    })
 });
