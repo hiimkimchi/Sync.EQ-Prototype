@@ -7,8 +7,21 @@ jest.mock('../models/user.js', () => ({
         findOneAndUpdate: jest.fn(),
     }
 }));
+
+jest.mock('../models/chat.js', () => ({
+    __esModule: true,
+    default: {
+        create: jest.fn(),
+        find: jest.fn(),
+        findOne: jest.fn(),
+        findOneAndUpdate: jest.fn(),
+    }
+}));
+
 import User from '../models/user.js';
+import Chat from '../models/chat.js';
 import { createUser } from '../controllers/userController.js';
+import { createChat } from '../controllers/chatController.js';
 import { Request, Response } from 'express';
 
 const mockUser = {
@@ -27,6 +40,11 @@ const mockUser = {
         "Instagram": "http://instagram.com/testuser1",
         "Twitter": "http://twitter.com/testuser1"
     }
+}
+
+const mockChat = {
+    user1: "user1",
+    user2: "user2" 
 }
 
 describe('Post Requests', () => {
@@ -49,8 +67,8 @@ describe('Post Requests', () => {
         jest.clearAllMocks();
     });
 
-    describe('create user route should return 201 status', () => {
-        test("successful createUser request", async () => {
+    describe('createUser routes', () => {
+        test("successful createUser request - expected 201", async () => {
             // Arrange
             (User.create as jest.Mock).mockResolvedValue(mockUser);
             mockRequest = {
@@ -65,6 +83,78 @@ describe('Post Requests', () => {
             expect(User.create).toHaveBeenCalledTimes(1);
             expect(responseObject.status).toHaveBeenCalledWith(201);
             expect(responseObject.json).toHaveBeenCalledWith(mockUser);
-        })
+        });
+
+        test("unsuccessful createUser request returns 400", async () => {
+            // Arrange
+            (User.create as jest.Mock).mockImplementation(() => {
+                throw new Error("errorMessage");
+            });
+
+            // Act
+            await createUser(mockRequest as Request, mockResponse as Response);
+
+            // Assert
+            expect(User.create).toHaveBeenCalledWith(mockUser);
+            expect(responseObject.status).toHaveBeenCalledWith(400);
+            expect(responseObject.json).toHaveBeenCalledWith({
+                error: "errorMessage"
+            });
+        });
     });
+
+    describe('createChat routes', () => {
+        test("successful createChat request returns 201", async () => {
+            // Arrange
+            (Chat.find as jest.Mock).mockResolvedValue([]);
+            (Chat.create as jest.Mock).mockResolvedValue(mockChat);
+            mockRequest = {
+                body: mockChat
+            }
+
+            // Act
+            await createChat(mockRequest as Request, mockResponse as Response);
+
+            // Assert
+            expect(Chat.create).toHaveBeenCalledWith(mockChat);
+            expect(Chat.create).toHaveBeenCalledTimes(1);
+            expect(responseObject.status).toHaveBeenCalledWith(201);
+            expect(responseObject.json).toHaveBeenCalledWith(mockChat);
+        });
+
+        test("unsuccessful createChat request when Chat already exists returns 400", async () => {
+            // Arrange
+            (Chat.find as jest.Mock).mockResolvedValue([mockChat]);
+            mockRequest = {
+                body: mockChat
+            }
+
+            // Act
+            await createChat(mockRequest as Request, mockResponse as Response);
+
+            // Assert
+            expect(Chat.create).not.toHaveBeenCalled();
+            expect(responseObject.status).toHaveBeenCalledWith(400);
+            expect(responseObject.json).toHaveBeenCalledWith({
+                error: "Chat Already Exists"
+            });
+        });
+
+        test("unsuccessful createChat request returns 400", async () => {
+            // Arrange
+            (Chat.find as jest.Mock).mockResolvedValue([]);
+            (Chat.create as jest.Mock).mockImplementation(() => {
+                throw new Error("MongoDB failure");
+            });
+
+            // Act
+            await createChat(mockRequest as Request, mockResponse as Response);
+
+            // Assert
+            expect(responseObject.status).toHaveBeenCalledWith(400);
+            expect(responseObject.json).toHaveBeenCalledWith({
+                error: "MongoDB failure"
+            });
+        })
+    })
 });
