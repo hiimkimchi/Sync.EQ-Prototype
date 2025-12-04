@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router'
 import { provideIcons } from '@ng-icons/core';
 import { bootstrapSearch, bootstrapHouse } from '@ng-icons/bootstrap-icons';
-import { TrackListOverlay } from '../trackList/trackListOverlay.component';
+import { TrackListOverlay } from '../trackListOverlay/trackListOverlay.component';
 
 @Component({
   selector: 'vinyl-record',
