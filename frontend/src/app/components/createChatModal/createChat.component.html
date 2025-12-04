@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h5 class="modal-title">New Chat</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+</div>
+<div class="modal-body">
+  <p>Search for User:</p>
+   <input #searchInput type="text" 
+        class="form-control search-input" 
+        placeholder="Enter a username..." 
+        [(ngModel)]="searchText" name="searchText" 
+        (keyup.enter)="searchUsers()"
+    />
+   <div class="mt-2 d-flex">
+     <button class="btn btn-sm btn-primary me-2" (click)="searchUsers()">Search</button>
+     <button class="btn btn-sm btn-outline-secondary" (click)="searchText=''; results=[]">Clear</button>
+   </div>
+
+  <div *ngIf="loading" class="mt-2">Searching...</div>
+  <div *ngIf="error" class="mt-2 text-danger">{{ error }}</div>
+
+  <ul *ngIf="results && results.length > 0" class="list-group mt-3">
+    <li *ngFor="let u of results" class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <strong>{{ u.username }}</strong>
+        <div class="small text-muted">{{ u.artistAlias }}</div>
+      </div>
+      <div>
+        <button class="btn btn-sm btn-primary" (click)="startChat(u)">Start Chat</button>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+</div>

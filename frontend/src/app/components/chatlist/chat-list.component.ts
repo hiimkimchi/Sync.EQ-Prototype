@@ -9,10 +9,11 @@ import { bootstrapEnvelope } from '@ng-icons/bootstrap-icons';
 import { ChatService } from '../../services/chat.service';
 import { User } from '../../models/users';
 import { Chat } from '../../models/chat';
+import { CreateChatModal } from '../createChatModal/createChat.component';
 
 @Component({
   selector: 'chatlist',
-  imports: [CommonModule, FormsModule, NgIconComponent],
+  imports: [CommonModule, FormsModule, NgIconComponent, CreateChatModal],
   providers: [provideIcons({ bootstrapEnvelope })],
   templateUrl: './chat-list.component.html',
   standalone: true,
@@ -22,6 +23,7 @@ export class ChatListComponent implements OnInit, OnDestroy {
   @Input() user?: User;
   @Input() chats: Chat[] = [];
   @Output() chatSelected = new EventEmitter<Chat>();
+  showModal = false;
 
   constructor() {
     console.log("chats: ", this.chats);
@@ -36,4 +38,20 @@ export class ChatListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {}
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  onChatCreated(chat: Chat) {
+    if (chat) {
+      this.chats = [chat, ...this.chats.filter(c => c._id !== chat._id)];
+    }
+    this.closeModal();
+  }
+
 }
