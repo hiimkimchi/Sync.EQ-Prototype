@@ -15,4 +15,5 @@ export class VinylRecord {
     title = 'vinyl-record';
 
     @Input() isVisible = false;
+    @Input() isEditable? = false;
 }
