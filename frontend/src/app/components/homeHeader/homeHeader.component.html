@@ -1,51 +1,63 @@
 <!-- Header for website -->
 <header>
   <div class="navbar navbar-dark bg-dark box-shadow">
+
+    <!-- LEFT SIDE -->
     <div class="d-flex align-items-left">
-      <!-- Drop Down Menu -->
-      <div class="dropdown">
-        <button class="d-flex align-items-center btn btn-dark ms-3" data-bs-toggle="dropdown" aria-expanded="true">
-          <ng-icon name="bootstrapListUl" class="me-2 text-white" style="width: 24px; height: 24px;"></ng-icon>
+
+      <!-- Drop Down Menu (LEFT-aligned) -->
+      <div class="dropdown" data-bs-display="dynamic">
+        <button 
+          class="d-flex align-items-center btn btn-dark ms-3" 
+          data-bs-toggle="dropdown" 
+          aria-expanded="true"
+        >
+          <ng-icon 
+            name="bootstrapListUl" 
+            class="me-2 text-white" 
+            style="width: 24px; height: 24px;">
+          </ng-icon>
         </button>
-        <ul class="dropdown-menu text-small shadow bg-dark"
-          style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 34px, 0px);"
-          data-popper-placement="bottom-start">
-          <li>
-            <a class="dropdown-item text-white" routerLink="/feed">Feed</a>
-          </li> 
-          <li>
-            <a class="dropdown-item text-white" routerLink="/chat">Messages</a>
-          </li> 
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li>
-            <a class="dropdown-item text-white" routerLink="/">About</a>
-          </li>
+
+        <ul class="dropdown-menu text-small shadow bg-dark">
+          <li><a class="dropdown-item text-white" routerLink="/feed">Feed</a></li>
+          <li><a class="dropdown-item text-white" routerLink="/chat">Messages</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-white" routerLink="/">About</a></li>
         </ul>
       </div>
 
-      <!-- Go to Homepage -->
+      <!-- Home Button -->
       <a routerLink="/" class="btn btn-dark align-items-center ms-3">
         <strong>Sync.Eq</strong>
       </a>
 
     </div>
 
-    <div class="container d-flex align-items-center justify-content-center" style="flex-wrap: nowrap; white-space: nowrap;">
+    <!-- CENTER SECTION -->
+    <div 
+      class="container d-flex align-items-center justify-content-center" 
+      style="flex-wrap: nowrap; white-space: nowrap;"
+    >
 
-
-
-      <!-- Search bar for searching for other profiles -->
-      <div class="search-container position-relative mx-auto" style="max-width: 400px; flex: 1;">
+      <!-- Search Bar -->
+      <div 
+        class="search-container position-relative mx-auto" 
+        style="max-width: 400px; flex: 1;"
+      >
         <search-bar></search-bar>
       </div>
 
-
+      <!-- RIGHT SIDE -->
       <div class="d-flex align-items-right">
-        <!-- Profile Picture for logged in user -->
-        <div *ngIf="isLoggedIn" class="dropdown">
-          <a class = "d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+
+        <!-- Profile Dropdown (RIGHT-aligned) -->
+        <div *ngIf="isLoggedIn" class="dropdown" data-bs-display="dynamic">
+          <a 
+            class="d-flex align-items-center" 
+            data-bs-toggle="dropdown" 
+            aria-expanded="false"
+          >
             <img
               [src]="profilePicURL"
               class="rounded-circle ms-3"
@@ -54,18 +66,38 @@
               alt="Profile"
             >
           </a>
-          <ul class="dropdown-menu text-small shadow bg-dark">
-            <li><a class="dropdown-item text-white btn" (click)="routeToProfile()">Profile</a></li>
-            <li><a class="dropdown-item text-white" routerLink="/">Settings</a></li>
+
+          <!-- RIGHT-ALIGNED DROPDOWN -->
+          <ul class="dropdown-menu dropdown-menu-end text-small shadow bg-dark">
+            <li>
+              <a 
+                class="dropdown-item text-white btn" 
+                (click)="routeToProfile()"
+              >Profile</a>
+            </li>
+            <li>
+              <a 
+                class="dropdown-item text-white" 
+                routerLink="/"
+              >Settings</a>
+            </li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-white" (click)="logOut()">Logout</a></li>
+            <li>
+              <a 
+                class="dropdown-item text-white" 
+                (click)="logOut()"
+              >Logout</a>
+            </li>
           </ul>
         </div>
-        <!--Login/Logout Button-->
+
+        <!-- Login Button -->
         <div *ngIf="!isLoggedIn">
           <app-auth-button></app-auth-button>
         </div>
+
       </div>
     </div>
+
   </div>
 </header>
