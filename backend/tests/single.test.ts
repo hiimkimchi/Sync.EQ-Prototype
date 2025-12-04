@@ -1,5 +1,5 @@
-import User from '../models/user';
-import { getSpecificUser} from '../controllers/userController';
+import User from '../models/user.js';
+import { getSpecificUser} from '../controllers/userController.js';
 import { Request, Response } from 'express';
 
 

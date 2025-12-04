@@ -1,5 +1,5 @@
-import User from '../models/user';
-import { getSpecificUsers} from '../controllers/userController';
+import User from '../models/user.js';
+import { getSpecificUsers} from '../controllers/userController.js';
 import { Request, Response } from 'express';
 
 // Tests for getting a list of users with specific filters
