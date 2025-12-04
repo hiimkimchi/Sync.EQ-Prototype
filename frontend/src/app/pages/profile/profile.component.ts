@@ -70,7 +70,6 @@ export class ProfilePage {
   username!: string;
   profilePicURL!: string;
 
-  // 🌟 Controls which component is shown
   vinylOpen: boolean = false;
 
   constructor(
