@@ -33,9 +33,7 @@ export class ChatListComponent implements OnInit, OnDestroy {
     this.chatSelected.emit(chat);
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {}
 

@@ -35,20 +35,29 @@ export class CreateChatModal {
   searchUsers() {
     if (!this.searchText || this.searchText.trim().length === 0) {
       this.results = [];
+      this.error = '';
       return;
     }
     this.loading = true;
     this.error = '';
-    this.userService.getFilteredProfiles({ username: this.searchText.trim() }).subscribe({
+
+    this.userService.getAllProfiles().subscribe({
       next: (users) => {
-        this.results = users.filter(u => u.username !== this.currentUser?.username);
+        this.results = users.filter(u => 
+          u.username?.toLowerCase().includes(this.searchText.toLowerCase()) &&
+          u.username !== this.currentUser?.username
+        );
         this.loading = false;
+        if (this.results.length === 0) {
+          this.error = 'No users found';
+        }
       },
       error: (err) => {
+        console.error('Search error:', err);
         this.error = 'Search failed';
         this.loading = false;
       }
-    })
+    });
   }
 
   startChat(withUser: User) {
