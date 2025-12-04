@@ -16,8 +16,10 @@
 
   <!-- BUTTONS -->
   <div class="button-row">
-    <button class="action-btn">Download</button>
-    <button class="action-btn">Listen</button>
+    <button class="action-btn" (click)="downloadTrack()" [disabled]="isDownloading">
+      {{ isDownloading ? 'Downloading...' : 'Download' }}
+    </button>
+    <!-- <button class="action-btn">Listen</button> -->
   </div>
 </div>
 
