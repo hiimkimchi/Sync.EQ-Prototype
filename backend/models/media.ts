@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const ObjectId = mongoose.Types.ObjectId; 
 
 const fileTypeEnum = [
-    "profilepic"
+    "profilepic",
+    "audio"
 ]
 
 // Rules for media objects:

@@ -114,7 +114,6 @@ export async function getUserAudio(req: Request, res: Response) {
         if(!audioFiles || audioFiles.length === 0) {
             return res.status(404).json({error: "No audio files found"});
         }
-
         return res.status(200).json({audio: audioFiles});
     } catch (err: any) {
         return res.status(404).json({error: err.message});
@@ -154,13 +153,14 @@ export async function createUserAudio(req: Request, res: Response) {
 
         // save request metadata
         const username = req.params.username;
-        const filename = req.params.filename;
         const fileBuffer = req.file.buffer;
-        const fileExt = req.file.originalname.split('.').pop();
-        const blobName = `${username}-${filename}.${fileExt}`
+        const originalName = req.file.originalname || 'upload';
+        // create a blob name that includes timestamp to avoid collisions
+        const safeName = originalName.replace(/[^a-zA-Z0-9._-]/g, '_');
+        const blobName = `${username}-${safeName}`;
 
         // upload
-        const requestId = await uploadFile("profilepics", blobName, fileBuffer);
+        const requestId = await uploadFile("audio", blobName, fileBuffer);
 
         // mongo entry with metadata
         const mediaMetadata = await Media.create({
