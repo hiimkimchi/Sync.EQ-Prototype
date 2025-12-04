@@ -15,26 +15,46 @@ import { Server } from "socket.io";
 const app = express();
 const server = http.createServer(app);
 
+dotenv.config();
+const port = process.env.PORT;
+const frontend = process.env.FRONTEND
+
+const urls = [
+  process.env.FRONTEND,
+  process.env.LOCAL
+]
+
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (urls.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   },
 });
-
-
-dotenv.config();
-const port = process.env.PORT;
-const frontend = process.env.FRONTEND
 
 // sets up connection to mongoDB
 await connectMongoose();
 app.use(express.json())
 
 app.use(cors({
-    origin: frontend,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: function (origin, callback) {
+      // Allow Postman, curl, mobile apps
+      if (!origin) return callback(null, true);
+
+      if (urls.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
