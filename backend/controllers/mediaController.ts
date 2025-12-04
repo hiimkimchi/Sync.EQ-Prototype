@@ -114,10 +114,6 @@ export async function replaceUserProfilePic(req: Request, res: Response) {
             fileType: "profilepic" 
         });
 
-        if (oldMedia) {
-            await deleteFile("profilepic", blobName);
-        }
-
         const requestId = await uploadFile("profilepics", blobName, fileBuffer);
 
         // NOTE: this is to set updatedAt via mongoose. none of the other metadata should change
