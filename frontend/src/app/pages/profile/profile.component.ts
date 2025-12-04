@@ -48,12 +48,12 @@ import {
     // VINYL → MOVE FROM RIGHT EDGE TO CENTER + SCALE UP + UNROTATE
     trigger('vinylSlide', [
       state('hidden', style({ 
-        transform: 'translateX(400px)', 
+        transform: 'translate(calc(-50% + 18vw), -50%)', 
         opacity: 1,
         zIndex: 0
       })),
       state('visible', style({ 
-        transform: 'translateX(0)', 
+        transform: 'translate(-50%, -50%)', 
         opacity: 1,
         zIndex: 0
       })),

@@ -99,9 +99,9 @@
     <div
       [@vinylSlide]="vinylOpen ? 'visible' : 'hidden'"
       class="position-absolute d-flex justify-content-center align-items-center flex-column"
-      style="left: 50%; top: 30%; transform: translate(-50%, -50%); width: 400px; height: 400px; z-index: 10;"
+      style="left: 50%; top: 50%; transform: translate(-50%, -50%); width: clamp(260px, 35vw, 420px); height: clamp(260px, 35vw, 420px); z-index: 10;"
     >
-      <vinyl-record></vinyl-record>
+      <vinyl-record style="width:100%; height:100%;"></vinyl-record>
     </div>
     
     <!-- Top-right Back button inside container (visible when vinylOpen) -->
