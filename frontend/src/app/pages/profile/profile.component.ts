@@ -66,7 +66,6 @@ export class ProfilePage {
   fetchProfilePic() {
     this.mediaService.getUserProfilePic(this.username).subscribe({
         next: (data) => {
-            console.log(data.url);
             this.profilePicURL = data.url;
         },
         error: (err) => {
