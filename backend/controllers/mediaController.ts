@@ -1,43 +1,7 @@
-import { uploadFile, getBlobSASURL, deleteFile } from "../azure/blob";
+import { uploadFile, uploadAudioFile, getBlobSASURL, deleteFile } from "../azure/blob";
 import mongoose from "mongoose";
 import Media from "../models/media";
 import { Request, Response } from "express";
-
-export async function getAllMedia(req: Request, res: Response): Promise<any> {
-    try {
-        const mediaFiles = await Media.find();
-        if(mediaFiles.length === 0) {
-            return res.status(404).json({error: "No Media In SyncEQ"});
-        }
-        return res.status(200).json(mediaFiles);
-    } catch(err: any) {
-        return res.status(400).json({error: err.message});
-    }
-}
-
-export async function getSpecificMedia(req: Request, res: Response): Promise<any> {
-    try {
-        const mediaFile = await Media.findById(req.params.mediaID);
-        if(!mediaFile) {
-            return res.status(404).json({error: "no mediaID found like that"});
-        }
-        return res.status(200).json(mediaFile);
-    } catch(err: any) {
-        return res.status(400).json({error: err.message});
-    }
-}
-
-export async function getUsersMedia(req: Request, res: Response): Promise<any> {
-    try {
-        const mediaFiles = await Media.find({author: req.params.username});
-        if(mediaFiles.length === 0) {
-            return res.status(404).json({error: "Provided user has no media"});
-        }
-        return res.status(200).json(mediaFiles);
-    } catch(err: any) {
-        return res.status(400).json({error: err.message});
-    }
-}
 
 
 export async function getUserProfilePic(req: Request, res: Response) {
@@ -132,6 +96,85 @@ export async function replaceUserProfilePic(req: Request, res: Response) {
             message: "Profile picture uploaded",
             requestId,
             media: updatedMetadata
+        });
+    } catch (err: any) {
+        return res.status(400).json({ error: err.message });
+    }
+}
+
+
+export async function getUserAudio(req: Request, res: Response) {
+    try {
+        const username = req.params.username;
+        const audioFiles = await Media.find({
+            author: username,
+            fileType: "audio"
+        });
+
+        if(!audioFiles || audioFiles.length === 0) {
+            return res.status(404).json({error: "No audio files found"});
+        }
+
+        return res.status(200).json({audio: audioFiles});
+    } catch (err: any) {
+        return res.status(404).json({error: err.message});
+    }
+}
+
+
+export async function getUserAudioFile(req: Request, res: Response) {
+    try {
+        // check for existance of metadata
+        const username = req.params.username;
+        const audiofile = await Media.findOne({
+            author: username,
+            fileType: "audio",
+            filePath: req.params.filePath
+        });
+
+        if(!audiofile) {
+            return res.status(404).json({error: "Audio does not exist"});
+        }
+
+        // get temp url to image
+        const sasURL = await getBlobSASURL("audio", audiofile.filePath)
+
+        return res.status(200).json({url: sasURL});
+    } catch(err: any) {
+        return res.status(400).json({error: err.message});
+    }
+}
+
+
+export async function createUserAudio(req: Request, res: Response) {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: "No file uploaded" });
+        }
+
+        // save request metadata
+        const username = req.params.username;
+        const filename = req.params.filename;
+        const fileBuffer = req.file.buffer;
+        const fileExt = req.file.originalname.split('.').pop();
+        const blobName = `${username}-${filename}.${fileExt}`
+
+        // upload
+        const requestId = await uploadFile("profilepics", blobName, fileBuffer);
+
+        // mongo entry with metadata
+        const mediaMetadata = await Media.create({
+            _id: new mongoose.Types.ObjectId(),
+            author: username,
+            fileType: "audio",
+            filePath: blobName
+        });
+
+        // response
+        return res.status(201).json({
+            message: "Audio uploaded",
+            requestId,
+            media: mediaMetadata
         });
     } catch (err: any) {
         return res.status(400).json({ error: err.message });
