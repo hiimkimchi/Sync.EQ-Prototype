@@ -17,15 +17,41 @@
           class="col-md-4 d-flex flex-column align-items-center justify-content-start"
         >
           <div
-            class="rounded-circle bg-light border border-dark d-flex align-items-center justify-content-center overflow-hidden"
-            style="width: 140px; height: 140px"
+            class="rounded-circle bg-light border border-dark d-flex align-items-center justify-content-center overflow-hidden position-relative"
+            style="width: 140px; height: 140px; cursor: pointer"
+            (click)="triggerFileInput(profilePicInput)"
           >
             <img
-              [src]="profilePicURL"
+              [src]="profilePicPreview || profilePicURL"
               class="w-100 h-100 object-fit-cover"
               alt="Loading"
             />
+
+            <!-- Change Indicator (Shown only if editable) -->
+            <div
+              *ngIf="isEditable"
+              class="position-absolute bottom-0 w-100 text-center bg-dark bg-opacity-50 text-white small py-1"
+            >
+              Change
+            </div>
           </div>
+
+          <!-- Hidden file input -->
+          <input
+            type="file"
+            #profilePicInput
+            accept="image/*"
+            style="display: none"
+            (change)="onFileSelected($event)"
+          />
+          <button
+            *ngIf="isEditable && profilePicFile"
+            class="btn btn-primary btn-sm mt-2"
+            (click)="updateProfilePic()"
+          >
+            Upload New Picture
+          </button>
+          
           <div class="mt-3">
             <input-field
               [inputField]="user?.artistAlias"

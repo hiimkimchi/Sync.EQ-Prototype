@@ -23,6 +23,9 @@ export class ProfilePage {
   error = '';
   username!: string;
   profilePicURL!: string;
+  profilePicFile?: File;
+  profilePicPreview: string | ArrayBuffer | null = null;
+
 
   constructor(private userService: UserService,
               private mediaService: MediaImageService,
@@ -43,7 +46,6 @@ export class ProfilePage {
         });
       }
     } else {
-      console.log("nothing found");
     }
   }
 
@@ -51,14 +53,12 @@ export class ProfilePage {
     this.isLoading = true;
     this.userService.getProfile(this.username).subscribe({
       next: (data) => {
-        console.log(data);
         this.user = data;
         this.isLoading = false;
       },
       error: (err) => {
         this.error = 'Failed to load profile.';
         this.isLoading = false;
-        console.error(err);
       },
     });
   }
@@ -66,7 +66,6 @@ export class ProfilePage {
   fetchProfilePic() {
     this.mediaService.getUserProfilePic(this.username).subscribe({
         next: (data) => {
-            console.log(data.url);
             this.profilePicURL = data.url;
         },
         error: (err) => {
@@ -92,5 +91,36 @@ export class ProfilePage {
         console.error('Failed to update profile:', err);
       },
     });
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (!file) return;
+
+    this.profilePicFile = file;
+
+    // preview
+    const reader = new FileReader();
+    reader.onload = () => (this.profilePicPreview = reader.result);
+    reader.readAsDataURL(file);
+  }
+
+  updateProfilePic() {
+    if(!this.profilePicFile) return;
+
+    this.mediaService.replaceUserProfilePic(this.username, this.profilePicFile).subscribe({
+      next: (data) => {
+          console.log("Profile pic uploaded:", data);
+          this.fetchProfilePic();
+          this.profilePicFile = undefined;
+          this.profilePicPreview = null;
+      },
+      error: (err) => console.error("Profile pic upload error:", err),
+    });
+  }
+
+  triggerFileInput(input: HTMLInputElement) {
+    if (!this.isEditable) return;
+    input.click();
   }
 }
